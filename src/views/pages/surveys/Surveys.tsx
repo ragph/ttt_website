@@ -20,6 +20,11 @@ const Surveys = () => {
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState<string[]>(['All']);
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // Fetch surveys from API
   useEffect(() => {
     const fetchSurveys = async () => {
