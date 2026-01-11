@@ -348,7 +348,7 @@ const Header = ({ toggleMobileSidebar }: HeaderProps) => {
               textDecoration: "none",
               flexShrink: 1,
               minWidth: 0,
-              maxWidth: { xs: "60%", sm: "auto" },
+              // maxWidth: { xs: "60%", sm: "auto" },
             }}
           >
             <Box
@@ -371,11 +371,11 @@ const Header = ({ toggleMobileSidebar }: HeaderProps) => {
               sx={{
                 color: themeMode === "dark" ? "white" : "#0B5290",
                 fontWeight: 900,
-                fontSize: { xs: ".7rem", sm: "1.2rem" },
+                fontSize: { xs: ".9rem", sm: "1.2rem" },
                 letterSpacing: 0,
                 whiteSpace: "nowrap",
                 overflow: "hidden",
-                textOverflow: "ellipsis",
+                // textOverflow: "ellipsis",
                 lineHeight: 1.5,
               }}
             >

@@ -214,9 +214,9 @@ const Sidebar = ({
       <Box sx={{ px: 2, py: 2 }}>
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-            <Box
+            {/* <Box
               component="img"
-              src="/images/logo.png"
+              src="/images/ttt.png"
               alt="ET Logo"
               sx={{
                 height: 40,
@@ -225,7 +225,7 @@ const Sidebar = ({
               onError={(e: any) => {
                 e.target.style.display = "none";
               }}
-            />
+            /> */}
             {/* <Typography
               variant="h6"
               component="div"
@@ -270,13 +270,13 @@ const Sidebar = ({
                   mb: 0.5,
                   borderRadius: "8px",
                   "&.Mui-selected": {
-                    bgcolor: "secondary.main",
-                    color: "primary.main",
+                    bgcolor: "primary.main",
+                    color: "white",
                     "&:hover": {
-                      bgcolor: "secondary.main",
+                      bgcolor: "primary.main",
                     },
                     "& .MuiListItemIcon-root": {
-                      color: "primary.main",
+                      color: "white",
                     },
                   },
                 }}
