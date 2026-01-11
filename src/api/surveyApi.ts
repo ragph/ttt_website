@@ -11,6 +11,7 @@ export interface Survey {
   startDate: string;
   endDate: string | null;
   totalResponses: number;
+  castingToken?: string | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -153,6 +154,19 @@ class SurveyApiService {
     } catch (error) {
       console.error('Error submitting survey response:', error);
       return false;
+    }
+  }
+
+  /**
+   * Get survey results/statistics (casting stats)
+   */
+  async getSurveyResults(token: string): Promise<any> {
+    try {
+      const response = await axiosClient.get(`/casting/${token}/stats`);
+      return response;
+    } catch (error) {
+      console.error('Error fetching survey results:', error);
+      throw error;
     }
   }
 }
