@@ -59,14 +59,17 @@ const Header = ({ toggleMobileSidebar }: HeaderProps) => {
   const isLandingPage = location.pathname === "/";
 
   // Navigation links for landing page
-  const navLinks: NavLink[] = useMemo(() => [
-    { label: "Home", href: "#hero" },
-    { label: "About", href: "#about" },
-    { label: "Explore", href: "/map" },
-    { label: "Blog", href: "#blog" },
-    { label: "Surveys", href: "/surveys" },
-    { label: "Contact", href: "#contact" },
-  ], []);
+  const navLinks: NavLink[] = useMemo(
+    () => [
+      { label: "Home", href: "#hero" },
+      { label: "About", href: "#about" },
+      { label: "Explore", href: "/map" },
+      { label: "Blog", href: "#blog" },
+      { label: "Surveys", href: "/surveys" },
+      { label: "Contact", href: "#contact" },
+    ],
+    []
+  );
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -105,12 +108,13 @@ const Header = ({ toggleMobileSidebar }: HeaderProps) => {
           // Calculate header height offset (top bar ~40px + toolbar ~80px + buffer ~20px)
           const isMobile = window.innerWidth < 600;
           const headerOffset = isMobile ? 100 : 140;
-          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+          const elementPosition =
+            element.getBoundingClientRect().top + window.pageYOffset;
           const offsetPosition = elementPosition - headerOffset;
 
           window.scrollTo({
             top: offsetPosition,
-            behavior: "smooth"
+            behavior: "smooth",
           });
         }
       } else {
@@ -133,12 +137,13 @@ const Header = ({ toggleMobileSidebar }: HeaderProps) => {
           // Calculate header height offset (top bar ~40px + toolbar ~80px + buffer ~20px)
           const isMobile = window.innerWidth < 600;
           const headerOffset = isMobile ? 100 : 140;
-          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+          const elementPosition =
+            element.getBoundingClientRect().top + window.pageYOffset;
           const offsetPosition = elementPosition - headerOffset;
 
           window.scrollTo({
             top: offsetPosition,
-            behavior: "smooth"
+            behavior: "smooth",
           });
         }
       }, 100);
@@ -267,7 +272,37 @@ const Header = ({ toggleMobileSidebar }: HeaderProps) => {
             </Stack>
 
             {/* Social Links */}
-            <Stack direction="row" spacing={1} sx={{ ml: "auto" }}>
+            <Stack
+              direction="row"
+              spacing={1}
+              sx={{ ml: "auto", alignItems: "center" }}
+            >
+              <Button
+                component="a"
+                href="https://etapp.triptravelandtours.com"
+                rel="noopener noreferrer"
+                size="small"
+                sx={{
+                  color: "white",
+                  bgcolor: "rgba(255, 255, 255, 0.15)",
+                  textTransform: "none",
+                  fontSize: "0.75rem",
+                  fontWeight: 600,
+                  px: 1.5,
+                  py: 0.25,
+                  minHeight: "auto",
+                  "&:hover": {
+                    bgcolor: "rgba(255, 255, 255, 0.25)",
+                  },
+                }}
+              >
+                Login to App
+              </Button>
+              <Divider
+                orientation="vertical"
+                flexItem
+                sx={{ bgcolor: "rgba(255, 255, 255, 0.3)", mx: 0.5 }}
+              />
               <IconButton
                 component="a"
                 href="https://www.facebook.com/profile.php?id=61555167518114"
@@ -336,122 +371,122 @@ const Header = ({ toggleMobileSidebar }: HeaderProps) => {
       {/* Main Navigation Bar */}
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3 } }}>
-        <Toolbar sx={{ justifyContent: "space-between", py: 2, px: 0 }}>
-          {/* Logo/Title */}
-          <Box
-            component="a"
-            href="/"
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 0.5,
-              textDecoration: "none",
-              flexShrink: 1,
-              minWidth: 0,
-              // maxWidth: { xs: "60%", sm: "auto" },
-            }}
-          >
+          <Toolbar sx={{ justifyContent: "space-between", py: 2, px: 0 }}>
+            {/* Logo/Title */}
             <Box
-              component="img"
-              src="/images/ttt.png"
-              alt="TTT Logo"
+              component="a"
+              href="/"
               sx={{
-                height: 40,
-                width: "auto",
-                flexShrink: 0,
-                marginRight: 1, 
-              }}
-              onError={(e: any) => {
-                e.target.style.display = "none";
-              }}
-            />
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{
-                color: themeMode === "dark" ? "white" : "#0B5290",
-                fontWeight: 900,
-                fontSize: { xs: ".9rem", sm: "1.2rem" },
-                letterSpacing: 0,
-                whiteSpace: "nowrap",
-                overflow: "hidden",
-                // textOverflow: "ellipsis",
-                lineHeight: 1.5,
+                display: "flex",
+                alignItems: "center",
+                gap: 0.5,
+                textDecoration: "none",
+                flexShrink: 1,
+                minWidth: 0,
+                // maxWidth: { xs: "60%", sm: "auto" },
               }}
             >
-              Trip Travel & Tours Agency
-            </Typography>
-          </Box>
+              <Box
+                component="img"
+                src="/images/ttt.png"
+                alt="TTT Logo"
+                sx={{
+                  height: 40,
+                  width: "auto",
+                  flexShrink: 0,
+                  marginRight: 1,
+                }}
+                onError={(e: any) => {
+                  e.target.style.display = "none";
+                }}
+              />
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{
+                  color: themeMode === "dark" ? "white" : "#0B5290",
+                  fontWeight: 900,
+                  fontSize: { xs: ".9rem", sm: "1.2rem" },
+                  letterSpacing: 0,
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  // textOverflow: "ellipsis",
+                  lineHeight: 1.5,
+                }}
+              >
+                Trip Travel & Tours Agency
+              </Typography>
+            </Box>
 
-          {/* Center Navigation Links - Always visible */}
-          <Box
-            sx={{
-              display: { xs: "none", md: "flex" },
-              alignItems: "center",
-              gap: 3,
-            }}
-          >
-            {navLinks.map((link) => {
-              // Check if active based on hash (for landing page sections) or pathname (for routes)
-              const isActive = link.href.startsWith("#")
-                ? isLandingPage && activeSection === link.href
-                : location.pathname === link.href;
-              return (
-                <Box
-                  key={link.label}
-                  sx={{
-                    position: "relative",
-                    pb: 0.5,
-                  }}
-                >
-                  <Link
-                    onClick={() => handleNavClick(link.href)}
+            {/* Center Navigation Links - Always visible */}
+            <Box
+              sx={{
+                display: { xs: "none", md: "flex" },
+                alignItems: "center",
+                gap: 3,
+              }}
+            >
+              {navLinks.map((link) => {
+                // Check if active based on hash (for landing page sections) or pathname (for routes)
+                const isActive = link.href.startsWith("#")
+                  ? isLandingPage && activeSection === link.href
+                  : location.pathname === link.href;
+                return (
+                  <Box
+                    key={link.label}
                     sx={{
-                      color: isActive ? "primary.main" : "text.primary",
-                      textDecoration: "none",
-                      fontSize: "0.95rem",
-                      fontWeight: isActive ? 700 : 600,
-                      cursor: "pointer",
-                      transition: "all 0.3s ease",
-                      "&:hover": {
-                        color: "primary.main",
-                      },
+                      position: "relative",
+                      pb: 0.5,
                     }}
                   >
-                    {link.label}
-                  </Link>
-                  {/* Active indicator - Yellow line */}
-                  <Box
-                    sx={{
-                      position: "absolute",
-                      bottom: -2,
-                      left: 0,
-                      right: 0,
-                      height: "3px",
-                      bgcolor: "#FDE047",
-                      borderRadius: "2px 2px 0 0",
-                      transform: isActive ? "scaleX(1)" : "scaleX(0)",
-                      transformOrigin: "center",
-                      transition: "transform 0.3s ease",
-                    }}
-                  />
-                </Box>
-              );
-            })}
-          </Box>
+                    <Link
+                      onClick={() => handleNavClick(link.href)}
+                      sx={{
+                        color: isActive ? "primary.main" : "text.primary",
+                        textDecoration: "none",
+                        fontSize: "0.95rem",
+                        fontWeight: isActive ? 700 : 600,
+                        cursor: "pointer",
+                        transition: "all 0.3s ease",
+                        "&:hover": {
+                          color: "primary.main",
+                        },
+                      }}
+                    >
+                      {link.label}
+                    </Link>
+                    {/* Active indicator - Yellow line */}
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        bottom: -2,
+                        left: 0,
+                        right: 0,
+                        height: "3px",
+                        bgcolor: "#FDE047",
+                        borderRadius: "2px 2px 0 0",
+                        transform: isActive ? "scaleX(1)" : "scaleX(0)",
+                        transformOrigin: "center",
+                        transition: "transform 0.3s ease",
+                      }}
+                    />
+                  </Box>
+                );
+              })}
+            </Box>
 
-          {/* Right side icons */}
+            {/* Right side icons */}
 
-          {/* Mobile menu toggle */}
-          <IconButton
-            color="inherit"
-            aria-label="menu"
-            onClick={toggleMobileSidebar}
-            sx={{ display: { lg: "none" }, color: "text.primary" }}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
+            {/* Mobile menu toggle */}
+            <IconButton
+              color="inherit"
+              aria-label="menu"
+              onClick={toggleMobileSidebar}
+              sx={{ display: { lg: "none" }, color: "text.primary" }}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Toolbar>
         </Container>
       </Box>
     </AppBar>

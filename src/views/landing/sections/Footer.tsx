@@ -303,7 +303,7 @@ export const Footer = () => {
             Powered by{" "}
             <Box
               component="a"
-              href="https://triptravelandtours.com/"
+              href="https://www.ragph.com/"
               target="_blank"
               rel="noopener noreferrer"
               sx={{
