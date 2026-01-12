@@ -93,7 +93,7 @@ export const Hero = () => {
                   variant="contained"
                   size="large"
                   endIcon={<ArrowForwardIcon />}
-                  href="https://app.earningwhiletravelling.com/login"
+                  href="http://etapp.triptravelandtours.com"
                   sx={{
                     px: 4,
                     py: 2,

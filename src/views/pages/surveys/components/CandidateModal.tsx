@@ -226,10 +226,10 @@ const CandidateModal = ({ candidate, open, onClose, onVote }: CandidateModalProp
       </DialogContent>
 
       <DialogActions sx={{ p: 3, pt: 0 }}>
-        <Button href="https://app.earningwhiletravelling.com/login" variant="contained" size="large" fullWidth>
+        <Button href="http://etapp.triptravelandtours.com" variant="contained" size="large" fullWidth>
           Vote Now
         </Button>
-        {/* <Button href="https://app.earningwhiletravelling.com/login" variant="contained" size="large" fullWidth>
+        {/* <Button href="http://etapp.triptravelandtours.com" variant="contained" size="large" fullWidth>
           Vote for {candidate.text}
         </Button> */}
       </DialogActions>

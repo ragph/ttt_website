@@ -123,7 +123,7 @@ export const Categories = () => {
               <Button
                 variant="contained"
                 size="large"
-                href="https://app.earningwhiletravelling.com"
+                href="http://etapp.triptravelandtours.com"
                 sx={{
                   px: 4,
                   py: 1.5,
