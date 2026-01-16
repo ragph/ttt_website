@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import {
   Card,
   CardContent,
@@ -7,11 +8,11 @@ import {
   Chip,
   Avatar, Button,
 } from "@mui/material";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import PersonIcon from "@mui/icons-material/Person";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 interface BlogCardProps {
+  id?: string;
   image: string;
   title: string;
   excerpt: string;
@@ -22,6 +23,7 @@ interface BlogCardProps {
 }
 
 export const BlogCard = ({
+  id,
   image,
   title,
   excerpt,
@@ -30,8 +32,17 @@ export const BlogCard = ({
   author,
   authorAvatar,
 }: BlogCardProps) => {
+  const navigate = useNavigate();
+
+  const handleReadMore = () => {
+    if (id) {
+      navigate(`/blog/${id}`);
+    }
+  };
+
   return (
     <Card
+      onClick={handleReadMore}
       sx={{
         height: "100%",
         borderRadius: 3,
@@ -136,7 +147,14 @@ export const BlogCard = ({
         >
           {excerpt}
         </Typography>
-        <Button variant="text" color="primary">
+        <Button
+          variant="text"
+          color="primary"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleReadMore();
+          }}
+        >
           Read More
           <ArrowForwardIcon sx={{ width: 18, ml: 0.5 }} />
         </Button>

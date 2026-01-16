@@ -26,6 +26,7 @@ const RefundPolicy = lazy(() => import('../views/pages/refund-policy/RefundPolic
 const Surveys = lazy(() => import('../views/pages/surveys/Surveys'));
 const SurveyDetails = lazy(() => import('../views/pages/surveys/SurveyDetails'));
 const SurveyResults = lazy(() => import('../views/pages/surveys/SurveyResults'));
+const BlogDetails = lazy(() => import('../views/pages/blog/BlogDetails'));
 
 // Loading component
 const Loader = () => (
@@ -154,6 +155,14 @@ export const routes: RouteObject[] = [
         element: (
           <SuspenseWrapper>
             <SurveyResults />
+          </SuspenseWrapper>
+        ),
+      },
+      {
+        path: '/blog/:slug',
+        element: (
+          <SuspenseWrapper>
+            <BlogDetails />
           </SuspenseWrapper>
         ),
       },
