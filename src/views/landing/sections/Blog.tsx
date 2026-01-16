@@ -1,8 +1,9 @@
-import { Box, Container, Grid, Button } from "@mui/material";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { Box, Container } from "@mui/material";
 import { BlogCard } from "../components/BlogCard";
 import { SectionHeader } from "../components/SectionHeader";
 import { AnimatedSection } from "../components/AnimatedSection";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 
 const articles = [
   {
@@ -45,6 +46,26 @@ const articles = [
     author: "David Wilson",
     authorAvatar: "https://i.pravatar.cc/150?img=12",
   },
+  {
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800",
+    title: "Beach Paradise: Top 10 Coastal Destinations",
+    excerpt:
+      "From pristine white sands to crystal-clear waters, discover the world's most stunning beach destinations.",
+    category: "Destinations",
+    date: "Nov 10, 2024",
+    author: "Lisa Park",
+    authorAvatar: "https://i.pravatar.cc/150?img=16",
+  },
+  {
+    image: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800",
+    title: "Adventure Travel: Thrilling Experiences Await",
+    excerpt:
+      "Push your limits with these adrenaline-pumping adventures around the globe. From bungee jumping to skydiving.",
+    category: "Adventure",
+    date: "Nov 8, 2024",
+    author: "Jake Thompson",
+    authorAvatar: "https://i.pravatar.cc/150?img=18",
+  },
 ];
 
 export const Blog = () => {
@@ -54,6 +75,7 @@ export const Blog = () => {
       sx={{
         py: { xs: 8, md: 20 },
         bgcolor: "background.paper",
+        overflow: "hidden",
       }}
     >
       <Container maxWidth="lg">
@@ -78,34 +100,38 @@ export const Blog = () => {
               containerSx={{ mb: 0, flex: 1 }}
             />
           </AnimatedSection>
-          <AnimatedSection animation="fadeRight" duration={0.8} delay={0.1}>
-            <Button
-              disableElevation
-              variant="contained"
-              color="secondary"
-              size="medium"
-              endIcon={<ArrowForwardIcon />}
-              sx={{
-                ml: "auto",
-                borderRadius: 999,
-                textTransform: "none",
-                alignSelf: "flex-start",
-              }}
-            >
-              View All
-            </Button>
-          </AnimatedSection>
         </Box>
-
-        {/* Articles Grid */}
-        <Grid container spacing={4}>
-          {articles.map((article, index) => (
-            <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
-              <BlogCard {...article} />
-            </Grid>
-          ))}
-        </Grid>
       </Container>
+
+      {/* Infinite Scrolling Blog Cards */}
+      <Box sx={{ px: { xs: 2, md: 4 } }}>
+        <Swiper
+          spaceBetween={24}
+          slidesPerView={1.2}
+          loop={true}
+          breakpoints={{
+            640: {
+              slidesPerView: 2.2,
+            },
+            900: {
+              slidesPerView: 3.2,
+            },
+            1200: {
+              slidesPerView: 4.2,
+            },
+          }}
+          style={{
+            width: "100%",
+            paddingBottom: "24px",
+          }}
+        >
+          {articles.map((article, index) => (
+            <SwiperSlide key={index}>
+              <BlogCard {...article} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </Box>
     </Box>
   );
 };

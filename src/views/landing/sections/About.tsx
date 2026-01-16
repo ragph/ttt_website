@@ -102,7 +102,7 @@ export const About = () => {
             <AnimatedSection animation="fadeUp" duration={0.8} delay={0}>
               <SectionHeader
                 title="Your Trusted Travel Partner"
-                subtitle="Trip Travel & Tours makes booking trips simple and seamless. Easily book flights, hotels, and travel services through a secure platform designed for convenience and peace of mind."
+                subtitle="Trip Travel & Tours Agency makes booking trips simple and seamless. Easily book flights, hotels, and travel services through a secure platform designed for convenience and peace of mind."
                 align="left"
                 containerSx={{ mb: 4 }}
               />
