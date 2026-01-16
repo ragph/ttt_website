@@ -24,7 +24,7 @@ const sections: Section[] = [
   {
     title: "2. About Our Services",
     content: [
-      "Trip Travel & Tours Agency is an online travel agency based in the Philippines that provides: Flight booking services (domestic and international), Hotel and accommodation reservations, Travel packages and tours, Visa assistance services, Travel insurance arrangements, and the Earning While Travelling (ET) rewards platform.",
+      "Trip Travel & Tours Agency is an online travel agency based in the Philippines that provides: Flight booking services (domestic and international), Hotel and accommodation reservations, Travel packages and tours, Visa assistance services, Travel insurance arrangements, and the ET rewards platform.",
       "We strive to maintain continuous service availability, but we do not guarantee that our services will be uninterrupted or error-free. We reserve the right to modify, suspend, or discontinue any aspect of our services at any time without prior notice.",
     ],
   },
@@ -47,12 +47,12 @@ const sections: Section[] = [
     ],
   },
   {
-    title: "5. Earning While Travelling (ET) Rewards Program",
+    title: "5. ET Rewards Program",
     content: [
       "The ET Rewards Program is our proprietary loyalty program that allows eligible members to earn cashback and points on qualifying bookings.",
-      "Rewards are earned on: Eligible flight bookings, Hotel reservations, Travel package purchases, and Successful referrals. Rewards are credited to your ET wallet after trip completion and within the timeframe specified in our ET program guidelines.",
+      "Rewards are earned on: Eligible flight bookings, Hotel reservations, Travel package purchases, and Successful referrals. Rewards are credited to your ET credits after trip completion and within the timeframe specified in our ET program guidelines.",
       "ET rewards can be redeemed for: Discounts on future bookings, Upgrades and premium services, Exclusive member promotions, and Other benefits as specified in the program terms.",
-      "ET points and cashback remain valid as long as your account is active and you make at least one qualifying booking within 12 months. Inactive accounts may have rewards adjusted or expired.",
+      "ET credits and cashback remain valid as long as your account is active and you make at least one qualifying booking within 12 months. Inactive accounts may have rewards adjusted or expired.",
       "We reserve the right to modify, suspend, or terminate the ET Rewards Program at any time. Members will be notified of material changes with reasonable advance notice.",
     ],
   },

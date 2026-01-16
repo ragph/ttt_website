@@ -33,14 +33,14 @@ const contactInfo = [
   {
     icon: EmailIcon,
     title: "Email Us",
-    details: "contact@earningwhiletravelling.com",
+    details: "contact@triptravelandtours.com",
   },
 ];
 
 const subjects = [
   "General Inquiry",
   "Booking Assistance",
-  "ET Points Question",
+  "ET Credits Question",
   "Technical Support",
   "Partnership",
   "Other",
@@ -192,7 +192,7 @@ export const Contact = () => {
                     Contact Us Today
                   </>
                 }
-                subtitle="Our team is here to help you with any questions about bookings, earnings, or your ET account. Reach out and we'll get back to you within 24 hours."
+                subtitle="Our team is here to help you with any questions about bookings, rewards, or your ET account. Reach out and we'll get back to you within 24 hours."
                 align="left"
                 containerSx={{ mb: 5 }}
               />

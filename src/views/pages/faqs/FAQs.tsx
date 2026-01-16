@@ -19,7 +19,7 @@ const faqCategories = [
       {
         question: "What is Trip Travel & Tours Agency?",
         answer:
-          "Trip Travel & Tours Agency is a full-service online travel agency based in the Philippines. We specialize in booking flights, hotels, travel packages, and providing visa and insurance assistance. We're also the creators of the Earning While Travelling (ET) rewards platform, which allows customers to earn cashback and redeemable points on every eligible booking.",
+          "Trip Travel & Tours Agency is a full-service online travel agency based in the Philippines. We specialize in booking flights, hotels, travel packages, and providing visa and insurance assistance. We're also the creators of the ET rewards platform, which allows customers to earn cashback and redeemable points on every eligible booking.",
       },
       {
         question: "Where is your office located?",
@@ -89,10 +89,10 @@ const faqCategories = [
     ],
   },
   {
-    category: "Earning While Travelling (ET) Rewards",
+    category: "ET Rewards",
     items: [
       {
-        question: "What is the Earning While Travelling (ET) platform?",
+        question: "What is the ET platform?",
         answer: [
           "The ET platform is our proprietary rewards program created by Trip Travel & Tours Agency. It allows you to earn cashback and redeemable points every time you book eligible travel services through us. The more you travel, the more you earn!",
           "",
@@ -108,7 +108,7 @@ const faqCategories = [
           "• Purchase Packages: Earn on complete travel packages",
           "• Refer Friends: Get bonus rewards when friends sign up and book",
           "",
-          "Rewards are credited to your ET wallet after your trip is completed.",
+          "Rewards are credited to your ET credits after your trip is completed.",
         ],
       },
       {
@@ -126,12 +126,12 @@ const faqCategories = [
       {
         question: "Do ET rewards expire?",
         answer:
-          "ET points and cashback remain valid as long as your account is active and you make at least one booking within a 12-month period. Inactive accounts may have their rewards adjusted or expired. Check your ET dashboard for specific expiration dates on your rewards.",
+          "ET credits and cashback remain valid as long as your account is active and you make at least one booking within a 12-month period. Inactive accounts may have their rewards adjusted or expired. Check your ET dashboard for specific expiration dates on your rewards.",
       },
       {
         question: "Is there a fee to join the ET rewards program?",
         answer:
-          "No! Joining the ET rewards program is completely free. Simply create an account and start earning rewards on your very first booking. There are no hidden fees, annual charges, or membership costs.",
+          "No! Joining the ET rewards program is completely free. Simply create an account and start getting rewarded on your very first booking. There are no hidden fees, annual charges, or membership costs.",
       },
     ],
   },
@@ -264,7 +264,7 @@ const FAQs = () => {
               fontSize: { xs: "1rem", md: "1.25rem" },
             }}
           >
-            Find answers to common questions about our travel services, booking process, and the Earning While Travelling (ET) rewards platform.
+            Find answers to common questions about our travel services, booking process, and the ET rewards platform.
           </Typography>
         </Container>
       </Box>

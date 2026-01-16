@@ -16,13 +16,13 @@ const features = [
   {
     icon: MonetizationOnIcon,
     title: 'Earn While Travelling',
-    description: 'Earn ET points with every booking and turn your travels into rewards.',
+    description: 'Earn ET credits with every booking and turn your travels into rewards.',
     color: '#00C18A',
   },
   {
     icon: AccountBalanceWalletIcon,
-    title: 'ET Wallet',
-    description: 'Store and manage your ET points securely in your digital wallet.',
+    title: 'ET Credits',
+    description: 'Store and manage your ET credits securely in your account.',
     color: '#FFD23F',
   },
   {
@@ -46,7 +46,7 @@ export const Features = () => {
         <AnimatedSection animation="fadeUp" duration={0.8} delay={0}>
           <SectionHeader
             title="Premier Services For Unmatched Journeys"
-            subtitle="Discover the powerful features that make earning while traveling easier than ever"
+            subtitle="Discover the powerful features that make getting rewarded while traveling easier than ever"
             align="center"
           />
         </AnimatedSection>

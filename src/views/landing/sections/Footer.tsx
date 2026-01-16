@@ -126,7 +126,7 @@ export const Footer = () => {
                 lineHeight: 1.7,
               }}
             >
-              Your ultimate platform for booking travel and earning money.
+              Your ultimate platform for booking travel and getting rewarded.
               Explore the world while building your income through commissions,
               referrals, and rewards.
             </Typography>

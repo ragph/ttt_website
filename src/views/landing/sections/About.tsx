@@ -102,7 +102,7 @@ export const About = () => {
             <AnimatedSection animation="fadeUp" duration={0.8} delay={0}>
               <SectionHeader
                 title="Your Trusted Travel Partner"
-                subtitle="Trip Travel & Tours Agency lets you book trips easily while earning from your travel activity—turning your adventures into income."
+                subtitle="Trip Travel & Tours Agency lets you book trips easily while getting rewarded from your travel activity—turning your adventures into income."
                 align="left"
                 containerSx={{ mb: 4 }}
               />
@@ -136,7 +136,7 @@ export const About = () => {
                       variant="body2"
                       sx={{ color: "#757575", fontSize: "0.875rem" }}
                     >
-                      Your bookings and earnings are protected with
+                      Your bookings and rewards are protected with
                       industry-leading security measures.
                     </Typography>
                   </Box>

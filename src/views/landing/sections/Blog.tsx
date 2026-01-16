@@ -17,10 +17,10 @@ const articles = [
   },
   {
     image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800",
-    title: "How to Maximize Your ET Points While Traveling",
+    title: "How to Maximize Your ET Credits While Traveling",
     excerpt:
-      "Discover proven strategies to earn more ET points on your trips and turn your travels into substantial rewards.",
-    category: "Earnings",
+      "Discover proven strategies to earn more ET credits on your trips and turn your travels into substantial rewards.",
+    category: "Rewards",
     date: "Nov 18, 2024",
     author: "Michael Chen",
     authorAvatar: "https://i.pravatar.cc/150?img=7",

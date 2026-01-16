@@ -10,7 +10,7 @@ export const Promo = () => {
     {
       icon: TrendingUpIcon,
       title: "Traveller",
-      subtitle: "Start Exploring, Start Earning",
+      subtitle: "Start Exploring, Get Rewarded",
       description:
         "Earn points on every booking and enjoy the essential perks of the platform—perfect for anyone who loves to travel and save.",
       color: "#4CAF50",
@@ -23,7 +23,7 @@ export const Promo = () => {
       title: "Affiliate",
       subtitle: "Share More, Earn More",
       description:
-        "Boost your earnings by referring new travelers. The more people you inspire, the more rewards and bonuses you unlock.",
+        "Get rewarded by referring new travelers. The more people you inspire, the more rewards and bonuses you unlock.",
       color: "#FF9800",
       image: "/images/affiliate.png",
       price: "FREE",
@@ -34,7 +34,7 @@ export const Promo = () => {
       title: "Victors",
       subtitle: "Lead the Pack, Enjoy Elite Rewards",
       description:
-        "Our highest tier with premium benefits, top earning multipliers, and exclusive privileges for power users and top performers.",
+        "Our highest tier with premium benefits, top reward multipliers, and exclusive privileges for power users and top performers.",
       color: "#2196F3",
       image: "/images/victors.png",
       price: "₱99/Year Subscription",
@@ -63,7 +63,7 @@ export const Promo = () => {
                 </Typography>
               </>
             }
-            subtitle="Discover a rewards system built for every kind of explorer. Whether you're traveling, sharing, or leading the community, each tier opens new perks, bonuses, and earning potential."
+            subtitle="Discover a rewards system built for every kind of explorer. Whether you're traveling, sharing, or leading the community, each tier opens new perks, bonuses, and reward potential."
             align="center"
             titleColor="white"
             subtitleColor="rgba(255,255,255,0.95)"

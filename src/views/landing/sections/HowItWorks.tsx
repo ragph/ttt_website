@@ -22,7 +22,7 @@ const steps = [
   {
     icon: AccountBalanceWalletIcon,
     title: 'Earn Rewards',
-    description: 'Cashback and points go to your ET wallet',
+    description: 'Cashback and points go to your ET credits',
     step: 3,
   },
   {

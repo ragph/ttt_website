@@ -118,7 +118,7 @@ export const Explore = () => {
             <SectionHeader
               badge="EXPLORE DESTINATIONS"
               title="Explore The World's Most Loved Travel"
-              subtitle="Discover iconic destinations and start earning points with every booking"
+              subtitle="Discover iconic destinations and start getting rewarded with every booking"
               align="left"
               containerSx={{ mb: 0, flex: 1 }}
             />
