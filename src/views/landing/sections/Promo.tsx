@@ -10,9 +10,9 @@ export const Promo = () => {
     {
       icon: TrendingUpIcon,
       title: "Traveller",
-      subtitle: "Start Exploring, Get Rewarded",
+      subtitle: "Explore More, Enjoy More",
       description:
-        "Earn points on every booking and enjoy the essential perks of the platform—perfect for anyone who loves to travel and save.",
+        "Perfect for everyday travelers. Book trips, access basic features, and enjoy a smoother and rewarding travel experience.",
       color: "#4CAF50",
       image: "/images/travellers.png",
       price: "FREE",
@@ -21,9 +21,9 @@ export const Promo = () => {
     {
       icon: CardGiftcardIcon,
       title: "Affiliate",
-      subtitle: "Share More, Earn More",
+      subtitle: "Share the Experience",
       description:
-        "Get rewarded by referring new travelers. The more people you inspire, the more rewards and bonuses you unlock.",
+        "Invite others to discover the platform and unlock additional features as your network grows. Ideal for users who enjoy sharing travel opportunities with friends and family.",
       color: "#FF9800",
       image: "/images/affiliate.png",
       price: "FREE",
@@ -32,13 +32,13 @@ export const Promo = () => {
     {
       icon: CheckCircleIcon,
       title: "Victors",
-      subtitle: "Lead the Pack, Enjoy Elite Rewards",
+      subtitle: "Premium Access, Elevated Benefits",
       description:
-        "Our highest tier with premium benefits, top reward multipliers, and exclusive privileges for power users and top performers.",
+        "Our highest tier, designed for engaged users who want enhanced features, priority access, and exclusive platform privileges.",
       color: "#2196F3",
       image: "/images/victors.png",
-      price: "₱99/Year Subscription",
-      priceDetail: "FREE 1 month trial",
+      price: "₱99/Year",
+      priceDetail: "Subscription",
     },
   ];
 
@@ -59,11 +59,11 @@ export const Promo = () => {
               <>
                 Choose Your Journey,{" "}
                 <Typography variant="inherit" color="textPrimary">
-                  Unlock Your Rewards
+                  Unlock More Benefits.
                 </Typography>
               </>
             }
-            subtitle="Discover a rewards system built for every kind of explorer. Whether you're traveling, sharing, or leading the community, each tier opens new perks, bonuses, and reward potential."
+            subtitle="Explore a tiered experience designed for every kind of traveler. Whether you’re booking trips, sharing the platform, or engaging with the community, each level unlocks added features and exclusive advantages."
             align="center"
             titleColor="white"
             subtitleColor="rgba(255,255,255,0.95)"

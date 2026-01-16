@@ -126,9 +126,7 @@ export const Footer = () => {
                 lineHeight: 1.7,
               }}
             >
-              Your ultimate platform for booking travel and getting rewarded.
-              Explore the world while building your income through commissions,
-              referrals, and rewards.
+              Your trusted platform for booking flights, hotels, and travel services. Explore destinations worldwide with a seamless and secure travel experience.
             </Typography>
             <Box sx={{ display: "flex", gap: 1 }}>
               {socialLinks.map((social) => {

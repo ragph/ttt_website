@@ -1,8 +1,8 @@
 import { Box, Container, Typography, Grid } from '@mui/material';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import SearchIcon from '@mui/icons-material/Search';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
+import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
+import StarIcon from '@mui/icons-material/Star';
 import { SectionHeader } from '../components/SectionHeader';
 import { AnimatedSection } from '../components/AnimatedSection';
 
@@ -10,25 +10,25 @@ const steps = [
   {
     icon: PersonAddIcon,
     title: 'Sign Up',
-    description: 'Create your account for free in minutes',
+    description: 'Create your account for free in just a few minutes.',
     step: 1,
   },
   {
-    icon: SearchIcon,
-    title: 'Book Your Trip',
-    description: 'Choose flights, hotels, or travel packages',
+    icon: AccountBalanceWalletIcon,
+    title: 'Top-up Prepaid Credits',
+    description: 'Add prepaid credits to your account for faster and more convenient bookings.',
     step: 2,
   },
   {
-    icon: AccountBalanceWalletIcon,
-    title: 'Earn Rewards',
-    description: 'Cashback and points go to your ET credits',
+    icon: FlightTakeoffIcon,
+    title: 'Book Your Trip',
+    description: 'Choose flights, hotels, or travel packages using available payment options or prepaid credits.',
     step: 3,
   },
   {
-    icon: CardGiftcardIcon,
-    title: 'Redeem',
-    description: 'Use rewards for travel discounts and exclusive deals',
+    icon: StarIcon,
+    title: 'Enjoy Platform Benefits',
+    description: 'Access exclusive features, tier-based rewards, and special offers as you use the platform.',
     step: 4,
   },
 ];
@@ -60,8 +60,8 @@ export const HowItWorks = () => {
               sx={{
                 position: 'absolute',
                 top: 60,
-                left: '12.5%',
-                right: '12.5%',
+                left: '10%',
+                right: '10%',
                 height: '2px',
                 bgcolor: '#3b82f6',
                 display: { xs: 'none', md: 'block' },

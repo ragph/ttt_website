@@ -83,7 +83,7 @@ export const Hero = () => {
                   textAlign: { xs: "center", md: "left" },
                 }}
               >
-                Your trusted online travel agency — and the creator of the ET App. Book flights, hotels, and travel services while getting rewarded with cashback and points.
+                Your trusted online travel agency — One app for all your travel needs. Book flights, hotels, and travel services and enjoy exclusive rewards.
               </Typography>
             </AnimatedSection>
 

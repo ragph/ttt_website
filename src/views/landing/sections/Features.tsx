@@ -9,27 +9,27 @@ import { AnimatedSection } from '../components/AnimatedSection';
 const features = [
   {
     icon: PublicIcon,
-    title: 'Travel Booking',
-    description: 'Book flights, hotels, and vacation packages to destinations worldwide with ease.',
+    title: 'Travel Benefits',
+    description: 'Enjoy added benefits with every booking, designed to enhance your overall travel experience.',
     color: '#1b60ff',
-  },
-  {
-    icon: MonetizationOnIcon,
-    title: 'Earn While Travelling',
-    description: 'Earn ET credits with every booking and turn your travels into rewards.',
-    color: '#00C18A',
-  },
-  {
-    icon: AccountBalanceWalletIcon,
-    title: 'ET Credits',
-    description: 'Store and manage your ET credits securely in your account.',
-    color: '#FFD23F',
   },
   {
     icon: ReceiptIcon,
     title: 'Bills Payments',
-    description: 'Pay your bills and earn points on everyday expenses.',
+    description: 'Pay utility and service bills quickly and securely within the platform.',
     color: '#FF6B6B',
+  },
+  {
+    icon: AccountBalanceWalletIcon,
+    title: 'eLoad Services',
+    description: 'Purchase mobile load for major networks anytime, anywhere.',
+    color: '#FFD23F',
+  },
+  {
+    icon: MonetizationOnIcon,
+    title: 'Referral Rewards',
+    description: 'Invite others to use the platform and receive rewards when they join and transact.',
+    color: '#00C18A',
   },
 ];
 
@@ -46,7 +46,7 @@ export const Features = () => {
         <AnimatedSection animation="fadeUp" duration={0.8} delay={0}>
           <SectionHeader
             title="Premier Services For Unmatched Journeys"
-            subtitle="Discover the powerful features that make getting rewarded while traveling easier than ever"
+            subtitle="Explore the features designed to make travel, payments, and everyday transactions simple and convenient."
             align="center"
           />
         </AnimatedSection>

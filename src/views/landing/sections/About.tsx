@@ -19,7 +19,7 @@ export const About = () => {
       id="about"
       sx={{
         py: { xs: 8, md: 12 },
-        bgcolor: 'background.paper',
+        bgcolor: "background.paper",
       }}
     >
       <Container maxWidth="lg">
@@ -102,7 +102,7 @@ export const About = () => {
             <AnimatedSection animation="fadeUp" duration={0.8} delay={0}>
               <SectionHeader
                 title="Your Trusted Travel Partner"
-                subtitle="Trip Travel & Tours Agency lets you book trips easily while getting rewarded from your travel activity—turning your adventures into income."
+                subtitle="Trip Travel & Tours makes booking trips simple and seamless. Easily book flights, hotels, and travel services through a secure platform designed for convenience and peace of mind."
                 align="left"
                 containerSx={{ mb: 4 }}
               />
@@ -136,8 +136,8 @@ export const About = () => {
                       variant="body2"
                       sx={{ color: "#757575", fontSize: "0.875rem" }}
                     >
-                      Your bookings and rewards are protected with
-                      industry-leading security measures.
+                      Your bookings are protected by industry-standard security
+                      and reliable systems you can trust.
                     </Typography>
                   </Box>
                 </Box>
@@ -167,8 +167,8 @@ export const About = () => {
                       variant="body2"
                       sx={{ color: "#757575", fontSize: "0.875rem" }}
                     >
-                      Book your travel plans instantly, efficiently and
-                      completely safe and secure
+                      Plan and book your travel quickly and effortlessly —
+                      anytime, anywhere.
                     </Typography>
                   </Box>
                 </Box>
@@ -198,8 +198,7 @@ export const About = () => {
                       variant="body2"
                       sx={{ color: "#757575", fontSize: "0.875rem" }}
                     >
-                      Our dedicated team is always ready to assist you with any
-                      questions or concerns.
+                      Our dedicated support team is always available to assist with your travel needs.
                     </Typography>
                   </Box>
                 </Box>
@@ -212,9 +211,9 @@ export const About = () => {
                 variant="outlined"
                 size="large"
                 onClick={() => {
-                  document.getElementById('video')?.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+                  document.getElementById("video")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
                   });
                 }}
                 sx={{
