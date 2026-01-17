@@ -17,9 +17,20 @@ const faqCategories = [
     category: "General Questions",
     items: [
       {
-        question: "What is Trip Travel & Tours Agency?",
-        answer:
-          "Trip Travel & Tours Agency is a full-service online travel agency based in the Philippines. We specialize in booking flights, hotels, travel packages, and providing visa and insurance assistance. We're also the creators of the ET rewards platform, which allows customers to earn cashback and redeemable points on every eligible booking.",
+        question: "What is Trip Travel & Tours Agency and the ET Platform?",
+        answer: [
+          "Trip Travel & Tours Agency is a full-service online travel agency based in the Philippines, and we operate the ET (Earning While Travelling) platform. Our tagline is \"World Tourism is our Business.\"",
+          "",
+          "The ET platform is a comprehensive travel and lifestyle services platform that offers:",
+          "• Travel bookings (flights, hotels, travel packages)",
+          "• Bills Payment services",
+          "• eLoad services for mobile prepaid",
+          "• ET Credits for booking travel",
+          "• ET Rewards program for cashback and points",
+          "• Interactive map of Philippine destinations",
+          "• Travel blog and destination guides",
+          "• Surveys and engagement features",
+        ],
       },
       {
         question: "Where is your office located?",
@@ -29,12 +40,25 @@ const faqCategories = [
       {
         question: "How can I contact customer support?",
         answer: [
-          "You can reach our customer support team through multiple channels:",
+          "You can reach our 24/7 customer support team through multiple channels:",
           "• Phone: +632-8683-6213",
           "• Email: contact@triptravelandtours.com",
           "• Contact Form: Fill out our online contact form on our website",
           "",
-          "We aim to respond to all inquiries within 24 hours.",
+          "For urgent travel matters, support is available 24/7. Standard inquiries are processed within 24 hours.",
+        ],
+      },
+      {
+        question: "How do I create an account?",
+        answer: [
+          "Creating an account is free and easy:",
+          "1. Click 'Sign Up' or 'Register' on our website",
+          "2. Enter your email address and create a password",
+          "3. Fill in your basic information (name, phone number)",
+          "4. Verify your email address",
+          "5. Start using all ET platform services!",
+          "",
+          "Once registered, you can book travel, pay bills, buy eLoad, and earn rewards.",
         ],
       },
     ],
@@ -47,9 +71,11 @@ const faqCategories = [
         answer: [
           "Booking is simple and can be done in 4 steps:",
           "1. Sign Up: Create your free account on our ET platform",
-          "2. Book Your Trip: Browse flights, hotels, or travel packages on earningwhiletravelling.com",
-          "3. Complete Payment: Use our secure payment gateway to finalize your booking",
-          "4. Receive Confirmation: Get your booking confirmation via email instantly",
+          "2. Top-up Credits: Add ET Credits to your account through our secure payment channels",
+          "3. Book Your Trip: Browse flights, hotels, or travel packages and use your ET Credits to book",
+          "4. Enjoy Benefits: Receive your confirmation and earn ET Rewards on your booking!",
+          "",
+          "You can also pay directly without using ET Credits if you prefer.",
         ],
       },
       {
@@ -59,6 +85,7 @@ const faqCategories = [
           "• Cancellation fees may apply based on the fare rules",
           "• Some promotional fares are non-refundable",
           "• Contact our support team immediately if you need to make changes",
+          "• Refunds may be issued to your original payment method or as ET Credits",
           "• We recommend purchasing travel insurance for added protection",
         ],
       },
@@ -70,8 +97,9 @@ const faqCategories = [
           "• Online Banking / Bank Transfer",
           "• E-Wallets (GCash, PayMaya, etc.)",
           "• Over-the-counter payment options",
+          "• ET Credits (for travel bookings)",
           "",
-          "All transactions are encrypted and secured.",
+          "All transactions are encrypted and PCI-DSS compliant.",
         ],
       },
       {
@@ -89,49 +117,263 @@ const faqCategories = [
     ],
   },
   {
-    category: "ET Rewards",
+    category: "ET Credits & Rewards",
     items: [
       {
-        question: "What is the ET platform?",
+        question: "What are ET Credits?",
         answer: [
-          "The ET platform is our proprietary rewards program created by Trip Travel & Tours Agency. It allows you to earn cashback and redeemable points every time you book eligible travel services through us. The more you travel, the more you earn!",
+          "ET Credits are prepaid credits that you can use to book travel services on our platform. Think of it as your travel wallet!",
           "",
-          "Our platform is designed to reward loyal customers and make travel more affordable through accumulated benefits.",
+          "Benefits of using ET Credits:",
+          "• Convenient one-click booking without entering payment details each time",
+          "• Faster checkout process",
+          "• Earn bonus rewards on credit top-ups during promotions",
+          "• Easy tracking of your travel budget",
         ],
       },
       {
-        question: "How do I earn rewards?",
+        question: "How do I top-up ET Credits?",
         answer: [
-          "You earn rewards automatically when you:",
-          "• Book Flights: Earn points and cashback on eligible flight bookings",
-          "• Book Hotels: Get rewards on hotel reservations",
-          "• Purchase Packages: Earn on complete travel packages",
-          "• Refer Friends: Get bonus rewards when friends sign up and book",
+          "You can top-up ET Credits through multiple payment methods:",
+          "1. Log in to your ET account",
+          "2. Go to 'ET Credits' or 'Top-up' section",
+          "3. Enter the amount you want to add",
+          "4. Choose your payment method (credit card, bank transfer, e-wallet, etc.)",
+          "5. Complete the payment",
           "",
-          "Rewards are credited to your ET credits after your trip is completed.",
+          "Credits are added to your account instantly upon successful payment.",
         ],
       },
       {
-        question: "How can I redeem my ET rewards?",
+        question: "What is the ET Rewards program?",
         answer: [
-          "You can redeem your ET rewards for:",
-          "• Discounts on future flight bookings",
+          "The ET Rewards program is our loyalty program that lets you earn cashback and points on eligible transactions. \"Earning While Travelling\" is our mission!",
+          "",
+          "You earn rewards when you:",
+          "• Book flights, hotels, and travel packages",
+          "• Refer friends who sign up and make bookings",
+          "• Participate in surveys and promotions",
+          "• Complete select bills payment and eLoad transactions (during promotions)",
+        ],
+      },
+      {
+        question: "How can I redeem my ET Rewards?",
+        answer: [
+          "You can redeem your ET Rewards for:",
+          "• Discounts on future travel bookings",
           "• Hotel room upgrades or discounts",
-          "• Travel package deals and perks",
-          "• Exclusive member-only promotions",
+          "• Bills payment credits",
+          "• eLoad purchases",
+          "• Exclusive member-only promotions and deals",
           "",
           "Simply log in to your ET account and apply your rewards during checkout.",
         ],
       },
       {
-        question: "Do ET rewards expire?",
-        answer:
-          "ET credits and cashback remain valid as long as your account is active and you make at least one booking within a 12-month period. Inactive accounts may have their rewards adjusted or expired. Check your ET dashboard for specific expiration dates on your rewards.",
+        question: "Do ET Credits and Rewards expire?",
+        answer: [
+          "ET Credits: Must be used within the validity period specified at the time of purchase. Check your account for expiration dates.",
+          "",
+          "ET Rewards: Remain valid as long as your account is active and you make at least one qualifying transaction within 12 months. Inactive accounts may have rewards adjusted or expired.",
+          "",
+          "Tip: Log in regularly and check your dashboard for expiration reminders!",
+        ],
       },
       {
-        question: "Is there a fee to join the ET rewards program?",
+        question: "Is there a fee to join the ET platform?",
         answer:
-          "No! Joining the ET rewards program is completely free. Simply create an account and start getting rewarded on your very first booking. There are no hidden fees, annual charges, or membership costs.",
+          "No! Creating an ET account and joining the rewards program is completely free. There are no hidden fees, annual charges, or membership costs. Simply sign up and start enjoying all our services.",
+      },
+    ],
+  },
+  {
+    category: "Bills Payment",
+    items: [
+      {
+        question: "What is the Bills Payment service?",
+        answer: [
+          "Our Bills Payment service allows you to conveniently pay various bills directly through the ET platform. No need to visit payment centers or use multiple apps!",
+          "",
+          "Available billers include:",
+          "• Electricity (Meralco, etc.)",
+          "• Water utilities",
+          "• Internet and cable providers",
+          "• Telecommunications",
+          "• Credit cards",
+          "• Government payments",
+          "• Insurance premiums",
+          "• And many more!",
+        ],
+      },
+      {
+        question: "How do I pay a bill through the ET platform?",
+        answer: [
+          "Paying bills is quick and easy:",
+          "1. Log in to your ET account",
+          "2. Go to 'Bills Payment' section",
+          "3. Select your biller from the list",
+          "4. Enter your account number and payment amount",
+          "5. Review the details and confirm",
+          "6. Complete payment using your preferred method",
+          "7. Receive instant confirmation",
+          "",
+          "Keep your transaction reference number for your records.",
+        ],
+      },
+      {
+        question: "Are there fees for bills payment?",
+        answer:
+          "A small convenience fee may apply to bills payment transactions. The exact fee is displayed before you confirm your payment, so you'll always know the total amount. Some promotional periods may offer reduced or waived fees.",
+      },
+      {
+        question: "How long does it take for my payment to be posted?",
+        answer: [
+          "Payment posting times vary by biller:",
+          "• Most billers: Real-time to 24 hours",
+          "• Some billers: Up to 2-3 business days",
+          "",
+          "The estimated posting time is shown for each biller before you confirm payment. You'll receive a confirmation with your transaction reference number immediately after successful payment.",
+        ],
+      },
+      {
+        question: "Can I get a refund for bills payment?",
+        answer: [
+          "Bills payments that have been successfully processed and posted to the biller are generally non-refundable.",
+          "",
+          "However, if your payment failed (money was deducted but not received by biller), please contact our support immediately with your transaction reference number. We will investigate and process a refund within 3-5 business days if the failure is confirmed.",
+          "",
+          "Always double-check your account number and amount before confirming payment.",
+        ],
+      },
+    ],
+  },
+  {
+    category: "eLoad Services",
+    items: [
+      {
+        question: "What is the eLoad service?",
+        answer: [
+          "Our eLoad service allows you to purchase prepaid mobile credits (load) for yourself or others directly through the ET platform.",
+          "",
+          "Supported networks include:",
+          "• Globe",
+          "• Smart",
+          "• TNT",
+          "• TM",
+          "• Sun Cellular",
+          "• DITO",
+          "• And other Philippine networks",
+        ],
+      },
+      {
+        question: "How do I buy eLoad?",
+        answer: [
+          "Buying eLoad is fast and simple:",
+          "1. Log in to your ET account",
+          "2. Go to 'eLoad' section",
+          "3. Select the network (Globe, Smart, etc.)",
+          "4. Enter the recipient's mobile number",
+          "5. Choose the load amount or promo",
+          "6. Confirm and complete payment",
+          "7. Load is sent instantly!",
+          "",
+          "You can buy load for your own number or send it as a gift to others.",
+        ],
+      },
+      {
+        question: "How quickly is eLoad delivered?",
+        answer:
+          "eLoad is typically delivered instantly (within seconds) after successful payment. In rare cases of network congestion, it may take up to a few minutes. If load is not received within 15 minutes, please contact our customer support with your transaction reference number.",
+      },
+      {
+        question: "Can I get a refund for eLoad?",
+        answer: [
+          "Successfully delivered eLoad is non-refundable as it is instantly credited to the recipient's mobile number.",
+          "",
+          "If your payment was deducted but load was not received:",
+          "• Contact our support within 24 hours",
+          "• Provide your transaction reference number",
+          "• We will investigate and refund within 3-5 business days if the failure is confirmed",
+          "",
+          "Important: Always verify the mobile number before confirming. Load sent to incorrect numbers cannot be retrieved.",
+        ],
+      },
+      {
+        question: "Are there fees for eLoad purchases?",
+        answer:
+          "A small service fee may apply to some eLoad transactions. The total amount (load + any fees) is always displayed before you confirm your purchase. During promotional periods, fees may be reduced or waived.",
+      },
+    ],
+  },
+  {
+    category: "Interactive Features",
+    items: [
+      {
+        question: "What is the Interactive Map feature?",
+        answer: [
+          "Our Interactive Map is a comprehensive guide to Philippine tourist destinations! It covers all 17 regions of the Philippines with detailed information about:",
+          "",
+          "• Provinces and their tourist spots",
+          "• Destination descriptions and images",
+          "• Location coordinates and directions",
+          "• Points of interest",
+          "",
+          "You can explore destinations, plan your trips, and discover hidden gems across the Philippines.",
+        ],
+      },
+      {
+        question: "How do I use the Interactive Map?",
+        answer: [
+          "Using the map is easy:",
+          "1. Go to the 'Map' or 'Explore' section",
+          "2. Browse the map of the Philippines",
+          "3. Click on a region to see its provinces",
+          "4. Click on tourist spots to see details, images, and information",
+          "5. Use the fullscreen mode for a better view",
+          "",
+          "You can also enable your location to see nearby attractions (GPS permission required).",
+        ],
+      },
+      {
+        question: "What are the Surveys on the platform?",
+        answer: [
+          "Our Surveys feature allows you to participate in polls and questionnaires about travel preferences, destinations, and platform improvements.",
+          "",
+          "Why participate?",
+          "• Help us improve our services",
+          "• Share your travel experiences and preferences",
+          "• Some surveys offer ET Rewards as incentives",
+          "• See what other travelers think (survey results)",
+          "",
+          "Participation is always voluntary, and your individual responses are kept confidential.",
+        ],
+      },
+      {
+        question: "What content is available in the Blog?",
+        answer: [
+          "Our Travel Blog features articles, tips, and guides including:",
+          "",
+          "• Destination guides and travel tips",
+          "• Hidden gems and must-visit places",
+          "• Travel hacks and money-saving advice",
+          "• Adventure and activity recommendations",
+          "• ET Rewards tips and maximizing benefits",
+          "• Seasonal travel recommendations",
+          "",
+          "New articles are published regularly. Check back often for fresh content!",
+        ],
+      },
+      {
+        question: "Does the map use my location?",
+        answer: [
+          "The Interactive Map can use your location to enhance your experience, but only with your permission.",
+          "",
+          "• GPS location is only accessed when you actively use the map feature",
+          "• You can use the map without enabling location",
+          "• Location permission can be granted or revoked anytime in your device settings",
+          "• We do not continuously track your location",
+          "• Location data is not shared with third parties for advertising",
+        ],
       },
     ],
   },
@@ -158,7 +400,7 @@ const faqCategories = [
           "• Medical emergencies abroad",
           "• Lost or delayed baggage",
           "• Flight delays and missed connections",
-          "• Emergency evacuation",
+          "• Emergency evacuation and repatriation",
           "",
           "We highly recommend purchasing travel insurance for peace of mind during your trips.",
         ],
@@ -199,7 +441,8 @@ const faqCategories = [
           "• PCI-DSS compliant payment processing through Xendit and UnionBank",
           "• Secure data storage with regular security audits",
           "• We never store complete credit card information",
-          "• Two-factor authentication available for account protection",
+          "• Compliance with Philippine Data Privacy Act of 2012",
+          "• Real-time fraud monitoring for all transactions",
         ],
       },
       {
@@ -211,13 +454,27 @@ const faqCategories = [
           "• UnionBank: Secure payment processing",
           "• Xendit: Payment gateway solutions",
           "• Wise: International money transfers",
-          "• QAsia: Regional travel services",
+          "• OpenStreetMap: Interactive map services",
+          "• Various billers and telecom providers for Bills Payment and eLoad",
         ],
       },
       {
         question: "Are you a registered travel agency?",
         answer:
-          "Yes, Trip Travel & Tours Agency is a fully registered and accredited travel agency in the Philippines. We comply with all local regulations and maintain partnerships with verified airlines, hotels, and travel service providers worldwide.",
+          "Yes, Trip Travel & Tours Agency is a fully registered and accredited travel agency in the Philippines. We comply with all local regulations including the Data Privacy Act of 2012 and maintain partnerships with verified airlines, hotels, and travel service providers worldwide.",
+      },
+      {
+        question: "How do you protect my data?",
+        answer: [
+          "We are committed to protecting your data:",
+          "• We comply with the Philippine Data Privacy Act of 2012",
+          "• We have a dedicated Data Protection Officer",
+          "• Your data is encrypted in transit and at rest",
+          "• We never sell your personal information to third parties",
+          "• You can request access, correction, or deletion of your data",
+          "",
+          "For privacy concerns, contact us at privacy@triptravelandtours.com",
+        ],
       },
     ],
   },
@@ -264,7 +521,7 @@ const FAQs = () => {
               fontSize: { xs: "1rem", md: "1.25rem" },
             }}
           >
-            Find answers to common questions about our travel services, booking process, and the ET rewards platform.
+            Find answers to common questions about our travel services, bills payment, eLoad, ET Credits & Rewards, interactive features, and more.
           </Typography>
         </Container>
       </Box>
@@ -391,7 +648,7 @@ const FAQs = () => {
             Still Have Questions?
           </Typography>
           <Typography variant="body1" sx={{ mb: 3, opacity: 0.9 }}>
-            Our customer support team is ready to help you with any questions or concerns.
+            Our 24/7 customer support team is ready to help you with any questions or concerns.
           </Typography>
           <Button
             variant="contained"

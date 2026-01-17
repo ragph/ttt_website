@@ -7,7 +7,6 @@ import {
   Avatar,
   Chip,
   Button,
-  Divider,
   Paper,
   CircularProgress,
 } from "@mui/material";
@@ -27,8 +26,16 @@ const formatDate = (dateString: string): string => {
   });
 };
 
+// Extract blog ID from title slug (format: "title-slug-{id}")
+const extractBlogId = (titleSlug: string): string | null => {
+  const parts = titleSlug.split("-");
+  const id = parts[parts.length - 1];
+  // Verify it's a number
+  return /^\d+$/.test(id) ? id : null;
+};
+
 const BlogDetails = () => {
-  const { slug } = useParams();
+  const { title } = useParams<{ category: string; title: string }>();
   const navigate = useNavigate();
   const [article, setArticle] = useState<Blog | null>(null);
   const [loading, setLoading] = useState(true);
@@ -38,14 +45,21 @@ const BlogDetails = () => {
     window.scrollTo(0, 0);
 
     const fetchBlog = async () => {
-      if (!slug) {
+      if (!title) {
+        setError(true);
+        setLoading(false);
+        return;
+      }
+
+      const blogId = extractBlogId(title);
+      if (!blogId) {
         setError(true);
         setLoading(false);
         return;
       }
 
       setLoading(true);
-      const blog = await blogApi.getBlogById(slug);
+      const blog = await blogApi.getBlogById(blogId);
 
       if (blog) {
         setArticle(blog);
@@ -57,7 +71,7 @@ const BlogDetails = () => {
     };
 
     fetchBlog();
-  }, [slug]);
+  }, [title]);
 
   if (loading) {
     return (

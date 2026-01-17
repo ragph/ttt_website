@@ -159,7 +159,7 @@ export const routes: RouteObject[] = [
         ),
       },
       {
-        path: '/blog/:slug',
+        path: '/blog/:category/:title',
         element: (
           <SuspenseWrapper>
             <BlogDetails />

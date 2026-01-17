@@ -6,7 +6,8 @@ import {
   Typography,
   Box,
   Chip,
-  Avatar, Button,
+  Avatar,
+  Button,
 } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -22,6 +23,16 @@ interface BlogCardProps {
   authorAvatar?: string;
 }
 
+// Helper to create URL-friendly slug
+const createSlug = (text: string): string => {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "") // Remove special characters
+    .replace(/\s+/g, "-") // Replace spaces with hyphens
+    .replace(/-+/g, "-") // Replace multiple hyphens with single
+    .trim();
+};
+
 export const BlogCard = ({
   id,
   image,
@@ -36,7 +47,9 @@ export const BlogCard = ({
 
   const handleReadMore = () => {
     if (id) {
-      navigate(`/blog/${id}`);
+      const categorySlug = createSlug(category);
+      const titleSlug = `${createSlug(title)}-${id}`;
+      navigate(`/blog/${categorySlug}/${titleSlug}`);
     }
   };
 
@@ -77,7 +90,7 @@ export const BlogCard = ({
           <Chip
             label={category}
             sx={{
-              bgcolor: 'background.paper',
+              bgcolor: "background.paper",
               color: "primary.main",
               fontWeight: 600,
               fontSize: "0.75rem",
