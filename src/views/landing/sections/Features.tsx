@@ -27,8 +27,8 @@ const features = [
   },
   {
     icon: MonetizationOnIcon,
-    title: 'Referral Rewards',
-    description: 'Invite others to use the platform and receive rewards when they join and transact.',
+    title: 'Earn Rewards',
+    description: 'Participate in platform activities and enjoy rewards available through bookings, referrals, and select partner offers.',
     color: '#00C18A',
   },
 ];
