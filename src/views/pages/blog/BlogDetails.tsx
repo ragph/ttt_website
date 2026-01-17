@@ -26,16 +26,13 @@ const formatDate = (dateString: string): string => {
   });
 };
 
-// Extract blog ID from title slug (format: "title-slug-{id}")
-const extractBlogId = (titleSlug: string): string | null => {
-  const parts = titleSlug.split("-");
-  const id = parts[parts.length - 1];
-  // Verify it's a number
-  return /^\d+$/.test(id) ? id : null;
+// Decode base36 ID back to number
+const decodeId = (encoded: string): string => {
+  return parseInt(encoded, 36).toString();
 };
 
 const BlogDetails = () => {
-  const { title } = useParams<{ category: string; title: string }>();
+  const { id } = useParams<{ category: string; id: string; title: string }>();
   const navigate = useNavigate();
   const [article, setArticle] = useState<Blog | null>(null);
   const [loading, setLoading] = useState(true);
@@ -45,18 +42,13 @@ const BlogDetails = () => {
     window.scrollTo(0, 0);
 
     const fetchBlog = async () => {
-      if (!title) {
+      if (!id) {
         setError(true);
         setLoading(false);
         return;
       }
 
-      const blogId = extractBlogId(title);
-      if (!blogId) {
-        setError(true);
-        setLoading(false);
-        return;
-      }
+      const blogId = decodeId(id);
 
       setLoading(true);
       const blog = await blogApi.getBlogById(blogId);
@@ -71,7 +63,7 @@ const BlogDetails = () => {
     };
 
     fetchBlog();
-  }, [title]);
+  }, [id]);
 
   if (loading) {
     return (

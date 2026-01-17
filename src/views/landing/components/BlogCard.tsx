@@ -33,6 +33,11 @@ const createSlug = (text: string): string => {
     .trim();
 };
 
+// Encode ID to base36 for shorter, cleaner URLs
+const encodeId = (id: string): string => {
+  return parseInt(id, 10).toString(36);
+};
+
 export const BlogCard = ({
   id,
   image,
@@ -48,8 +53,9 @@ export const BlogCard = ({
   const handleReadMore = () => {
     if (id) {
       const categorySlug = createSlug(category);
-      const titleSlug = `${createSlug(title)}-${id}`;
-      navigate(`/blog/${categorySlug}/${titleSlug}`);
+      const titleSlug = createSlug(title);
+      const encodedId = encodeId(id);
+      navigate(`/blog/${categorySlug}/${encodedId}/${titleSlug}`);
     }
   };
 
