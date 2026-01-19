@@ -16,6 +16,13 @@ import PersonIcon from "@mui/icons-material/Person";
 import { blogApi } from "@/api/blogApi";
 import type { Blog } from "@/api/types/blog.types";
 
+// Helper to strip HTML tags for meta description
+const stripHtml = (html: string): string => {
+  const tmp = document.createElement("div");
+  tmp.innerHTML = html;
+  return tmp.textContent || tmp.innerText || "";
+};
+
 // Helper to format date
 const formatDate = (dateString: string): string => {
   const date = new Date(dateString);
@@ -64,6 +71,58 @@ const BlogDetails = () => {
 
     fetchBlog();
   }, [id]);
+
+  // Update meta tags when article is loaded
+  useEffect(() => {
+    if (!article) return;
+
+    const originalTitle = document.title;
+    const description = article.excerpt || stripHtml(article.description).substring(0, 160);
+    const currentUrl = window.location.href;
+
+    // Update document title
+    document.title = `${article.title} | TTT Travel`;
+
+    // Helper to set or create meta tag
+    const setMetaTag = (name: string, content: string, property?: boolean) => {
+      const attr = property ? "property" : "name";
+      let meta = document.querySelector(`meta[${attr}="${name}"]`) as HTMLMetaElement;
+      if (!meta) {
+        meta = document.createElement("meta");
+        meta.setAttribute(attr, name);
+        document.head.appendChild(meta);
+      }
+      meta.setAttribute("content", content);
+    };
+
+    // Basic meta tags
+    setMetaTag("description", description);
+    setMetaTag("author", article.author);
+
+    // Open Graph meta tags (for Facebook, LinkedIn, etc.)
+    setMetaTag("og:title", article.title, true);
+    setMetaTag("og:description", description, true);
+    setMetaTag("og:image", article.image, true);
+    setMetaTag("og:url", currentUrl, true);
+    setMetaTag("og:type", "article", true);
+    setMetaTag("og:site_name", "TTT Travel", true);
+
+    // Twitter Card meta tags
+    setMetaTag("twitter:card", "summary_large_image");
+    setMetaTag("twitter:title", article.title);
+    setMetaTag("twitter:description", description);
+    setMetaTag("twitter:image", article.image);
+
+    // Article-specific meta tags
+    setMetaTag("article:published_time", article.datePosted, true);
+    setMetaTag("article:author", article.author, true);
+    setMetaTag("article:section", article.category, true);
+
+    // Cleanup: restore original title when component unmounts
+    return () => {
+      document.title = originalTitle;
+    };
+  }, [article]);
 
   if (loading) {
     return (
@@ -219,7 +278,24 @@ const BlogDetails = () => {
             bgcolor: "background.paper",
           }}
         >
-          {/* <Divider sx={{ mb: 4 }} /> */}
+
+          {/* Excerpt/Summary */}
+          {article.excerpt && (
+            <Typography
+              variant="body1"
+              sx={{
+                fontStyle: "italic",
+                color: "text.secondary",
+                lineHeight: 1.8,
+                mb: 4,
+                pb: 4,
+                borderBottom: "1px solid",
+                borderColor: "divider",
+              }}
+            >
+              {article.excerpt}
+            </Typography>
+          )}
 
           <Box
             sx={{

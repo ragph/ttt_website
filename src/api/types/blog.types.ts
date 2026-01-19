@@ -4,6 +4,7 @@ export interface Blog {
   id: number;
   title: string;
   description: string;
+  excerpt: string;
   image: string;
   category: string;
   status: 'published' | 'draft' | 'archived';

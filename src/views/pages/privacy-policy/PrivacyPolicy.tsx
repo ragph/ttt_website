@@ -279,7 +279,7 @@ const PrivacyPolicy = () => {
             >
               Our Commitment to You
             </Typography>
-            <Typography variant="body2" sx={{ lineHeight: 1.8, color: "text.secondary" }}>
+            <Typography variant="body1" sx={{ lineHeight: 1.8, color: "text.secondary" }}>
               Your trust is paramount to us. We are committed to transparency in our data practices, implementing robust security measures, and giving you control over your personal information. By using the Trip Travel & Tours Agency ET (Earning While Travelling) platform and its services - including travel bookings, bills payment, eLoad, surveys, and our interactive features - you acknowledge that you have read and understood this Privacy Policy. We comply with the Philippine Data Privacy Act of 2012.
             </Typography>
           </Box>

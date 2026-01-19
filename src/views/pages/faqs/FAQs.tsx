@@ -585,7 +585,7 @@ const FAQs = () => {
                         }}
                       >
                         <Typography
-                          variant="subtitle1"
+                          variant="h6"
                           sx={{
                             fontWeight: 600,
                             color: "text.primary",
@@ -600,7 +600,7 @@ const FAQs = () => {
                             {faq.answer.map((line, lineIndex) => (
                               <Typography
                                 key={lineIndex}
-                                variant="body2"
+                                variant="body1"
                                 sx={{
                                   color: "text.secondary",
                                   lineHeight: 1.8,
@@ -614,7 +614,7 @@ const FAQs = () => {
                           </Box>
                         ) : (
                           <Typography
-                            variant="body2"
+                            variant="body1"
                             sx={{
                               color: "text.secondary",
                               lineHeight: 1.8,

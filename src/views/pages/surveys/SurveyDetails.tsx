@@ -126,8 +126,30 @@ const SurveyDetail = () => {
   console.log('Voting question options:', votingQuestion?.options);
 
   return (
-    <Box sx={{ bgcolor: 'background.default', minHeight: '100vh', py: 4 }}>
-      <Container maxWidth="lg">
+    <Box
+      sx={{
+        bgcolor: 'background.default',
+        minHeight: '100vh',
+        py: 4,
+        position: 'relative',
+        '&::before': {
+          content: '""',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: 'url(https://images.unsplash.com/photo-1588163308092-5196fe66a63e?q=80&w=2098)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          opacity: 0.05,
+          zIndex: 0,
+          pointerEvents: 'none',
+        },
+      }}
+    >
+      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
         {/* Tab-like Navigation - Only show for pageant surveys */}
         {isPageantSurvey && (
           <SurveyTabNavigation
@@ -138,9 +160,9 @@ const SurveyDetail = () => {
         )}
 
         {/* Survey Header */}
-        <Box sx={{ textAlign: 'center', mb: 4 }}>
+        <Box sx={{ textAlign: 'center', mb: 6 }}>
           <Chip label={survey.category} color="primary" sx={{ mb: 2 }} />
-          <Typography variant="h3" sx={{ fontWeight: 700, mb: 2 }}>
+          <Typography variant="h1" sx={{ fontWeight: 700, mb: 0.5 }}>
             {survey.title}
           </Typography>
           <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
@@ -159,7 +181,7 @@ const SurveyDetail = () => {
                 height: 'auto',
                 mx: 'auto',
                 mb: 4,
-                borderRadius: 2,
+                borderRadius: 0,
               }}
             />
           )}

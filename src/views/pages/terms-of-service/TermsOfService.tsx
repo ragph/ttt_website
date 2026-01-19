@@ -282,7 +282,7 @@ const TermsOfService = () => {
             >
               Agreement
             </Typography>
-            <Typography variant="body2" sx={{ lineHeight: 1.8, color: "text.secondary" }}>
+            <Typography variant="body1" sx={{ lineHeight: 1.8, color: "text.secondary" }}>
               By creating an account or using the Trip Travel & Tours Agency ET (Earning While Travelling) platform, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions. This includes our travel booking services, bills payment services, eLoad services, ET Rewards Program, and all other features available on our platform. If you do not agree with any part of these terms, you must not use our services.
             </Typography>
           </Box>

@@ -269,7 +269,7 @@ const RefundPolicy = () => {
             >
               Agreement
             </Typography>
-            <Typography variant="body2" sx={{ lineHeight: 1.8, color: "text.secondary" }}>
+            <Typography variant="body1" sx={{ lineHeight: 1.8, color: "text.secondary" }}>
               By using our services and making transactions through the Trip Travel and Tours Agency ET (Earning While Travelling) platform, including travel bookings, bills payment, eLoad services, and ET Credits, you acknowledge that you have read, understood, and agree to be bound by this Refund Policy.
             </Typography>
           </Box>

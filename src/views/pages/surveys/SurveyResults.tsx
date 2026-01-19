@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import {
   Box,
   Container,
@@ -15,7 +15,13 @@ import {
   CircularProgress,
   Alert,
   Avatar,
+  IconButton,
+  Dialog,
+  DialogContent,
 } from '@mui/material';
+import FullscreenIcon from '@mui/icons-material/Fullscreen';
+import CloseIcon from '@mui/icons-material/Close';
+import SurveyTabNavigation from './components/SurveyTabNavigation';
 import {
   BarChart,
   Bar,
@@ -42,7 +48,7 @@ interface CandidateScore {
 
 // Custom label component for the bar chart
 const CustomBarLabel = (props: any) => {
-  const { x, y, width, height, value, imageUrl, rank, percentage } = props;
+  const { x, y, width, height, imageUrl, rank, percentage } = props;
 
   // Adjust sizes based on available width
   const isMobile = width < 300;
@@ -90,6 +96,7 @@ const CustomBarLabel = (props: any) => {
             height={imageSize}
             href={imageUrl}
             clipPath={`url(#clip-${rank})`}
+            preserveAspectRatio="xMidYMid slice"
           />
           <circle
             cx={imageX + imageSize / 2}
@@ -111,18 +118,20 @@ const CustomBarLabel = (props: any) => {
         />
       )}
 
-      {/* Percentage at the end of the bar */}
-      <text
-        x={x + width - (isMobile ? 5 : 10)}
-        y={y + height / 2}
-        fill="#333"
-        fontSize={isMobile ? 12 : 14}
-        fontWeight="600"
-        textAnchor="end"
-        dominantBaseline="middle"
-      >
-        {percentage ? `${percentage.toFixed(1)}%` : '0%'}
-      </text>
+      {/* Percentage - only show for top 5 */}
+      {rank <= 5 && (
+        <text
+          x={x + width + 8}
+          y={y + height / 2}
+          fill="#333"
+          fontSize={isMobile ? 11 : 13}
+          fontWeight="600"
+          textAnchor="start"
+          dominantBaseline="middle"
+        >
+          {percentage ? `${percentage.toFixed(1)}%` : '0%'}
+        </text>
+      )}
     </g>
   );
 };
@@ -130,10 +139,24 @@ const CustomBarLabel = (props: any) => {
 const SurveyResults = () => {
   const { id: slug } = useParams<{ id: string }>();
   const location = useLocation();
+  const navigate = useNavigate();
   const [survey, setSurvey] = useState<SurveyDetailType | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [candidateScores, setCandidateScores] = useState<CandidateScore[]>([]);
+  const [fullscreenOpen, setFullscreenOpen] = useState(false);
+
+  // Check if this is a pageant survey (case-insensitive)
+  const isPageantSurvey = survey?.category.toLowerCase().includes('pageant') ||
+                          survey?.category.toLowerCase().includes('beauty') ||
+                          survey?.title.toLowerCase().includes('miss') ||
+                          survey?.title.toLowerCase().includes('pageant');
+
+  const handleGeneralClick = () => {
+    if (slug) {
+      navigate(`/surveys/${slug}`);
+    }
+  };
 
   // Helper function to create slug from title
   const createSlug = (title: string) => {
@@ -143,6 +166,48 @@ const SurveyResults = () => {
       .replace(/^-+|-+$/g, '');
   };
 
+  // Store castingToken in state for polling
+  const [castingToken, setCastingToken] = useState<string | null>(null);
+
+  // Function to fetch voting results (used for initial load and polling)
+  const fetchVotingResults = async (token: string) => {
+    try {
+      const resultsData = await surveyApi.getSurveyResults(token);
+
+      if (resultsData && resultsData.statistics && resultsData.statistics.length > 0) {
+        const votingStats = resultsData.statistics[0];
+
+        if (votingStats && votingStats.options) {
+          const scores: CandidateScore[] = votingStats.options.map((option: any) => {
+            const textMatch = option.option.match(/^(.+?)\s*\((.+?)\)$/);
+            const candidateName = textMatch ? textMatch[1].trim() : option.option;
+            const candidateRegion = textMatch ? textMatch[2].trim() : '';
+
+            return {
+              name: candidateName,
+              region: candidateRegion,
+              votes: option.votes || 0,
+              percentage: option.percentage || 0,
+              rank: 0,
+              imageUrl: option.imageUrls?.[0] || option.imageUrl,
+            };
+          });
+
+          // Sort by votes descending and assign ranks
+          scores.sort((a, b) => b.votes - a.votes);
+          scores.forEach((score, index) => {
+            score.rank = index + 1;
+          });
+
+          setCandidateScores(scores);
+        }
+      }
+    } catch (error: any) {
+      console.error('Error fetching voting results:', error);
+    }
+  };
+
+  // Initial data fetch
   useEffect(() => {
     const fetchSurveyResults = async () => {
       if (!slug) return;
@@ -182,40 +247,10 @@ const SurveyResults = () => {
 
           // Fetch real voting results from API
           if (surveyData.castingToken) {
+            setCastingToken(surveyData.castingToken);
             try {
               console.log('🔍 Fetching results with token:', surveyData.castingToken);
-              const resultsData = await surveyApi.getSurveyResults(surveyData.castingToken);
-              console.log('📈 Results Data:', resultsData);
-
-              if (resultsData && resultsData.statistics && resultsData.statistics.length > 0) {
-                // Get the first question's statistics (voting question)
-                const votingStats = resultsData.statistics[0];
-
-                if (votingStats && votingStats.options) {
-                  const scores: CandidateScore[] = votingStats.options.map((option: any, index: number) => {
-                    const textMatch = option.option.match(/^(.+?)\s*\((.+?)\)$/);
-                    const candidateName = textMatch ? textMatch[1].trim() : option.option;
-                    const candidateRegion = textMatch ? textMatch[2].trim() : '';
-
-                    return {
-                      name: candidateName,
-                      region: candidateRegion,
-                      votes: option.votes || 0,
-                      percentage: option.percentage || 0,
-                      rank: 0, // Will be set after sorting
-                      imageUrl: option.imageUrls?.[0] || option.imageUrl,
-                    };
-                  });
-
-                  // Sort by votes descending and assign ranks
-                  scores.sort((a, b) => b.votes - a.votes);
-                  scores.forEach((score, index) => {
-                    score.rank = index + 1;
-                  });
-
-                  setCandidateScores(scores);
-                }
-              }
+              await fetchVotingResults(surveyData.castingToken);
             } catch (error: any) {
               console.error('❌ Error fetching voting results:', error);
               console.error('Error details:', error.response?.data || error.message);
@@ -236,6 +271,47 @@ const SurveyResults = () => {
 
     fetchSurveyResults();
   }, [slug, location.state]);
+
+  // Auto-refresh polling every 30 seconds (pauses when tab is hidden)
+  useEffect(() => {
+    if (!castingToken) return;
+
+    let intervalId: NodeJS.Timeout | null = null;
+
+    const startPolling = () => {
+      if (intervalId) return;
+      intervalId = setInterval(() => {
+        fetchVotingResults(castingToken);
+      }, 30000); // Refresh every 30 seconds
+    };
+
+    const stopPolling = () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+        intervalId = null;
+      }
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        stopPolling();
+      } else {
+        fetchVotingResults(castingToken); // Fetch immediately when tab becomes visible
+        startPolling();
+      }
+    };
+
+    // Start polling initially
+    startPolling();
+
+    // Listen for tab visibility changes
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      stopPolling();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, [castingToken]);
 
   const getRankColor = (rank: number) => {
     switch (rank) {
@@ -282,10 +358,19 @@ const SurveyResults = () => {
   return (
     <Box sx={{ bgcolor: 'background.default', minHeight: '100vh', py: 4 }}>
       <Container maxWidth="lg">
+        {/* Tab-like Navigation - Only show for pageant surveys */}
+        {isPageantSurvey && (
+          <SurveyTabNavigation
+            activeTab="tally"
+            onGeneralClick={handleGeneralClick}
+            onTallyClick={() => {}}
+          />
+        )}
+
         {/* Header */}
         <Box sx={{ textAlign: 'center', mb: 4 }}>
           <Chip label={survey.category} color="primary" sx={{ mb: 2 }} />
-          <Typography variant="h3" sx={{ fontWeight: 700, mb: 2 }}>
+          <Typography variant="h2" sx={{ fontWeight: 700, mb: 2 }}>
             {survey.title} - Results
           </Typography>
           <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
@@ -300,16 +385,28 @@ const SurveyResults = () => {
 
         {/* Bar Chart */}
         <Paper elevation={2} sx={{ p: { xs: 2, md: 4 }, mb: 4, borderRadius: 2 }}>
-          <Typography variant="h5" sx={{ fontWeight: 600, mb: 3, fontSize: { xs: '1.25rem', md: '1.5rem' } }}>
-            Vote Distribution
-          </Typography>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+            <Typography variant="h5" sx={{ fontWeight: 600, fontSize: { xs: '1.25rem', md: '1.5rem' } }}>
+              Vote Distribution
+            </Typography>
+            <IconButton
+              onClick={() => setFullscreenOpen(true)}
+              sx={{
+                bgcolor: 'grey.100',
+                '&:hover': { bgcolor: 'grey.200' },
+              }}
+              title="View fullscreen"
+            >
+              <FullscreenIcon />
+            </IconButton>
+          </Box>
           <Box sx={{ width: '100%', overflowX: 'auto' }}>
             <Box sx={{ minWidth: { xs: 400, md: '100%' } }}>
               <ResponsiveContainer width="100%" height={Math.max(candidateScores.length * 70, 400)}>
                 <BarChart
                   data={candidateScores}
                   layout="vertical"
-                  margin={{ top: 30, right: 10, left: 5, bottom: 5 }}
+                  margin={{ top: 30, right: 60, left: 5, bottom: 5 }}
                   barCategoryGap="20%"
                 >
                   <CartesianGrid strokeDasharray="3 3" />
@@ -372,9 +469,9 @@ const SurveyResults = () => {
                   <TableCell sx={{ fontWeight: 600, minWidth: 150 }}>
                     Vote Progress
                   </TableCell>
-                  {/* <TableCell align="right" sx={{ fontWeight: 600, width: 120, minWidth: 90 }}>
+                  <TableCell align="right" sx={{ fontWeight: 600, width: 120, minWidth: 90 }}>
                     Percentage
-                  </TableCell> */}
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -469,14 +566,14 @@ const SurveyResults = () => {
                         </Box>
                       </Box>
                     </TableCell>
-                    {/* <TableCell align="right">
+                    <TableCell align="right">
                       <Chip
                         label={`${candidate.percentage.toFixed(1)}%`}
                         color={candidate.rank === 1 ? 'primary' : 'default'}
                         size="small"
                         sx={{ fontWeight: 600, minWidth: 70 }}
                       />
-                    </TableCell> */}
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -491,6 +588,230 @@ const SurveyResults = () => {
           </Typography>
         </Box>
       </Container>
+
+      {/* Fullscreen Modal */}
+      <Dialog
+        open={fullscreenOpen}
+        onClose={() => setFullscreenOpen(false)}
+        fullScreen
+        slotProps={{
+          paper: {
+            sx: {
+              bgcolor: 'background.default',
+            },
+          },
+        }}
+      >
+        <DialogContent sx={{ px: { xs: 2, md: 4 }, pt: 2, pb: 4, overflow: 'auto' }}>
+          {/* Close Button */}
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>
+            <IconButton
+              onClick={() => setFullscreenOpen(false)}
+              sx={{
+                bgcolor: 'grey.100',
+                '&:hover': { bgcolor: 'grey.200' },
+              }}
+              title="Close fullscreen"
+            >
+              <CloseIcon />
+            </IconButton>
+          </Box>
+
+          {/* Header */}
+          <Box sx={{ textAlign: 'center', mb: 4 }}>
+            <Chip label={survey.category} color="primary" sx={{ mb: 2 }} />
+            <Typography variant="h1" sx={{ fontWeight: 700, mb: 2 }}>
+              {survey.title} - Results
+            </Typography>
+            <Typography variant="body1" color="text.secondary">
+              Total Responses: {survey.totalResponses}
+            </Typography>
+          </Box>
+
+          {/* Bar Chart */}
+          <Paper elevation={2} sx={{ p: { xs: 2, md: 4 }, mb: 4, borderRadius: 2 }}>
+            <Typography variant="h5" sx={{ fontWeight: 600, mb: 3, fontSize: { xs: '1.25rem', md: '1.5rem' } }}>
+              Vote Distribution
+            </Typography>
+            <Box sx={{ width: '100%', overflowX: 'auto' }}>
+              <Box sx={{ minWidth: { xs: 400, md: '100%' } }}>
+                <ResponsiveContainer width="100%" height={Math.max(candidateScores.length * 70, 400)}>
+                  <BarChart
+                    data={candidateScores}
+                    layout="vertical"
+                    margin={{ top: 30, right: 60, left: 5, bottom: 5 }}
+                    barCategoryGap="20%"
+                  >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis type="number" />
+                    <YAxis
+                      dataKey="name"
+                      type="category"
+                      width={140}
+                      tick={{ fontSize: 10 }}
+                      interval={0}
+                    />
+                    <Tooltip
+                      formatter={(value) => `${value} votes`}
+                      labelStyle={{ color: '#000' }}
+                    />
+                    <Legend />
+                    <Bar dataKey="votes" name="Votes" radius={[0, 8, 8, 0]} barSize={40}>
+                      {candidateScores.map((entry, index) => (
+                        <Cell key={`cell-fs-${index}`} fill={getBarColor(entry.rank)} />
+                      ))}
+                      <LabelList
+                        dataKey="votes"
+                        content={(props) => (
+                          <CustomBarLabel
+                            {...props}
+                            imageUrl={candidateScores[props.index || 0]?.imageUrl}
+                            rank={candidateScores[props.index || 0]?.rank}
+                            percentage={candidateScores[props.index || 0]?.percentage}
+                          />
+                        )}
+                      />
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </Box>
+            </Box>
+          </Paper>
+
+          {/* Rankings Table */}
+          <Paper elevation={2} sx={{ borderRadius: 2, overflow: 'hidden' }}>
+            <Box sx={{ p: 3, bgcolor: 'primary.main', color: 'white' }}>
+              <Typography variant="h5" sx={{ fontWeight: 600 }}>
+                Rankings & Scores
+              </Typography>
+            </Box>
+            <TableContainer sx={{ overflowX: 'auto' }}>
+              <Table sx={{ minWidth: { xs: 600, md: 'auto' } }}>
+                <TableHead>
+                  <TableRow sx={{ bgcolor: 'grey.100' }}>
+                    <TableCell align="center" sx={{ fontWeight: 600, width: 80, minWidth: 60 }}>
+                      Rank
+                    </TableCell>
+                    <TableCell sx={{ fontWeight: 600, minWidth: 150 }}>Candidate</TableCell>
+                    <TableCell sx={{ fontWeight: 600, minWidth: 100 }}>
+                      Region
+                    </TableCell>
+                    <TableCell align="right" sx={{ fontWeight: 600, minWidth: 80 }}>
+                      Votes
+                    </TableCell>
+                    <TableCell sx={{ fontWeight: 600, minWidth: 150 }}>
+                      Vote Progress
+                    </TableCell>
+                    <TableCell align="right" sx={{ fontWeight: 600, width: 120, minWidth: 90 }}>
+                      Percentage
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {candidateScores.map((candidate, index) => (
+                    <TableRow
+                      key={`fs-${index}`}
+                      sx={{
+                        '&:hover': { bgcolor: 'grey.50' },
+                        bgcolor: candidate.rank <= 3 ? `${getRankColor(candidate.rank)}15` : 'inherit',
+                      }}
+                    >
+                      <TableCell align="center">
+                        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+                          {candidate.rank <= 3 && (
+                            <EmojiEventsIcon
+                              sx={{
+                                color: getRankColor(candidate.rank),
+                                fontSize: 28,
+                              }}
+                            />
+                          )}
+                          <Typography
+                            sx={{
+                              fontWeight: candidate.rank <= 3 ? 700 : 500,
+                              fontSize: candidate.rank === 1 ? '1.25rem' : '1rem',
+                            }}
+                          >
+                            {candidate.rank}
+                          </Typography>
+                        </Box>
+                      </TableCell>
+                      <TableCell>
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                          {candidate.imageUrl && (
+                            <Avatar
+                              src={candidate.imageUrl}
+                              alt={candidate.name}
+                              sx={{ width: 50, height: 50 }}
+                            />
+                          )}
+                          <Typography
+                            sx={{
+                              fontWeight: candidate.rank <= 3 ? 600 : 400,
+                              fontSize: candidate.rank === 1 ? '1.1rem' : '1rem',
+                            }}
+                          >
+                            {candidate.name}
+                          </Typography>
+                        </Box>
+                      </TableCell>
+                      <TableCell>
+                        <Typography variant="body2" color="text.secondary">
+                          {candidate.region}
+                        </Typography>
+                      </TableCell>
+                      <TableCell align="right">
+                        <Typography sx={{ fontWeight: 500, fontSize: '1rem' }}>
+                          {candidate.votes.toLocaleString()}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                          <Box
+                            sx={{
+                              flex: 1,
+                              height: 24,
+                              bgcolor: 'grey.200',
+                              borderRadius: 2,
+                              overflow: 'hidden',
+                              position: 'relative',
+                            }}
+                          >
+                            <Box
+                              sx={{
+                                height: '100%',
+                                width: `${candidate.percentage}%`,
+                                bgcolor: getBarColor(candidate.rank),
+                                borderRadius: 2,
+                                transition: 'width 0.5s ease-in-out',
+                              }}
+                            />
+                          </Box>
+                        </Box>
+                      </TableCell>
+                      <TableCell align="right">
+                        <Chip
+                          label={`${candidate.percentage.toFixed(1)}%`}
+                          color={candidate.rank === 1 ? 'primary' : 'default'}
+                          size="small"
+                          sx={{ fontWeight: 600, minWidth: 70 }}
+                        />
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Paper>
+
+          {/* Note about data */}
+          <Box sx={{ mt: 4, textAlign: 'center' }}>
+            <Typography variant="caption" color="text.secondary">
+              Note: Results are updated in real-time based on submitted responses
+            </Typography>
+          </Box>
+        </DialogContent>
+      </Dialog>
     </Box>
   );
 };

@@ -201,10 +201,7 @@ export const Blog = () => {
                       id={blog.id.toString()}
                       image={blog.image}
                       title={blog.title}
-                      excerpt={
-                        blog.description.replace(/<[^>]*>/g, "").substring(0, 150) +
-                        "..."
-                      }
+                      excerpt={blog.excerpt}
                       category={blog.category}
                       date={formatDate(blog.datePosted)}
                       author={blog.author}

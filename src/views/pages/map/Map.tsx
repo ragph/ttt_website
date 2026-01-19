@@ -17,6 +17,7 @@ import {
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import MyLocationIcon from "@mui/icons-material/MyLocation";
 import CloseIcon from "@mui/icons-material/Close";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
@@ -104,14 +105,14 @@ const createLabelIcon = (name: string) => {
 L.Marker.prototype.options.icon = DefaultIcon;
 
 // Component to handle map center changes
-function MapCenterController({ center }: { center: [number, number] }) {
+function MapCenterController({ center, zoom }: { center: [number, number]; zoom: number }) {
   const map = useMap();
 
   useEffect(() => {
-    map.flyTo(center, 10, {
+    map.flyTo(center, zoom, {
       duration: 1.5,
     });
-  }, [center, map]);
+  }, [center, zoom, map]);
 
   return null;
 }
@@ -247,6 +248,7 @@ const Map = () => {
   const [mapCenter, setMapCenter] = useState<[number, number]>([
     12.8797, 121.774,
   ]); // Center of Philippines
+  const [mapZoom, setMapZoom] = useState(6); // Default zoom for country view
   const [dialogOpen, setDialogOpen] = useState(false);
   const [userLocation, setUserLocation] = useState<[number, number] | null>(
     null
@@ -308,38 +310,84 @@ const Map = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
+  // Request user location
+  const requestUserLocation = useCallback(() => {
+    if (!("geolocation" in navigator)) {
+      console.log("Geolocation is not supported by this browser.");
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        const userCoords: [number, number] = [latitude, longitude];
+        setUserLocation(userCoords);
+        setMapCenter(userCoords);
+        setMapZoom(12); // Zoom in to user's location
+      },
+      (error) => {
+        console.log("Geolocation error:", error.message);
+        // Don't change map center on error, keep default Philippines view
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0,
+      }
+    );
+  }, []);
+
   // Get user's current location on component mount
   useEffect(() => {
     setIsLoading(true);
 
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          const userCoords: [number, number] = [latitude, longitude];
-          setUserLocation(userCoords);
-          setMapCenter(userCoords);
-          // Delay to ensure map renders properly
-          setTimeout(() => setIsLoading(false), 800);
-        },
-        (error) => {
-          console.log("Geolocation error:", error.message);
-          // Fallback to Philippines center if geolocation fails
-          setMapCenter([12.8797, 121.774]);
-          setTimeout(() => setIsLoading(false), 800);
-        },
-        {
-          enableHighAccuracy: true,
-          timeout: 5000,
-          maximumAge: 0,
+    const initializeMap = async () => {
+      // Check if geolocation is available
+      if (!("geolocation" in navigator)) {
+        console.log("Geolocation is not supported by this browser.");
+        setMapCenter([12.8797, 121.774]);
+        setTimeout(() => setIsLoading(false), 800);
+        return;
+      }
+
+      // Check permission state if available (not all browsers support this)
+      if ("permissions" in navigator) {
+        try {
+          const permission = await navigator.permissions.query({ name: "geolocation" });
+
+          if (permission.state === "granted") {
+            // Permission already granted, get location
+            requestUserLocation();
+          } else if (permission.state === "prompt") {
+            // Permission not yet requested, request it
+            requestUserLocation();
+          } else {
+            // Permission denied, use default location
+            console.log("Geolocation permission denied.");
+          }
+
+          // Listen for permission changes
+          permission.onchange = () => {
+            if (permission.state === "granted") {
+              requestUserLocation();
+            }
+          };
+        } catch (err) {
+          // permissions.query might not be supported, try direct request
+          requestUserLocation();
         }
-      );
-    } else {
-      console.log("Geolocation is not supported by this browser.");
+      } else {
+        // Fallback for browsers without permissions API
+        requestUserLocation();
+      }
+
+      // Set map center to default Philippines and finish loading
       setMapCenter([12.8797, 121.774]);
       setTimeout(() => setIsLoading(false), 800);
-    }
-  }, []);
+    };
+
+    initializeMap();
+  }, [requestUserLocation]);
 
   const handleRegionClick = (region: RegionData, province?: string) => {
     console.log('Selected Province:', province);
@@ -352,7 +400,14 @@ const Map = () => {
 
   const handleCloseDialog = () => {
     setDialogOpen(false);
-    setSelectedProvince(null); // Reset selected province when closing dialog
+    // Don't reset selectedRegion here - let TransitionProps.onExited handle it
+    // This prevents flickering during close animation
+  };
+
+  // Called after dialog close animation completes
+  const handleDialogExited = () => {
+    setSelectedProvince(null);
+    // Don't reset selectedRegion here as it's used for province view
   };
 
   // Show loading state
@@ -413,24 +468,60 @@ const Map = () => {
                   },
                 }}
               >
-                {/* Fullscreen Toggle Button */}
-                <IconButton
-                  onClick={toggleFullscreen}
+                {/* Map Control Buttons */}
+                <Box
                   sx={{
                     position: "absolute",
                     top: 10,
                     right: 10,
                     zIndex: 1000,
-                    bgcolor: "white",
-                    boxShadow: 2,
-                    "&:hover": {
-                      bgcolor: "grey.100",
-                    },
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 1,
                   }}
-                  size="small"
                 >
-                  {isFullscreen ? <FullscreenExitIcon /> : <FullscreenIcon />}
-                </IconButton>
+                  {/* Fullscreen Toggle Button */}
+                  <IconButton
+                    onClick={toggleFullscreen}
+                    sx={{
+                      bgcolor: "white",
+                      boxShadow: 2,
+                      "&:hover": {
+                        bgcolor: "grey.100",
+                      },
+                    }}
+                    size="small"
+                    title={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
+                  >
+                    {isFullscreen ? <FullscreenExitIcon /> : <FullscreenIcon />}
+                  </IconButton>
+
+                  {/* My Location Button */}
+                  <IconButton
+                    onClick={() => {
+                      if (userLocation) {
+                        // If we already have location, just center the map
+                        setMapCenter(userLocation);
+                        setMapZoom(12); // Zoom level for user location
+                      } else {
+                        // Request location permission
+                        requestUserLocation();
+                      }
+                    }}
+                    sx={{
+                      bgcolor: userLocation ? "primary.main" : "white",
+                      color: userLocation ? "white" : "inherit",
+                      boxShadow: 2,
+                      "&:hover": {
+                        bgcolor: userLocation ? "primary.dark" : "grey.100",
+                      },
+                    }}
+                    size="small"
+                    title="My Location"
+                  >
+                    <MyLocationIcon />
+                  </IconButton>
+                </Box>
 
                 <MapContainer
                   center={mapCenter}
@@ -441,7 +532,7 @@ const Map = () => {
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                   />
-                  <MapCenterController center={mapCenter} />
+                  <MapCenterController center={mapCenter} zoom={mapZoom} />
 
                   {/* Region Boundaries - shown when viewing regions OR for non-selected regions */}
                   {regionalData.map((region) => {
@@ -472,6 +563,7 @@ const Map = () => {
                             setSelectedRegion(region);
                             setViewMode("provinces");
                             setMapCenter([region.lat, region.lng]);
+                            setMapZoom(8); // Zoom level for region view
                           },
                         }}
                       />
@@ -513,6 +605,7 @@ const Map = () => {
                             eventHandlers={{
                               click: () => {
                                 setMapCenter([province.lat, province.lng]);
+                                setMapZoom(10); // Zoom level for province view
                                 handleRegionClick(selectedRegion, province.province);
                               },
                             }}
@@ -572,6 +665,8 @@ const Map = () => {
                       onClick={() => {
                         setViewMode("regions");
                         setSelectedRegion(null);
+                        setMapCenter([12.8797, 121.774]); // Reset to Philippines center
+                        setMapZoom(6); // Reset to country view zoom
                       }}
                       sx={{
                         bgcolor: "action.hover",
@@ -633,6 +728,7 @@ const Map = () => {
                             setSelectedRegion(region);
                             setViewMode("provinces");
                             setMapCenter([region.lat, region.lng]);
+                            setMapZoom(8); // Zoom level for region view
                           }}
                           sx={{
                             p: 2,
@@ -713,7 +809,8 @@ const Map = () => {
                           elevation={2}
                           onClick={() => {
                             setMapCenter([province.lat, province.lng]);
-                            handleRegionClick(selectedRegion);
+                            setMapZoom(10); // Zoom level for province view
+                            handleRegionClick(selectedRegion, province.province);
                           }}
                           sx={{
                             p: 2,
@@ -765,6 +862,11 @@ const Map = () => {
           maxWidth="lg"
           fullWidth
           scroll="paper"
+          slotProps={{
+            transition: {
+              onExited: handleDialogExited,
+            },
+          }}
         >
           {selectedRegion && (
             <>
