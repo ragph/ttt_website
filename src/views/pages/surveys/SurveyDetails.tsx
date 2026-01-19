@@ -35,6 +35,11 @@ const SurveyDetail = () => {
       .replace(/^-+|-+$/g, '');
   };
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   useEffect(() => {
     const fetchSurvey = async () => {
       if (!slug) return;
@@ -128,7 +133,7 @@ const SurveyDetail = () => {
   return (
     <Box
       sx={{
-        bgcolor: 'background.default',
+        bgcolor: '#ffffff',
         minHeight: '100vh',
         py: 4,
         position: 'relative',

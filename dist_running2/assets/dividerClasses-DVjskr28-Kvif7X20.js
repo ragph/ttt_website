@@ -1,1 +1,0 @@
-import{n as i,v as e}from"./index-Blp7pDh0.js";function l(t){return e("MuiDivider",t)}const n=i("MuiDivider",["root","absolute","fullWidth","inset","middle","flexItem","light","vertical","withChildren","withChildrenVertical","textAlignRight","textAlignLeft","wrapper","wrapperVertical"]);export{n as a,l};

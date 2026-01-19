@@ -135,7 +135,7 @@ const Surveys = () => {
         )}
 
         {/* Empty State */}
-        {filteredSurveys.length === 0 && (
+        {!loading && filteredSurveys.length === 0 && (
           <Box
             sx={{
               textAlign: 'center',

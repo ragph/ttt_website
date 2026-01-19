@@ -166,6 +166,11 @@ const SurveyResults = () => {
       .replace(/^-+|-+$/g, '');
   };
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // Store castingToken in state for polling
   const [castingToken, setCastingToken] = useState<string | null>(null);
 
