@@ -2,10 +2,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ThemeState, ThemeMode } from './types';
 import { THEME_STORAGE_KEY, loadFromLocalStorage, saveToLocalStorage } from '../../utils';
 
-const savedTheme = loadFromLocalStorage<{ mode: ThemeMode }>(THEME_STORAGE_KEY);
-
+// Always use default state to avoid hydration mismatch
+// Theme will be loaded from localStorage after hydration via hydrateTheme action
 const initialState: ThemeState = {
-  mode: savedTheme?.mode || 'light',
+  mode: 'light',
 };
 
 const themeSlice = createSlice({
@@ -20,8 +20,14 @@ const themeSlice = createSlice({
       state.mode = action.payload;
       saveToLocalStorage(THEME_STORAGE_KEY, { mode: state.mode });
     },
+    hydrateTheme: (state) => {
+      const savedTheme = loadFromLocalStorage<{ mode: ThemeMode }>(THEME_STORAGE_KEY);
+      if (savedTheme?.mode) {
+        state.mode = savedTheme.mode;
+      }
+    },
   },
 });
 
-export const { toggleTheme, setThemeMode } = themeSlice.actions;
+export const { toggleTheme, setThemeMode, hydrateTheme } = themeSlice.actions;
 export default themeSlice.reducer;

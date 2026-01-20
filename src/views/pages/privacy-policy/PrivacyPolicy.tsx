@@ -210,6 +210,7 @@ const PrivacyPolicy = () => {
               opacity: 0.9,
               fontWeight: 500,
             }}
+            suppressHydrationWarning
           >
             Last Updated: {new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
           </Typography>

@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authReducer, { rehydrateAuth } from '../features/auth/authSlice';
+import authReducer from '../features/auth/authSlice';
 import themeReducer from '../features/theme/themeSlice';
 
 export const store = configureStore({
@@ -13,8 +13,8 @@ export const store = configureStore({
     }),
 });
 
-// Rehydrate auth state from localStorage on app start
-store.dispatch(rehydrateAuth());
+// Note: Auth and theme hydration from localStorage is handled in useStoreHydration hook
+// to avoid React hydration mismatch errors
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

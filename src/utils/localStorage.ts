@@ -2,7 +2,12 @@
  * LocalStorage utility functions for persistent storage
  */
 
+const isBrowser = typeof window !== 'undefined';
+
 export const loadFromLocalStorage = <T>(key: string): T | null => {
+  if (!isBrowser) {
+    return null;
+  }
   try {
     const serializedState = localStorage.getItem(key);
     if (serializedState === null) {
@@ -16,6 +21,9 @@ export const loadFromLocalStorage = <T>(key: string): T | null => {
 };
 
 export const saveToLocalStorage = <T>(key: string, state: T): void => {
+  if (!isBrowser) {
+    return;
+  }
   try {
     const serializedState = JSON.stringify(state);
     localStorage.setItem(key, serializedState);
@@ -25,6 +33,9 @@ export const saveToLocalStorage = <T>(key: string, state: T): void => {
 };
 
 export const removeFromLocalStorage = (key: string): void => {
+  if (!isBrowser) {
+    return;
+  }
   try {
     localStorage.removeItem(key);
   } catch (err) {
@@ -33,6 +44,9 @@ export const removeFromLocalStorage = (key: string): void => {
 };
 
 export const clearLocalStorage = (): void => {
+  if (!isBrowser) {
+    return;
+  }
   try {
     localStorage.clear();
   } catch (err) {

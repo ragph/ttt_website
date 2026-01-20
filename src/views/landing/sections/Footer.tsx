@@ -293,7 +293,7 @@ export const Footer = () => {
             gap: 2,
           }}
         >
-          <Typography variant="body1" sx={{ color: "rgba(255,255,255,0.5)" }}>
+          <Typography variant="body1" sx={{ color: "rgba(255,255,255,0.5)" }} suppressHydrationWarning>
             © {new Date().getFullYear()} Trip Travel & Tours Agency. All rights
             reserved.
           </Typography>

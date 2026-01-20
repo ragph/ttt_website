@@ -1,0 +1,1 @@
+import{w as o,j as r}from"./index-DOuprDjG.js";const a=o(r.jsx("path",{d:"m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"})),t=o(r.jsx("path",{d:"M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"}));export{a as A,t as E};
