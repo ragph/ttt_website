@@ -43,15 +43,15 @@ class SocketService {
       this.joinSurveyRoom(token);
     });
 
-    this.socket.on("disconnect", (reason) => {
+    this.socket.on("disconnect", (reason: string) => {
       console.log("❌ Socket disconnected:", reason);
     });
 
-    this.socket.on("connect_error", (error) => {
+    this.socket.on("connect_error", (error: Error) => {
       console.error("🔴 Socket connection error:", error.message);
     });
 
-    this.socket.on("reconnect", (attemptNumber) => {
+    this.socket.on("reconnect", (attemptNumber: number) => {
       console.log("🔄 Socket reconnected after", attemptNumber, "attempts");
       // Rejoin the survey room after reconnection
       if (this.surveyToken) {
@@ -73,7 +73,7 @@ class SocketService {
     if (this.socket) {
       // Remove existing listener to avoid duplicates
       this.socket.off("vote-update");
-      this.socket.on("vote-update", (data) => {
+      this.socket.on("vote-update", (data: any) => {
         console.log("📥 Received vote update:", data);
         callback(data);
       });
@@ -84,7 +84,7 @@ class SocketService {
     if (this.socket) {
       // Remove existing listener to avoid duplicates
       this.socket.off("survey-results");
-      this.socket.on("survey-results", (data) => {
+      this.socket.on("survey-results", (data: any) => {
         console.log("📥 Received survey results:", data);
         callback(data);
       });
