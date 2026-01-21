@@ -5,6 +5,7 @@ import { About } from "./sections/About";
 import { WhatWeOffer } from "./sections/WhatWeOffer";
 import { HowItWorks } from "./sections/HowItWorks";
 import { Categories } from "./sections/Categories";
+import { TrendingDestinations } from "./sections/TrendingDestinations";
 import { Features } from "./sections/Features";
 import { Explore } from "./sections/Explore";
 import { Promo } from "./sections/Promo";
@@ -64,7 +65,9 @@ const LandingPage = () => {
 
           <Categories />
 
-          {/* <Explore /> */}
+          {/* <TrendingDestinations /> */}
+
+          <Explore />
 
           <Promo />
 

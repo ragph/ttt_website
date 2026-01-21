@@ -36,6 +36,7 @@ import {
 } from 'recharts';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { surveyApi, SurveyDetail as SurveyDetailType } from '../../../api/surveyApi';
+import { socketService } from '../../../api/socketService';
 
 interface CandidateScore {
   name: string;
@@ -277,44 +278,87 @@ const SurveyResults = () => {
     fetchSurveyResults();
   }, [slug, location.state]);
 
-  // Auto-refresh polling every 30 seconds (pauses when tab is hidden)
+  // Real-time updates via Socket.IO
   useEffect(() => {
     if (!castingToken) return;
 
-    let intervalId: NodeJS.Timeout | null = null;
+    // Connect to socket and join survey room
+    socketService.connect(castingToken);
 
-    const startPolling = () => {
-      if (intervalId) return;
-      intervalId = setInterval(() => {
-        fetchVotingResults(castingToken);
-      }, 30000); // Refresh every 30 seconds
-    };
+    // Listen for vote updates
+    socketService.onVoteUpdate((data) => {
+      console.log('🔄 Real-time vote update received:', data);
 
-    const stopPolling = () => {
-      if (intervalId) {
-        clearInterval(intervalId);
-        intervalId = null;
-      }
-    };
+      // If the update contains full statistics, process it
+      if (data && data.statistics && data.statistics.length > 0) {
+        const votingStats = data.statistics[0];
 
-    const handleVisibilityChange = () => {
-      if (document.hidden) {
-        stopPolling();
+        if (votingStats && votingStats.options) {
+          const scores: CandidateScore[] = votingStats.options.map((option: any) => {
+            const textMatch = option.option.match(/^(.+?)\s*\((.+?)\)$/);
+            const candidateName = textMatch ? textMatch[1].trim() : option.option;
+            const candidateRegion = textMatch ? textMatch[2].trim() : '';
+
+            return {
+              name: candidateName,
+              region: candidateRegion,
+              votes: option.votes || 0,
+              percentage: option.percentage || 0,
+              rank: 0,
+              imageUrl: option.imageUrls?.[0] || option.imageUrl,
+            };
+          });
+
+          // Sort by votes descending and assign ranks
+          scores.sort((a, b) => b.votes - a.votes);
+          scores.forEach((score, index) => {
+            score.rank = index + 1;
+          });
+
+          setCandidateScores(scores);
+        }
       } else {
-        fetchVotingResults(castingToken); // Fetch immediately when tab becomes visible
-        startPolling();
+        // If partial update, re-fetch full results
+        fetchVotingResults(castingToken);
       }
-    };
+    });
 
-    // Start polling initially
-    startPolling();
+    // Also listen for survey-results event
+    socketService.onSurveyResults((data) => {
+      console.log('🔄 Real-time survey results received:', data);
+      if (data && data.statistics && data.statistics.length > 0) {
+        const votingStats = data.statistics[0];
 
-    // Listen for tab visibility changes
-    document.addEventListener('visibilitychange', handleVisibilityChange);
+        if (votingStats && votingStats.options) {
+          const scores: CandidateScore[] = votingStats.options.map((option: any) => {
+            const textMatch = option.option.match(/^(.+?)\s*\((.+?)\)$/);
+            const candidateName = textMatch ? textMatch[1].trim() : option.option;
+            const candidateRegion = textMatch ? textMatch[2].trim() : '';
 
+            return {
+              name: candidateName,
+              region: candidateRegion,
+              votes: option.votes || 0,
+              percentage: option.percentage || 0,
+              rank: 0,
+              imageUrl: option.imageUrls?.[0] || option.imageUrl,
+            };
+          });
+
+          // Sort by votes descending and assign ranks
+          scores.sort((a, b) => b.votes - a.votes);
+          scores.forEach((score, index) => {
+            score.rank = index + 1;
+          });
+
+          setCandidateScores(scores);
+        }
+      }
+    });
+
+    // Cleanup on unmount
     return () => {
-      stopPolling();
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      socketService.disconnect();
     };
   }, [castingToken]);
 

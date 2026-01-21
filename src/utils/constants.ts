@@ -1,9 +1,9 @@
 // API Configuration
-export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://api.earningwhiletravelling.com/api';
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://etapi.triptravelandtours.com/api';
 
 // Image base URL should point to the API server without /api suffix
-// Example: https://api.earningwhiletravelling.com/api -> https://api.earningwhiletravelling.com
-const baseUrl = import.meta.env.VITE_API_BASE_URL || 'https://api.earningwhiletravelling.com/api';
+// Example: https://etapi.triptravelandtours.com/api -> https://etapi.triptravelandtours.com
+const baseUrl = import.meta.env.VITE_API_BASE_URL || 'https://etapi.triptravelandtours.com/api';
 export const API_IMAGE_BASE_URL = baseUrl.replace(/\/api$/, '');
 
 export const API_TIMEOUT = 30000;

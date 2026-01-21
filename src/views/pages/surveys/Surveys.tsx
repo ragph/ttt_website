@@ -6,12 +6,12 @@ import {
   Chip,
   Grid,
   Paper,
-  CircularProgress,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { surveyApi, Survey } from '../../../api/surveyApi';
 import SurveyCard from './components/SurveyCard';
 import { SectionHeader } from '../../landing/components/SectionHeader';
+import Loader from '../../../components/shared/Loader';
 
 const Surveys = () => {
   const navigate = useNavigate();
@@ -29,12 +29,11 @@ const Surveys = () => {
   useEffect(() => {
     const fetchSurveys = async () => {
       setLoading(true);
-      const data = await surveyApi.getPublicSurveys();
-      setSurveys(data);
+      const data = await surveyApi.getPublicSurveysWithCategories();
+      setSurveys(data.surveys);
 
-      // Extract unique categories from surveys
-      const uniqueCategories = ['All', ...new Set(data.map(s => s.category))];
-      setCategories(uniqueCategories);
+      // Use all categories from API (including empty ones)
+      setCategories(['All', ...data.categories]);
 
       setLoading(false);
     };
@@ -74,9 +73,7 @@ const Surveys = () => {
 
         {/* Loading State */}
         {loading ? (
-          <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
-            <CircularProgress />
-          </Box>
+          <Loader />
         ) : (
           <>
             {/* Filter Chips - Horizontally Scrollable */}

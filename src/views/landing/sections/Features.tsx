@@ -57,26 +57,27 @@ export const Features = () => {
             const Icon = feature.icon;
             return (
               <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
-                <AnimatedSection
-                  animation="scaleUp"
-                  duration={0.6}
-                  delay={0.1 + index * 0.1}
-                >
-                  <Card
-                    sx={{
-                      minHeight: 300,
-                      height: '100%',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      borderRadius: 3,
-                      transition: 'all 0.3s ease',
-                      cursor: 'pointer',
-                      '&:hover': {
-                        transform: 'translateY(-8px)',
-                      },
-                    }}
+                <Box sx={{ height: '100%' }}>
+                  <AnimatedSection
+                    animation="scaleUp"
+                    duration={0.6}
+                    delay={0.1 + index * 0.1}
                   >
-                    <CardContent sx={{ p: 4, textAlign: 'center', flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                    <Card
+                      sx={{
+                        height: '100%',
+                        minHeight: 320,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        borderRadius: 3,
+                        transition: 'all 0.3s ease',
+                        cursor: 'pointer',
+                        '&:hover': {
+                          transform: 'translateY(-8px)',
+                        },
+                      }}
+                    >
+                      <CardContent sx={{ p: 4, textAlign: 'center', flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
                       <Box
                         sx={{
                           width: 80,
@@ -113,6 +114,7 @@ export const Features = () => {
                     </CardContent>
                   </Card>
                 </AnimatedSection>
+                </Box>
               </Grid>
             );
           })}

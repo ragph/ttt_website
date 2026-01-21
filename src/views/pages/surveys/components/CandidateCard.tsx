@@ -3,10 +3,11 @@ import { Candidate } from '../data/CandidateData'
 
 interface CandidateCardProps {
   candidate: Candidate;
+  candidateNumber?: number;
   onClick: () => void;
 }
 
-const CandidateCard = ({ candidate, onClick }: CandidateCardProps) => {
+const CandidateCard = ({ candidate, candidateNumber, onClick }: CandidateCardProps) => {
   return (
     <Card
       sx={{
@@ -32,7 +33,12 @@ const CandidateCard = ({ candidate, onClick }: CandidateCardProps) => {
         }}
       />
       <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', textAlign: 'center' }}>
-        <Typography variant="h4" sx={{ fontWeight: 600, mb: 0.5 }}>
+        {candidateNumber && (
+          <Typography variant="subtitle1" sx={{ fontWeight: 600, color: 'text.secondary', mb: 0.5 }}>
+            Candidate #{candidateNumber}
+          </Typography>
+        )}
+        <Typography variant="h4" sx={{ fontWeight: 700, mb: 0.5 }}>
           {candidate.name}
         </Typography>
 

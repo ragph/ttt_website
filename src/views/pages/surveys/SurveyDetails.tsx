@@ -220,9 +220,11 @@ const SurveyDetail = () => {
                   // Get the first image (either from imageUrl or imageUrls array)
                   const thumbnailImage = candidate.imageUrls?.[0] || candidate.imageUrl;
 
-                  // Extract name and region from text (format: "Name (Region)")
-                  const textMatch = candidate.text.match(/^(.+?)\s*\((.+?)\)$/);
-                  const candidateName = textMatch ? textMatch[1].trim() : candidate.text;
+                  // Extract name and region from text (format: "Candidate #X - Name (Region)" or "Name (Region)")
+                  // First, remove "Candidate #X - " prefix if present
+                  const textWithoutPrefix = candidate.text.replace(/^Candidate\s*#\d+\s*-\s*/i, '');
+                  const textMatch = textWithoutPrefix.match(/^(.+?)\s*\((.+?)\)$/);
+                  const candidateName = textMatch ? textMatch[1].trim() : textWithoutPrefix;
                   const candidateRegion = textMatch ? textMatch[2].trim() : '';
 
                   return (
@@ -258,6 +260,9 @@ const SurveyDetail = () => {
                           />
                         )}
                         <CardContent sx={{ textAlign: 'center', py: 2.5, px: 2, bgcolor: 'background.paper' }}>
+                          <Typography variant="subtitle2" sx={{ fontWeight: 600, color: 'text.secondary', mb: 0.5 }}>
+                            Candidate #{index + 1}
+                          </Typography>
                           <Typography variant="body1" sx={{ fontWeight: 700, fontSize: '1rem', mb: 0.5, lineHeight: 1.4 }}>
                             {candidateName}
                           </Typography>

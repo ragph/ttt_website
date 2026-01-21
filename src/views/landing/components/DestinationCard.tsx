@@ -17,6 +17,9 @@ export const DestinationCard = ({ image, title, country, flag, price, rating = 4
       sx={{
         bgcolor: 'background.paper',
         height: '100%',
+        minHeight: 420,
+        display: 'flex',
+        flexDirection: 'column',
         borderRadius: 3,
         overflow: 'hidden',
         transition: 'all 0.3s ease',
@@ -55,13 +58,12 @@ export const DestinationCard = ({ image, title, country, flag, price, rating = 4
                 width: 50,
                 height: 35,
                 borderRadius: 1,
-                boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
               }}
             />
           </Box>
         )}
       </Box>
-      <CardContent sx={{ p: 3 }}>
+      <CardContent sx={{ p: 3, display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
             <LocationOnIcon sx={{ fontSize: 16, color: '#6B7280' }} />
@@ -76,6 +78,7 @@ export const DestinationCard = ({ image, title, country, flag, price, rating = 4
             fontWeight: 600,
             mb: 2,
             fontSize: '1.125rem',
+            minHeight: 54,
           }}
         >
           {title}
@@ -86,11 +89,16 @@ export const DestinationCard = ({ image, title, country, flag, price, rating = 4
             alignItems: 'center',
             justifyContent: 'space-between',
             pt: 2,
+            mt: 'auto',
           }}
         >
           <Button
             variant="contained"
             fullWidth
+            component="a"
+            href="https://etapp.triptravelandtours.com/"
+            target="_blank"
+            rel="noopener noreferrer"
             sx={{
               borderRadius: 999,
               textTransform: 'none',
@@ -99,7 +107,7 @@ export const DestinationCard = ({ image, title, country, flag, price, rating = 4
               color: '#000',
             }}
           >
-            Explore
+            Book Now
           </Button>
         </Box>
       </CardContent>

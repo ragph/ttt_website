@@ -9,10 +9,13 @@ import {
   Button,
   Paper,
   CircularProgress,
+  IconButton,
+  Snackbar,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import PersonIcon from "@mui/icons-material/Person";
+import ShareIcon from "@mui/icons-material/Share";
 import { blogApi } from "@/api/blogApi";
 import type { Blog } from "@/api/types/blog.types";
 
@@ -44,6 +47,13 @@ const BlogDetails = () => {
   const [article, setArticle] = useState<Blog | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+
+  const handleShareClick = () => {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url);
+    setSnackbarOpen(true);
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -263,10 +273,34 @@ const BlogDetails = () => {
                   {formatDate(article.datePosted)}
                 </Typography>
               </Box>
+              <IconButton
+                onClick={handleShareClick}
+                size="small"
+                sx={{
+                  color: "white",
+                  // bgcolor: "rgba(255,255,255,0.15)",
+                  ml: 'auto',
+                  p: 0.5,
+                  "&:hover": {
+                    // bgcolor: "rgba(255,255,255,0.25)",
+                  },
+                }}
+              >
+                <ShareIcon sx={{ fontSize: 18 }} />
+              </IconButton>
             </Box>
           </Box>
         </Container>
       </Box>
+
+      {/* Snackbar for copy confirmation */}
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={() => setSnackbarOpen(false)}
+        message="Link copied to clipboard!"
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      />
 
       {/* Content Section */}
       <Container maxWidth="md" sx={{ py: { xs: 4, md: 8 } }}>

@@ -50,28 +50,47 @@ class SurveyApiService {
    * Get all public active surveys
    */
   async getPublicSurveys(): Promise<Survey[]> {
+    const result = await this.getPublicSurveysWithCategories();
+    return result.surveys;
+  }
+
+  /**
+   * Get all public active surveys with all categories
+   */
+  async getPublicSurveysWithCategories(): Promise<{ surveys: Survey[]; categories: string[] }> {
     try {
-      const response = await axiosClient.get('/surveys/public') as { surveys: Survey[] };
-      const surveys = response.surveys || [];
+      const response = await axiosClient.get('/surveys/public') as {
+        success: boolean;
+        categories: { category: string; surveys: Survey[]; count: number }[];
+      };
+
+      // Extract all category names and flatten surveys
+      const allCategories: string[] = [];
+      const surveys: Survey[] = [];
+
+      if (response.categories) {
+        for (const cat of response.categories) {
+          allCategories.push(cat.category);
+          if (cat.surveys && cat.surveys.length > 0) {
+            surveys.push(...cat.surveys);
+          }
+        }
+      }
 
       // Convert image URLs for all surveys
-      return surveys.map(survey => {
+      const processedSurveys = surveys.map(survey => {
         if (survey.image && !survey.image.startsWith('http')) {
-          // Remove /api prefix if it exists in the image path
           const imagePath = survey.image.startsWith('/api') ? survey.image.replace('/api', '') : survey.image;
           const finalImageUrl = `${API_IMAGE_BASE_URL}${imagePath}`;
-          console.log('🖼️ Survey List Image URL:', {
-            surveyId: survey.id,
-            original: survey.image,
-            final: finalImageUrl
-          });
           return { ...survey, image: finalImageUrl };
         }
         return survey;
       });
+
+      return { surveys: processedSurveys, categories: allCategories };
     } catch (error) {
       console.error('Error fetching public surveys:', error);
-      return [];
+      return { surveys: [], categories: [] };
     }
   }
 
