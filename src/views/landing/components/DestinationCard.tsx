@@ -97,7 +97,6 @@ export const DestinationCard = ({ image, title, country, flag, price, rating = 4
             fullWidth
             component="a"
             href="https://etapp.triptravelandtours.com/"
-            target="_blank"
             rel="noopener noreferrer"
             sx={{
               borderRadius: 999,

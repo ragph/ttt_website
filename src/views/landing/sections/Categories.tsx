@@ -26,14 +26,14 @@ export const Categories = () => {
   const destinations = [
     {
       image:
-        "https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=800&h=600&fit=crop",
-      title: "Santorini, Greece",
+        "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=800&h=600&fit=crop",
+      title: "El Nido, Palawan",
       overlay: true,
     },
     {
       image:
-        "https://images.unsplash.com/photo-1533105079780-92b9be482077?w=400&h=300&fit=crop",
-      title: "Mykonos",
+        "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=300&fit=crop",
+      title: "Boracay",
       overlay: false,
     },
   ];

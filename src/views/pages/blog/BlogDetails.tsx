@@ -256,7 +256,7 @@ const BlogDetails = () => {
             <Box
               sx={{ display: "flex", alignItems: "center", gap: 3, flexWrap: "wrap" }}
             >
-              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              {/* <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                 <Avatar
                   src={article.authorImage || undefined}
                   sx={{ width: 40, height: 40 }}
@@ -266,7 +266,7 @@ const BlogDetails = () => {
                 <Typography sx={{ color: "white", fontWeight: 500 }}>
                   {article.author}
                 </Typography>
-              </Box>
+              </Box> */}
               <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
                 <CalendarTodayIcon sx={{ color: "white", fontSize: 18 }} />
                 <Typography sx={{ color: "white" }}>
