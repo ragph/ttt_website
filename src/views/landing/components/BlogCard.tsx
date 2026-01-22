@@ -113,7 +113,7 @@ export const BlogCard = ({
             mb: 2,
           }}
         >
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+          {/* <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <Avatar
               src={authorAvatar}
               sx={{
@@ -130,7 +130,7 @@ export const BlogCard = ({
             >
               {author}
             </Typography>
-          </Box>
+          </Box> */}
           <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
             <Typography variant="caption" sx={{ color: "#6B7280" }}>
               {date}

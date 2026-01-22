@@ -43,15 +43,15 @@ class SocketService {
       this.joinCastingRoom(surveyId);
     });
 
-    this.socket.on("disconnect", (reason) => {
+    this.socket.on("disconnect", (reason: string) => {
       console.log("❌ Socket disconnected:", reason);
     });
 
-    this.socket.on("connect_error", (error) => {
+    this.socket.on("connect_error", (error: Error) => {
       console.error("🔴 Socket connection error:", error.message);
     });
 
-    this.socket.on("reconnect", (attemptNumber) => {
+    this.socket.on("reconnect", (attemptNumber: number) => {
       console.log("🔄 Socket reconnected after", attemptNumber, "attempts");
       // Rejoin the casting room after reconnection
       if (this.surveyId) {
