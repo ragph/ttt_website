@@ -280,79 +280,19 @@ const SurveyResults = () => {
 
   // Real-time updates via Socket.IO
   useEffect(() => {
-    if (!castingToken) return;
+    if (!castingToken || !survey) return;
 
-    // Connect to socket and join survey room
-    socketService.connect(castingToken);
+    // Connect to socket using surveyId (not token) to match backend room naming
+    socketService.connect(survey.id);
 
-    // Listen for vote updates
-    socketService.onVoteUpdate((data) => {
-      console.log('🔄 Real-time vote update received:', data);
+    // Listen for casting updates from backend
+    socketService.onCastingUpdate((data) => {
+      console.log('🔄 Real-time casting update received:', data);
 
-      // If the update contains full statistics, process it
-      if (data && data.statistics && data.statistics.length > 0) {
-        const votingStats = data.statistics[0];
-
-        if (votingStats && votingStats.options) {
-          const scores: CandidateScore[] = votingStats.options.map((option: any) => {
-            const textMatch = option.option.match(/^(.+?)\s*\((.+?)\)$/);
-            const candidateName = textMatch ? textMatch[1].trim() : option.option;
-            const candidateRegion = textMatch ? textMatch[2].trim() : '';
-
-            return {
-              name: candidateName,
-              region: candidateRegion,
-              votes: option.votes || 0,
-              percentage: option.percentage || 0,
-              rank: 0,
-              imageUrl: option.imageUrls?.[0] || option.imageUrl,
-            };
-          });
-
-          // Sort by votes descending and assign ranks
-          scores.sort((a, b) => b.votes - a.votes);
-          scores.forEach((score, index) => {
-            score.rank = index + 1;
-          });
-
-          setCandidateScores(scores);
-        }
-      } else {
-        // If partial update, re-fetch full results
+      // If the update is just a notification, re-fetch full results
+      if (data && data.surveyId) {
+        console.log('📊 New vote detected, refreshing results...');
         fetchVotingResults(castingToken);
-      }
-    });
-
-    // Also listen for survey-results event
-    socketService.onSurveyResults((data) => {
-      console.log('🔄 Real-time survey results received:', data);
-      if (data && data.statistics && data.statistics.length > 0) {
-        const votingStats = data.statistics[0];
-
-        if (votingStats && votingStats.options) {
-          const scores: CandidateScore[] = votingStats.options.map((option: any) => {
-            const textMatch = option.option.match(/^(.+?)\s*\((.+?)\)$/);
-            const candidateName = textMatch ? textMatch[1].trim() : option.option;
-            const candidateRegion = textMatch ? textMatch[2].trim() : '';
-
-            return {
-              name: candidateName,
-              region: candidateRegion,
-              votes: option.votes || 0,
-              percentage: option.percentage || 0,
-              rank: 0,
-              imageUrl: option.imageUrls?.[0] || option.imageUrl,
-            };
-          });
-
-          // Sort by votes descending and assign ranks
-          scores.sort((a, b) => b.votes - a.votes);
-          scores.forEach((score, index) => {
-            score.rank = index + 1;
-          });
-
-          setCandidateScores(scores);
-        }
       }
     });
 
@@ -360,7 +300,7 @@ const SurveyResults = () => {
     return () => {
       socketService.disconnect();
     };
-  }, [castingToken]);
+  }, [castingToken, survey]);
 
   const getRankColor = (rank: number) => {
     switch (rank) {

@@ -10,20 +10,20 @@ const getSocketUrl = () => {
 
 class SocketService {
   private socket: Socket | null = null;
-  private surveyToken: string | null = null;
+  private surveyId: number | null = null;
 
-  connect(token: string): Socket {
-    // If already connected with the same token, return existing socket
-    if (this.socket?.connected && this.surveyToken === token) {
+  connect(surveyId: number): Socket {
+    // If already connected with the same surveyId, return existing socket
+    if (this.socket?.connected && this.surveyId === surveyId) {
       return this.socket;
     }
 
-    // Disconnect existing socket if connecting with different token
+    // Disconnect existing socket if connecting with different surveyId
     if (this.socket) {
       this.disconnect();
     }
 
-    this.surveyToken = token;
+    this.surveyId = surveyId;
 
     const socketUrl = getSocketUrl();
     console.log("🔌 Connecting to socket server:", socketUrl);
@@ -39,8 +39,8 @@ class SocketService {
 
     this.socket.on("connect", () => {
       console.log("✅ Socket connected:", this.socket?.id);
-      // Join the survey room for real-time updates
-      this.joinSurveyRoom(token);
+      // Join the casting room for real-time updates
+      this.joinCastingRoom(surveyId);
     });
 
     this.socket.on("disconnect", (reason) => {
@@ -53,50 +53,56 @@ class SocketService {
 
     this.socket.on("reconnect", (attemptNumber) => {
       console.log("🔄 Socket reconnected after", attemptNumber, "attempts");
-      // Rejoin the survey room after reconnection
-      if (this.surveyToken) {
-        this.joinSurveyRoom(this.surveyToken);
+      // Rejoin the casting room after reconnection
+      if (this.surveyId) {
+        this.joinCastingRoom(this.surveyId);
       }
     });
 
     return this.socket;
   }
 
-  private joinSurveyRoom(token: string) {
+  private joinCastingRoom(surveyId: number) {
     if (this.socket?.connected) {
-      console.log("📊 Joining survey room:", token);
-      this.socket.emit("join-survey", { token });
+      console.log("📊 Joining casting room for survey:", surveyId);
+      this.socket.emit("join-casting", surveyId);
     }
   }
 
-  onVoteUpdate(callback: (data: any) => void): void {
+  onCastingUpdate(callback: (data: any) => void): void {
     if (this.socket) {
       // Remove existing listener to avoid duplicates
-      this.socket.off("vote-update");
-      this.socket.on("vote-update", (data) => {
-        console.log("📥 Received vote update:", data);
+      this.socket.off("casting-update");
+      this.socket.on("casting-update", (data) => {
+        console.log("📥 Received casting update:", data);
         callback(data);
       });
     }
+  }
+
+  // Keep legacy methods for backward compatibility
+  onVoteUpdate(callback: (data: any) => void): void {
+    this.onCastingUpdate(callback);
   }
 
   onSurveyResults(callback: (data: any) => void): void {
-    if (this.socket) {
-      // Remove existing listener to avoid duplicates
-      this.socket.off("survey-results");
-      this.socket.on("survey-results", (data) => {
-        console.log("📥 Received survey results:", data);
-        callback(data);
-      });
+    this.onCastingUpdate(callback);
+  }
+
+  leaveCastingRoom(): void {
+    if (this.socket?.connected && this.surveyId) {
+      console.log("📊 Leaving casting room for survey:", this.surveyId);
+      this.socket.emit("leave-casting", this.surveyId);
     }
   }
 
   disconnect(): void {
     if (this.socket) {
       console.log("🔌 Disconnecting socket");
+      this.leaveCastingRoom();
       this.socket.disconnect();
       this.socket = null;
-      this.surveyToken = null;
+      this.surveyId = null;
     }
   }
 
