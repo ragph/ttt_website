@@ -26,6 +26,7 @@ import ExploreIcon from "@mui/icons-material/Explore";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import ArticleIcon from "@mui/icons-material/Article";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
+import CampaignIcon from "@mui/icons-material/Campaign";
 import CloseIcon from "@mui/icons-material/Close";
 import { ROUTES } from "../../utils/constants";
 
@@ -111,6 +112,11 @@ const landingPageMenuItems: MenuItem[] = [
     title: "Surveys",
     icon: <ContactMailIcon />,
     href: "/surveys",
+  },
+  {
+    title: "Announcements",
+    icon: <CampaignIcon />,
+    href: "/announcements",
   },
   {
     title: "Contact",

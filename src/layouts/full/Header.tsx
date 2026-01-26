@@ -66,6 +66,7 @@ const Header = ({ toggleMobileSidebar }: HeaderProps) => {
       { label: "Explore", href: "/map" },
       { label: "Blog", href: "#blog" },
       { label: "Surveys", href: "/surveys" },
+      { label: "Announcements", href: "/announcements" },
       { label: "Contact", href: "#contact" },
     ],
     []

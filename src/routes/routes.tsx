@@ -27,6 +27,7 @@ const Surveys = lazy(() => import('../views/pages/surveys/Surveys'));
 const SurveyDetails = lazy(() => import('../views/pages/surveys/SurveyDetails'));
 const SurveyResults = lazy(() => import('../views/pages/surveys/SurveyResults'));
 const BlogDetails = lazy(() => import('../views/pages/blog/BlogDetails'));
+const Announcements = lazy(() => import('../views/pages/announcements/Announcements'));
 
 // Loading component
 const Loader = () => (
@@ -163,6 +164,14 @@ export const routes: RouteObject[] = [
         element: (
           <SuspenseWrapper>
             <BlogDetails />
+          </SuspenseWrapper>
+        ),
+      },
+      {
+        path: '/announcements',
+        element: (
+          <SuspenseWrapper>
+            <Announcements />
           </SuspenseWrapper>
         ),
       },
