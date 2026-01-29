@@ -19,8 +19,8 @@ import { SectionHeader } from '../../landing/components/SectionHeader';
 import { AnimatedSection } from '../../landing/components/AnimatedSection';
 import Loader from '../../../components/shared/Loader';
 
-// Placeholder image for announcements
-const PLACEHOLDER_IMAGE = 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop';
+// Default placeholder image for announcements without images
+const DEFAULT_IMAGE = '/images/placeholder.jpg';
 
 // Type labels for chips
 const typeLabels: Record<string, string> = {
@@ -207,16 +207,16 @@ const Announcements = () => {
                       <Box sx={{ position: 'relative', overflow: 'hidden', height: 200 }}>
                         <CardMedia
                           component="img"
-                          image={PLACEHOLDER_IMAGE}
+                          image={announcement.images?.[0] || DEFAULT_IMAGE}
                           alt={announcement.title}
                           className="announcement-image"
                           sx={{
-                            height: 200,
+                            height: 160,
                             objectFit: 'cover',
                             transition: 'transform 0.3s ease',
                           }}
                         />
-                        <Box
+                        {/* <Box
                           sx={{
                             position: 'absolute',
                             top: 16,
@@ -232,7 +232,7 @@ const Announcements = () => {
                               fontSize: '0.75rem',
                             }}
                           />
-                        </Box>
+                        </Box> */}
                       </Box>
 
                       <CardContent sx={{ p: 2, flex: 1, display: 'flex', flexDirection: 'column' }}>

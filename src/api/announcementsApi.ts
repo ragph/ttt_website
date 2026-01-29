@@ -9,6 +9,7 @@ export interface Announcement {
   startDate: string;
   endDate: string | null;
   createdAt: string;
+  images: string[];
 }
 
 export interface AnnouncementsResponse {
