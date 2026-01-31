@@ -180,7 +180,7 @@ const Membership = () => {
                   </Typography>
                 </>
               }
-              subtitle="Choose the subscrption that fits your travel style. From casual bookings to full-scale travel business, we have a plan for everyone."
+              subtitle="Choose the subscription that fits your travel style. From casual bookings to full-scale travel business, we have a plan for everyone."
               align="center"
               titleColor="white"
               subtitleColor="rgba(255,255,255,0.95)"
