@@ -110,13 +110,14 @@ const rewardsData: TierRewards[] = [
     subtitle: "Automatic rewards. No selling required.",
     color: "#4CAF50",
     rewards: [
-      { activity: "Domestic flight booking cashback", points: "100 pts" },
-      { activity: "Shared platform domestic flight booking", points: "25 pts" },
+      { activity: "International flight booking cashback", points: "50 pts" },
+      { activity: "Domestic flight booking cashback", points: "25 pts" },
       {
-        activity: "Shared platform international flight booking",
+        activity: "Shared platform international flight bookings",
         points: "50 pts",
       },
-      { activity: "Shared platform hotel booking", points: "25 pts" },
+      { activity: "Shared platform domestic flight booking", points: "25 pts" },
+      { activity: "Shared platform international and domestic hotel bookings", points: "25 pts" },
     ],
   },
   {
@@ -124,13 +125,14 @@ const rewardsData: TierRewards[] = [
     subtitle: "Earn rewards plus profit from business activity.",
     color: "#FF9800",
     rewards: [
-      { activity: "Domestic flight booking cashback", points: "100 pts" },
-      { activity: "Shared platform domestic flight booking", points: "25 pts" },
+      { activity: "International flight booking cashback", points: "50 pts" },
+      { activity: "Domestic flight booking cashback", points: "25 pts" },
       {
         activity: "Shared platform international flight booking",
         points: "50 pts",
       },
-      { activity: "Shared platform hotel booking", points: "25 pts" },
+      { activity: "Shared platform domestic flight booking", points: "25 pts" },
+      { activity: "Shared platform international and domestic hotel bookings", points: "25 pts" },
     ],
   },
   {
@@ -138,14 +140,15 @@ const rewardsData: TierRewards[] = [
     subtitle: "Highest rewards and earning potential across all actions.",
     color: "#2196F3",
     rewards: [
-      { activity: "Annual Victors subscription", points: "10 pts" },
-      { activity: "Domestic flight booking cashback", points: "100 pts" },
-      { activity: "Shared platform domestic flight booking", points: "25 pts" },
+      { activity: "Shared platform annual victors subscription", points: "10 pts" },
+      { activity: "International flight booking cashback", points: "50 pts" },
+      { activity: "Domestic flight booking cashback", points: "25 pts" },
       {
-        activity: "Shared platform international flight booking",
+        activity: "Shared platform international flight bookings",
         points: "50 pts",
       },
-      { activity: "Shared platform hotel booking", points: "25 pts" },
+      { activity: "Shared platform domestic flight bookings", points: "25 pts" },
+      { activity: "Shared platform international and domestic hotel bookings", points: "25 pts" },
     ],
   },
 ];
@@ -170,7 +173,7 @@ const Membership = () => {
               title={
                 <>
                   <Typography variant="inherit" color="textPrimary">
-                   ET Membership Levels
+                   ET Subscription Levels
                   </Typography>
                 </>
               }
@@ -396,7 +399,7 @@ const Membership = () => {
               badge="REWARDS"
               badgeColor="#1b60ff"
               title="ET Rewards Points Program"
-              subtitle="Earn points on every booking and activity. Rewards points have a redemption value of ₱1 per point, subject to platform rules."
+              subtitle="Earn points on every booking and activity. Rewards points have a redemption value of PHP 1 per point, subject to platform rules."
               align="center"
             />
           </AnimatedSection>
@@ -413,7 +416,7 @@ const Membership = () => {
                     elevation={0}
                     sx={{
                       p: 3,
-                      minHeight: { xs: 'auto', md: 600 },
+                      minHeight: { xs: 'auto', md: 700 },
                       borderRadius: 3,
                       display: "flex",
                       flexDirection: "column",
@@ -506,7 +509,7 @@ const Membership = () => {
               }}
             >
               <Typography variant="body1" sx={{ fontWeight: 500 }}>
-                Rewards points have a redemption value of 1 PHP per point, subject
+                Rewards points have a redemption value of PHP 1 per point, subject
                 to platform rules.
               </Typography>
             </Paper>
