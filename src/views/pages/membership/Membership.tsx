@@ -59,7 +59,7 @@ const membershipTiers: MembershipTier[] = [
     features: [
       "Everything in Traveller, plus:",
       "Your own unique referral & sales links",
-      "Sell travel bookings like a business — set your own selling price and keep the margin",
+      "Sell travel bookings with markup — set your own selling price and keep the margin",
       "Create shareable booking links you can sell online",
     ],
     bestFor: ["Content creators", "Travel promoters", "Side-hustlers"],
@@ -118,6 +118,7 @@ const rewardsData: TierRewards[] = [
       },
       { activity: "Shared platform domestic flight booking", points: "25 pts" },
       { activity: "Shared platform international and domestic hotel bookings", points: "25 pts" },
+      { activity: "Shared platform international and domestic hotel bookings cashback", points: "25 pts" },
     ],
   },
   {
@@ -133,6 +134,7 @@ const rewardsData: TierRewards[] = [
       },
       { activity: "Shared platform domestic flight booking", points: "25 pts" },
       { activity: "Shared platform international and domestic hotel bookings", points: "25 pts" },
+            { activity: "Shared platform international and domestic hotel bookings cashback", points: "25 pts" },
     ],
   },
   {
@@ -149,6 +151,7 @@ const rewardsData: TierRewards[] = [
       },
       { activity: "Shared platform domestic flight bookings", points: "25 pts" },
       { activity: "Shared platform international and domestic hotel bookings", points: "25 pts" },
+      { activity: "Shared platform international and domestic hotel bookings cashback", points: "25 pts" },
     ],
   },
 ];
@@ -177,7 +180,7 @@ const Membership = () => {
                   </Typography>
                 </>
               }
-              subtitle="Choose the membership that fits your travel style. From casual bookings to full-scale travel business, we have a plan for everyone."
+              subtitle="Choose the subscrption that fits your travel style. From casual bookings to full-scale travel business, we have a plan for everyone."
               align="center"
               titleColor="white"
               subtitleColor="rgba(255,255,255,0.95)"
@@ -198,7 +201,7 @@ const Membership = () => {
                     sx={{
                       borderRadius: 3,
                       overflow: "hidden",
-                      minHeight: { xs: "auto", md: 950 },
+                      minHeight: { xs: "auto", md: 1000 },
                       display: "flex",
                       flexDirection: "column",
                       transition: "all 0.3s ease",
@@ -339,6 +342,7 @@ const Membership = () => {
                                   primary: {
                                     sx: {
                                       fontSize: "0.95rem",
+                                      lineHeight: 1.5,
                                       color: "text.secondary",
                                     },
                                   },
@@ -416,7 +420,7 @@ const Membership = () => {
                     elevation={0}
                     sx={{
                       p: 3,
-                      minHeight: { xs: 'auto', md: 700 },
+                      minHeight: { xs: 'auto', md: 920 },
                       borderRadius: 3,
                       display: "flex",
                       flexDirection: "column",
@@ -483,6 +487,7 @@ const Membership = () => {
                                 sx: {
                                   fontWeight: 500,
                                   fontSize: "0.95rem",
+                                  lineHeight: 1.5,
                                 },
                               },
                             }}
