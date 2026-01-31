@@ -110,9 +110,9 @@ const landingPageMenuItems: MenuItem[] = [
     href: "/announcements",
   },
   {
-    title: "Membership",
+    title: "Subscriptions",
     icon: <CardMembershipIcon />,
-    href: "/membership",
+    href: "/subscriptions",
   },
   {
     title: "Contact",

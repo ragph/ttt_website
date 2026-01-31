@@ -32,10 +32,13 @@ const footerLinks = {
     { label: "Blog", href: "#blog" },
   ],
   quickLinks: [
-    { label: "What We Offer", href: "#what-we-offer" },
-    { label: "How It Works", href: "#how-it-works" },
+    { label: "Home", href: "#hero" },
     { label: "Explore", href: "/map" },
-    { label: "Partnerships", href: "#partners" },
+    { label: "Blog", href: "#blog" },
+    { label: "Surveys", href: "/surveys" },
+    { label: "Announcements", href: "/announcements" },
+    { label: "Subscriptions", href: "/subscriptions" },
+    { label: "Contact", href: "#contact" },
   ],
   support: [
     { label: "FAQs", href: "/faqs" },
