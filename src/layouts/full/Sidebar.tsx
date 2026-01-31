@@ -28,6 +28,7 @@ import ArticleIcon from "@mui/icons-material/Article";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
 import CampaignIcon from "@mui/icons-material/Campaign";
 import CloseIcon from "@mui/icons-material/Close";
+import CardMembershipIcon from "@mui/icons-material/CardMembership";
 import { ROUTES } from "../../utils/constants";
 
 const DRAWER_WIDTH = '100%';
@@ -89,16 +90,6 @@ const landingPageMenuItems: MenuItem[] = [
     href: "#hero",
   },
   {
-    title: "About",
-    icon: <InfoIcon />,
-    href: "#about",
-  },
-  // {
-  //   title: "Features",
-  //   icon: <StarIcon />,
-  //   href: "#features",
-  // },
-  {
     title: "Explore",
     icon: <ExploreIcon />,
     href: "/map",
@@ -117,6 +108,11 @@ const landingPageMenuItems: MenuItem[] = [
     title: "Announcements",
     icon: <CampaignIcon />,
     href: "/announcements",
+  },
+  {
+    title: "Membership",
+    icon: <CardMembershipIcon />,
+    href: "/membership",
   },
   {
     title: "Contact",
