@@ -118,7 +118,7 @@ const rewardsData: TierRewards[] = [
       },
       { activity: "Shared platform domestic flight booking", points: "25 pts" },
       { activity: "Shared platform international and domestic hotel bookings", points: "25 pts" },
-      { activity: "Shared platform international and domestic hotel bookings cashback", points: "25 pts" },
+      { activity: "International and domestic hotel bookings cashback", points: "25 pts" },
     ],
   },
   {
@@ -134,7 +134,7 @@ const rewardsData: TierRewards[] = [
       },
       { activity: "Shared platform domestic flight booking", points: "25 pts" },
       { activity: "Shared platform international and domestic hotel bookings", points: "25 pts" },
-            { activity: "Shared platform international and domestic hotel bookings cashback", points: "25 pts" },
+        { activity: "International and domestic hotel bookings cashback", points: "25 pts" },
     ],
   },
   {
@@ -151,7 +151,7 @@ const rewardsData: TierRewards[] = [
       },
       { activity: "Shared platform domestic flight bookings", points: "25 pts" },
       { activity: "Shared platform international and domestic hotel bookings", points: "25 pts" },
-      { activity: "Shared platform international and domestic hotel bookings cashback", points: "25 pts" },
+      { activity: "International and domestic hotel bookings cashback", points: "25 pts" },
     ],
   },
 ];
