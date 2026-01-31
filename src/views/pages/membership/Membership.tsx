@@ -195,8 +195,7 @@ const Membership = () => {
                     sx={{
                       borderRadius: 3,
                       overflow: "hidden",
-                      height: "100%",
-                      minHeight: { xs: 650, md: 680 },
+                      minHeight: { xs: "auto", md: 950 },
                       display: "flex",
                       flexDirection: "column",
                       transition: "all 0.3s ease",
@@ -206,36 +205,11 @@ const Membership = () => {
                         ? "none"
                         : "0px solid",
                       borderColor: tier.highlighted ? "transparent" : "divider",
-                      // Double border effect for highlighted card
-                      ...(tier.highlighted && {
-                        outline: `3px solid ${tier.color}`,
-                        outlineOffset: "3px",
-                        boxShadow: `0 0 0 0px ${tier.color}, 0 8px 32px rgba(33, 150, 243, 0.25)`,
-                      }),
                       "&:hover": {
                         transform: "scale(1.02)",
-                        boxShadow: tier.highlighted
-                          ? `0 0 0 1px ${tier.color}, 0 12px 40px rgba(33, 150, 243, 0.19)`
-                          : 8,
                       },
                     }}
                   >
-                    {/* Most Popular Badge */}
-                    {tier.highlighted && (
-                      <Chip
-                        label="Most Popular"
-                        sx={{
-                          position: "absolute",
-                          top: 12,
-                          right: 12,
-                          zIndex: 10,
-                          bgcolor: tier.color,
-                          color: "white",
-                          fontWeight: 600,
-                        }}
-                      />
-                    )}
-
                     {/* Card Image */}
                     <Box
                       component="img"
@@ -259,7 +233,7 @@ const Membership = () => {
                         flexGrow: 1,
                       }}
                     >
-                      {/* Title & Subtitle */}
+                      {/* Title & Tagline */}
                       <Box
                         sx={{
                           display: "flex",
@@ -273,17 +247,17 @@ const Membership = () => {
                           variant="h5"
                           sx={{
                             fontWeight: 700,
-                            fontSize: { xs: "1.5rem", md: "1.25rem" },
+                            color: tier.color,
                           }}
                         >
                           {tier.name}
                         </Typography>
                         <Typography
-                          variant="body2"
+                          variant="body1"
                           sx={{
-                            color: tier.color,
                             fontWeight: 600,
                             textAlign: "center",
+                            fontSize: "0.95rem",
                           }}
                         >
                           {tier.tagline}
@@ -292,12 +266,13 @@ const Membership = () => {
 
                       {/* Description */}
                       <Typography
-                        variant="body2"
+                        variant="body1"
                         sx={{
-                          color: "#6B7280",
-                          lineHeight: 1.7,
+                          color: "text.secondary",
+                          lineHeight: 1.6,
                           textAlign: "center",
                           mb: 2,
+                          fontSize: "0.85rem",
                         }}
                       >
                         {tier.description}
@@ -311,17 +286,16 @@ const Membership = () => {
                             fontWeight: 700,
                             mb: 1,
                             color: "text.primary",
-                            textAlign: "center",
                           }}
                         >
                           What you get
                         </Typography>
                         <List dense disablePadding>
-                          {tier.features.slice(0, 3).map((feature, idx) => (
-                            <ListItem key={idx} disableGutters sx={{ py: 0.25 }}>
-                              <ListItemIcon sx={{ minWidth: 24 }}>
+                          {tier.features.map((feature, idx) => (
+                            <ListItem key={idx} disableGutters sx={{ py: 0.5 }}>
+                              <ListItemIcon sx={{ minWidth: 28 }}>
                                 <CheckCircleIcon
-                                  sx={{ fontSize: 14, color: tier.color }}
+                                  sx={{ fontSize: 16, color: tier.color }}
                                 />
                               </ListItemIcon>
                               <ListItemText
@@ -329,44 +303,48 @@ const Membership = () => {
                                 slotProps={{
                                   primary: {
                                     sx: {
-                                      fontSize: "0.8rem",
-                                      color: "#6B7280",
+                                      fontSize: "0.95rem",
+                                      color: "text.secondary",
+                                      lineHeight: 1.5,
                                     },
                                   },
                                 }}
                               />
                             </ListItem>
                           ))}
-                          {tier.features.length > 3 && (
-                            <Typography
-                              variant="caption"
-                              sx={{
-                                color: tier.color,
-                                fontWeight: 600,
-                                display: "block",
-                                textAlign: "center",
-                                mt: 0.5,
-                              }}
-                            >
-                              + {tier.features.length - 3} more benefits
-                            </Typography>
-                          )}
                         </List>
                       </Box>
 
-                      {/* Bottom Tagline */}
-                      <Typography
-                        variant="body2"
-                        sx={{
-                          fontWeight: 600,
-                          color: tier.color,
-                          fontStyle: "italic",
-                          textAlign: "center",
-                          mb: 2,
-                        }}
-                      >
-                        {tier.bottomTagline}
-                      </Typography>
+                      {/* Best For */}
+                      <Box sx={{ mb: 2, flexGrow: 1 }}>
+                        <Typography
+                          variant="subtitle2"
+                          sx={{
+                            fontWeight: 700,
+                            mb: 1,
+                            color: "text.primary",
+                          }}
+                        >
+                          Best for
+                        </Typography>
+                        <List dense disablePadding>
+                          {tier.bestFor.map((item, idx) => (
+                            <ListItem key={idx} disableGutters sx={{ py: 0.25 }}>
+                              <ListItemText
+                                primary={`• ${item}`}
+                                slotProps={{
+                                  primary: {
+                                    sx: {
+                                      fontSize: "0.95rem",
+                                      color: "text.secondary",
+                                    },
+                                  },
+                                }}
+                              />
+                            </ListItem>
+                          ))}
+                        </List>
+                      </Box>
 
                       {/* Pricing Section */}
                       <Box
@@ -410,129 +388,6 @@ const Membership = () => {
         </Container>
       </Box>
 
-      {/* Detailed Features Section */}
-      <Box sx={{ py: { xs: 8, md: 12 } }}>
-        <Container maxWidth="lg">
-          <AnimatedSection animation="fadeUp" duration={0.8} delay={0}>
-            <SectionHeader
-              badge="FEATURES"
-              badgeColor="#1b60ff"
-              title="Complete Membership Benefits"
-              subtitle="Explore all the features available in each membership tier."
-              align="center"
-            />
-          </AnimatedSection>
-
-          <Grid container spacing={4} alignItems="stretch">
-            {membershipTiers.map((tier, index) => (
-              <Grid size={{ xs: 12, md: 4 }} key={index}>
-                <AnimatedSection
-                  animation="fadeUp"
-                  duration={0.6}
-                  delay={0.1 + index * 0.1}
-                >
-                  <Paper
-                    elevation={0}
-                    sx={{
-                      p: 3,
-                      borderRadius: 3,
-                      height: { xs: '100%', md: 540 },
-                      bgcolor: "background.paper",
-                      border: "1px solid",
-                      borderColor: "divider",
-                      transition: "all 0.3s ease",
-                      display: "flex",
-                      flexDirection: "column",
-                      overflowY: "auto",
-                      "&:hover": {
-                        boxShadow: 3,
-                        borderColor: tier.color,
-                      },
-                    }}
-                  >
-                    <Typography
-                      variant="h5"
-                      sx={{
-                        fontWeight: 700,
-                        mb: 0.5,
-                        color: tier.color,
-                      }}
-                    >
-                      {tier.name}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        color: "text.secondary",
-                        mb: 3,
-                        fontStyle: "italic",
-                      }}
-                    >
-                      {tier.tagline}
-                    </Typography>
-
-                    {/* All Features */}
-                    <Typography
-                      variant="subtitle2"
-                      sx={{ fontWeight: 700, mb: 1, color: "text.primary" }}
-                    >
-                      What you get
-                    </Typography>
-                    <List dense disablePadding sx={{ mb: 3 }}>
-                      {tier.features.map((feature, idx) => (
-                        <ListItem key={idx} disableGutters sx={{ py: 0.5 }}>
-                          <ListItemIcon sx={{ minWidth: 28 }}>
-                            <CheckCircleIcon
-                              sx={{ fontSize: 16, color: tier.color }}
-                            />
-                          </ListItemIcon>
-                          <ListItemText
-                            primary={feature}
-                            slotProps={{
-                              primary: {
-                                sx: {
-                                  fontSize: "0.85rem",
-                                  color: "text.secondary",
-                                },
-                              },
-                            }}
-                          />
-                        </ListItem>
-                      ))}
-                    </List>
-
-                    {/* Best For */}
-                    <Typography
-                      variant="subtitle2"
-                      sx={{ fontWeight: 700, mb: 1, color: "text.primary" }}
-                    >
-                      Best for
-                    </Typography>
-                    <List dense disablePadding>
-                      {tier.bestFor.map((item, idx) => (
-                        <ListItem key={idx} disableGutters sx={{ py: 0.25 }}>
-                          <ListItemText
-                            primary={`• ${item}`}
-                            slotProps={{
-                              primary: {
-                                sx: {
-                                  fontSize: "0.85rem",
-                                  color: "text.secondary",
-                                },
-                              },
-                            }}
-                          />
-                        </ListItem>
-                      ))}
-                    </List>
-                  </Paper>
-                </AnimatedSection>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-      </Box>
-
       {/* Rewards Points Section */}
       <Box sx={{ bgcolor: "grey.50", py: { xs: 8, md: 12 } }}>
         <Container maxWidth="lg">
@@ -558,9 +413,10 @@ const Membership = () => {
                     elevation={0}
                     sx={{
                       p: 3,
-                      height: { xs: '100%', md: 540 },
+                      minHeight: { xs: 'auto', md: 600 },
                       borderRadius: 3,
-                      // height: "100%",
+                      display: "flex",
+                      flexDirection: "column",
                       bgcolor: "background.paper",
                       border: "1px solid",
                       borderColor: "divider",
@@ -582,11 +438,10 @@ const Membership = () => {
                       {tier.name}
                     </Typography>
                     <Typography
-                      variant="body2"
+                      variant="body1"
                       sx={{
                         color: "text.secondary",
                         mb: 3,
-                        fontStyle: "italic",
                       }}
                     >
                       {tier.subtitle}
@@ -613,7 +468,7 @@ const Membership = () => {
                                 label={reward.points}
                                 size="small"
                                 sx={{
-                                  mt: 0.5,
+                                  mt: 1,
                                   fontWeight: 600,
                                   bgcolor: `${tier.color}15`,
                                   color: tier.color,
@@ -624,7 +479,7 @@ const Membership = () => {
                               primary: {
                                 sx: {
                                   fontWeight: 500,
-                                  fontSize: "0.875rem",
+                                  fontSize: "0.95rem",
                                 },
                               },
                             }}
@@ -651,7 +506,7 @@ const Membership = () => {
               }}
             >
               <Typography variant="body1" sx={{ fontWeight: 500 }}>
-                Rewards points have a redemption value of ₱1 per point, subject
+                Rewards points have a redemption value of 1 PHP per point, subject
                 to platform rules.
               </Typography>
             </Paper>
