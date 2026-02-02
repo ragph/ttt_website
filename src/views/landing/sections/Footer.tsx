@@ -42,6 +42,7 @@ const footerLinks = {
   ],
   support: [
     { label: "FAQs", href: "/faqs" },
+    { label: "How It Works", href: "/how-it-works" },
     { label: "Contact Us", href: "/#contact" },
     { label: "Refund Policy", href: "/refund-policy" },
     { label: "Terms of Service", href: "/terms-of-service" },

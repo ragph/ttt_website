@@ -30,6 +30,7 @@ const BlogDetails = lazy(() => import('../views/pages/blog/BlogDetails'));
 const Announcements = lazy(() => import('../views/pages/announcements/Announcements'));
 const AnnouncementDetails = lazy(() => import('../views/pages/announcements/AnnouncementDetails'));
 const Subscriptions = lazy(() => import('../views/pages/membership/Membership'));
+const HowItWorksPage = lazy(() => import('../views/pages/how-it-works/HowItWorksPage'));
 
 // Loading component
 const Loader = () => (
@@ -190,6 +191,14 @@ export const routes: RouteObject[] = [
         element: (
           <SuspenseWrapper>
             <Subscriptions />
+          </SuspenseWrapper>
+        ),
+      },
+      {
+        path: '/how-it-works',
+        element: (
+          <SuspenseWrapper>
+            <HowItWorksPage />
           </SuspenseWrapper>
         ),
       },

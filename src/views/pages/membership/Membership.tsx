@@ -201,7 +201,7 @@ const Membership = () => {
                     sx={{
                       borderRadius: 3,
                       overflow: "hidden",
-                      minHeight: { xs: "auto", md: 1000 },
+                      minHeight: { xs: "auto", md: 1100 },
                       display: "flex",
                       flexDirection: "column",
                       transition: "all 0.3s ease",
@@ -385,6 +385,31 @@ const Membership = () => {
                         >
                           {tier.priceLabel}
                         </Typography>
+
+                        {/* Subscribe Button */}
+                        <Button
+                          variant="contained"
+                          size="large"
+                          href="https://etapp.triptravelandtours.com/register"
+                          rel="noopener noreferrer"
+                          sx={{
+                            mt: 2,
+                            width: "100%",
+                            py: 1.5,
+                            fontWeight: 600,
+                            fontSize: "1rem",
+                            textTransform: "none",
+                            bgcolor: tier.color,
+                            color: "white",
+                            borderRadius: 2,
+                            "&:hover": {
+                              bgcolor: tier.color,
+                              filter: "brightness(0.9)",
+                            },
+                          }}
+                        >
+                          Subscribe Now
+                        </Button>
                       </Box>
                     </Box>
                   </Paper>
