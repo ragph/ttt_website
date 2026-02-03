@@ -17,6 +17,7 @@ export default defineConfig({
         '/privacy-policy',
         '/refund-policy',
         '/surveys',
+        '/how-it-works',
       ],
       renderer: new PuppeteerRenderer({
         renderAfterDocumentEvent: 'render-event',

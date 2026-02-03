@@ -155,8 +155,7 @@ const HowItWorksPage = () => {
               mb: { xs: 4, md: 6 },
             }}
           >
-            Master your credits in minutes. Learn how to top up, payout funds,
-            and convert currencies with our easy-to-follow guides.
+            Learn how to manage and use your prepaid credits to use in-app services, payout your rewards with our easy-to-follow guides.
           </Typography>
 
           {/* Dashboard Preview Phone Mockup */}
