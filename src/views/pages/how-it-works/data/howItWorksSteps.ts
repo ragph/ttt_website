@@ -8,6 +8,8 @@ export interface Section {
   id: string;
   title: string;
   subtitle: string;
+  description: string;
+  image: string;
   steps: Step[];
 }
 
@@ -15,19 +17,22 @@ export const howItWorksSections: Section[] = [
   {
     id: 'topup',
     title: 'How to Top Up',
-    subtitle: 'Add credits to your wallet in 4 easy steps',
+    subtitle: 'Add credits to your account',
+    description:
+      'Easily add prepaid credits to your account using various payment methods. Your credits are instantly available for in-app services and transactions.',
+    image: '/images/et-topup.png',
     steps: [
       {
         id: 'topup-step-1',
-        title: 'Open Wallet',
+        title: 'Open Credits',
         description:
-          'Navigate to your wallet by tapping the wallet icon in your dashboard or menu.',
+          'Navigate to your credits by tapping the credits icon in your dashboard or menu.',
       },
       {
         id: 'topup-step-2',
         title: 'Select Top Up',
         description:
-          'Choose the "Top Up" option to begin adding funds to your account.',
+          'Choose the "Top Up" option to begin adding credits to your account.',
       },
       {
         id: 'topup-step-3',
@@ -46,51 +51,57 @@ export const howItWorksSections: Section[] = [
   {
     id: 'payout',
     title: 'How to Payout',
-    subtitle: 'Withdraw your funds in 3 simple steps',
+    subtitle: 'Payout your credits',
+    description:
+      'Receive your earnings and rewards directly to your bank account or local e-wallet. Fast, secure, and hassle-free payouts.',
+    image: '/images/et-payout.png',
     steps: [
       {
         id: 'payout-step-1',
         title: 'Go to Payouts',
         description:
-          'Access the Payouts section from your wallet or account settings.',
+          'Access the Payouts section from your credits or account settings.',
       },
       {
         id: 'payout-step-2',
         title: 'Select Destination',
         description:
-          'Choose where you want to receive your funds: bank account, e-wallet, or other supported methods.',
+          'Choose where you want to receive your credits: bank account, e-wallet, or other supported methods.',
       },
       {
         id: 'payout-step-3',
         title: 'Submit Request',
         description:
-          'Enter the amount to withdraw, review the fees, and submit your payout request for processing.',
+          'Enter the amount to payout, review the fees, and submit your payout request for processing.',
       },
     ],
   },
   {
     id: 'convert',
     title: 'How to Convert',
-    subtitle: 'Exchange between currencies or assets in 3 steps',
+    subtitle: 'Exchange your credits',
+    description:
+      'Convert your rewards credits to prepaid credits instantly with zero service fees.',
+    image: '/images/et-convert.png',
     steps: [
       {
         id: 'convert-step-1',
         title: 'Open Convert Tool',
         description:
-          'Navigate to the Convert section from your dashboard or wallet menu.',
+          'Navigate to the Convert section from your dashboard or credits menu.',
       },
       {
         id: 'convert-step-2',
-        title: 'Select Assets',
-        description:
-          'Choose the asset or currency you want to convert from and the target asset you want to receive.',
-      },
-      {
-        id: 'convert-step-3',
         title: 'Confirm Conversion',
         description:
-          'Review the exchange rate and fees, then confirm to complete the conversion instantly.',
+          'Simply confirm to complete conversion instantly. Use converted credits right away.',
       },
+      // {
+      //   id: 'convert-step-3',
+      //   title: 'Confirm Conversion',
+      //   description:
+      //     'Review the exchange rate and fees, then confirm to complete the conversion instantly.',
+      // },
     ],
   },
 ];

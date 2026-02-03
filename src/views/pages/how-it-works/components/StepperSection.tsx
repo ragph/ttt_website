@@ -1,8 +1,9 @@
-import { useRef, useEffect, useState } from 'react';
-import { Box, Typography, Container, Chip } from '@mui/material';
+import { useState } from 'react';
+import { Box, Typography, Container, Chip, IconButton, Snackbar } from '@mui/material';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
+import ShareIcon from '@mui/icons-material/Share';
 import { StepCard } from './StepCard';
 import type { Section } from '../data/howItWorksSteps';
 
@@ -24,207 +25,274 @@ interface StepperSectionProps {
 }
 
 export const StepperSection = ({ section, index }: StepperSectionProps) => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [parallaxOffset, setParallaxOffset] = useState(0);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
   const Icon = sectionIcons[section.id] || AccountBalanceWalletIcon;
   const accentColor = sectionColors[section.id] || '#1e40af';
   const isEven = index % 2 === 0;
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (sectionRef.current) {
-        const rect = sectionRef.current.getBoundingClientRect();
-        const scrollProgress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
-        const offset = Math.max(0, Math.min(1, scrollProgress)) * 30;
-        setParallaxOffset(offset);
-      }
-    };
+  const handleShare = async () => {
+    const url = `${window.location.origin}/how-it-works#${section.id}`;
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: section.title,
+          text: section.description,
+          url: url,
+        });
+      } catch (err) {
+        // User cancelled or share failed, fall back to copy
+        if ((err as Error).name !== 'AbortError') {
+          copyToClipboard(url);
+        }
+      }
+    } else {
+      copyToClipboard(url);
+    }
+  };
+
+  const copyToClipboard = async (url: string) => {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(url);
+      } else {
+        // Fallback for older browsers or non-secure contexts
+        const textArea = document.createElement('textarea');
+        textArea.value = url;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        textArea.style.top = '-999999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+      }
+      setSnackbarOpen(true);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
 
   return (
     <Box
       id={section.id}
-      ref={sectionRef}
       sx={{
-        py: { xs: 8, md: 12 },
+        py: { xs: 6, md: 10 },
         bgcolor: isEven ? 'background.default' : 'background.paper',
         position: 'relative',
         overflow: 'hidden',
       }}
     >
-      {/* Decorative Background Elements */}
-      {/* <Box
-        sx={{
-          position: 'absolute',
-          top: -100 + parallaxOffset,
-          right: isEven ? -150 : 'auto',
-          left: isEven ? 'auto' : -150,
-          width: 400,
-          height: 400,
-          borderRadius: '50%',
-          bgcolor: accentColor,
-          opacity: 0.03,
-          transition: 'top 0.1s linear',
-          pointerEvents: 'none',
-        }}
-      />
-      <Box
-        sx={{
-          position: 'absolute',
-          bottom: -50 - parallaxOffset * 0.5,
-          right: isEven ? 'auto' : -100,
-          left: isEven ? -100 : 'auto',
-          width: 250,
-          height: 250,
-          borderRadius: '50%',
-          bgcolor: accentColor,
-          opacity: 0.02,
-          transition: 'bottom 0.1s linear',
-          pointerEvents: 'none',
-        }}
-      /> */}
-
       <Container maxWidth="lg">
         <Box
           sx={{
             display: 'flex',
             flexDirection: { xs: 'column', lg: 'row' },
-            gap: { xs: 4, lg: 8 },
-            // alignItems: { xs: 'center', lg: 'flex-start' },
-            // justifyContent: { xs: 'center', lg: 'space-between' },
+            gap: { xs: 5, lg: 8 },
+            alignItems: { xs: 'center', lg: 'center' },
           }}
         >
-          {/* Section Header - Sticky on Desktop, Centered on Mobile */}
+          {/* Phone Mockup with Screenshot */}
           <Box
             sx={{
-              flex: { lg: '0 0 320px' },
-              position: { lg: 'sticky' },
-              top: { lg: 140 },
+              flex: { lg: '0 0 340px' },
               order: { xs: 0, lg: isEven ? 0 : 1 },
-              textAlign: { xs: 'center', lg: 'left' },
               display: 'flex',
-              flexDirection: 'column',
-              alignItems: { xs: 'center', lg: 'flex-start' },
+              justifyContent: 'center',
             }}
           >
-            {/* Icon Badge */}
             <Box
               sx={{
-                width: 72,
-                height: 72,
-                borderRadius: 3,
-                bgcolor: accentColor,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                mb: 3,
-                boxShadow: `0 8px 24px ${accentColor}33`,
+                position: 'relative',
+                width: { xs: 260, sm: 300 },
+                height: { xs: 520, sm: 600 },
               }}
             >
-              <Icon sx={{ fontSize: 36, color: 'white' }} />
-            </Box>
-
-            {/* Section Number Chip */}
-            <Chip
-              label={`Section ${index + 1}`}
-              size="small"
-              sx={{
-                mb: 2,
-                bgcolor: `${accentColor}15`,
-                color: accentColor,
-                fontWeight: 600,
-                fontSize: '0.75rem',
-              }}
-            />
-
-            <Typography
-              variant="h3"
-              sx={{
-                fontWeight: 800,
-                color: 'text.primary',
-                mb: 2,
-                fontSize: { xs: '1.75rem', sm: '2rem', md: '2.5rem' },
-                letterSpacing: '-0.02em',
-                lineHeight: 1.2,
-              }}
-            >
-              {section.title}
-            </Typography>
-
-            <Typography
-              variant="body1"
-              sx={{
-                color: 'text.secondary',
-                fontSize: { xs: '1rem', md: '1.1rem' },
-                lineHeight: 1.7,
-                mb: 3,
-              }}
-            >
-              {section.subtitle}
-            </Typography>
-
-            {/* Step Count Indicator */}
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: { xs: 'center', lg: 'flex-start' },
-                gap: 1,
-              }}
-            >
+              {/* Phone Frame */}
               <Box
                 sx={{
-                  display: 'flex',
-                  gap: 0.5,
+                  p: '8px',
                 }}
               >
-                {section.steps.map((_, i) => (
+                {/* Screen */}
+                <Box
+                  sx={{
+                    width: '100%',
+                    height: '100%',
+                    overflow: 'hidden',
+                    position: 'relative',
+                    zIndex: 5,
+                  }}
+                >
+                  {/* Screenshot Image */}
                   <Box
-                    key={i}
+                    component="img"
+                    src={section.image}
+                    alt={`${section.title} screenshot`}
                     sx={{
-                      width: 8,
-                      height: 8,
-                      borderRadius: '50%',
-                      bgcolor: accentColor,
-                      opacity: 0.3 + (i + 1) * (0.7 / section.steps.length),
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: 'top',
                     }}
                   />
-                ))}
+                </Box>
               </Box>
-              <Typography
-                variant="body2"
+
+              {/* Decorative Elements */}
+              <Box
                 sx={{
-                  color: 'text.secondary',
-                  fontWeight: 500,
+                  position: 'absolute',
+                  top: -20,
+                  right: -20,
+                  width: 80,
+                  height: 80,
+                  borderRadius: '50%',
+                  bgcolor: accentColor,
+                  opacity: 0.1,
                 }}
-              >
-                {section.steps.length} steps
-              </Typography>
+              />
+              <Box
+                sx={{
+                  position: 'absolute',
+                  bottom: -10,
+                  left: -10,
+                  width: 60,
+                  height: 60,
+                  borderRadius: '50%',
+                  bgcolor: accentColor,
+                  opacity: 0.08,
+                }}
+              />
             </Box>
           </Box>
 
-          {/* Steps Timeline */}
+          {/* Content Section */}
           <Box
             sx={{
               flex: 1,
               order: { xs: 1, lg: isEven ? 1 : 0 },
             }}
           >
-            {section.steps.map((step, stepIndex) => (
-              <StepCard
-                key={step.id}
-                stepNumber={stepIndex + 1}
-                title={step.title}
-                description={step.description}
-                isLast={stepIndex === section.steps.length - 1}
-              />
-            ))}
+            {/* Section Header */}
+            <Box
+              sx={{
+                mb: 4,
+                textAlign: { xs: 'center', lg: 'left' },
+              }}
+            >
+              {/* Icon & Chip Row */}
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 2,
+                  mb: 2,
+                  justifyContent: { xs: 'center', lg: 'flex-start' },
+                }}
+              >
+                <Box
+                  sx={{
+                    width: 56,
+                    height: 56,
+                    borderRadius: 2,
+                    bgcolor: accentColor,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: `0 4px 14px ${accentColor}40`,
+                  }}
+                >
+                  <Icon sx={{ fontSize: 28, color: 'white' }} />
+                </Box>
+                <Chip
+                  label={`Step ${index + 1} of 3`}
+                  size="small"
+                  sx={{
+                    bgcolor: `${accentColor}15`,
+                    color: accentColor,
+                    fontWeight: 600,
+                    fontSize: '0.75rem',
+                  }}
+                />
+              </Box>
+
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 1,
+                  justifyContent: { xs: 'center', lg: 'flex-start' },
+                }}
+              >
+                <Typography
+                  variant="h3"
+                  sx={{
+                    fontWeight: 800,
+                    color: 'text.primary',
+                    mb: 1,
+                    fontSize: { xs: '1.75rem', sm: '2rem', md: '2.25rem' },
+                    letterSpacing: '-0.02em',
+                    lineHeight: 1.2,
+                  }}
+                >
+                  {section.title}
+                </Typography>
+                <IconButton
+                  onClick={handleShare}
+                  size="small"
+                  sx={{
+                    color: accentColor,
+                    bgcolor: `${accentColor}10`,
+                    mb: 1,
+                    '&:hover': {
+                      bgcolor: `${accentColor}20`,
+                    },
+                  }}
+                >
+                  <ShareIcon sx={{ fontSize: 18 }} />
+                </IconButton>
+              </Box>
+
+              <Typography
+                variant="body1"
+                sx={{
+                  color: 'text.secondary',
+                  fontSize: { xs: '1rem', md: '1.1rem' },
+                  lineHeight: 1.7,
+                  maxWidth: 500,
+                  mx: { xs: 'auto', lg: 0 },
+                }}
+              >
+                {section.description}
+              </Typography>
+            </Box>
+
+            {/* Steps List */}
+            <Box>
+              {section.steps.map((step, stepIndex) => (
+                <StepCard
+                  key={step.id}
+                  stepNumber={stepIndex + 1}
+                  title={step.title}
+                  description={step.description}
+                  isLast={stepIndex === section.steps.length - 1}
+                  accentColor={accentColor}
+                />
+              ))}
+            </Box>
           </Box>
         </Box>
       </Container>
+
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={2000}
+        onClose={() => setSnackbarOpen(false)}
+        message="Link copied to clipboard!"
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      />
     </Box>
   );
 };

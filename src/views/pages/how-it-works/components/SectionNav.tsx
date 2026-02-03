@@ -139,7 +139,7 @@ export const SectionNav = ({ sections, activeSection }: SectionNavProps) => {
                     transform: 'scale(1.1)',
                     boxShadow: `0 6px 24px ${color}50`,
                     borderColor: color,
-                    bgcolor: isActive || isPast ? color : `${color}15`,
+                    // bgcolor: isActive || isPast ? color : `${color}15`,
                   },
                 }}
               >
