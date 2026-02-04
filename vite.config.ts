@@ -21,12 +21,24 @@ export default defineConfig({
       ],
       renderer: new PuppeteerRenderer({
         renderAfterDocumentEvent: 'render-event',
+        timeout: 30000, // Increase timeout to wait for styles
       }),
     }),
   ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+    },
+  },
+  build: {
+    cssCodeSplit: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'mui-core': ['@mui/material', '@emotion/react', '@emotion/styled'],
+          'mui-icons': ['@mui/icons-material'],
+        },
+      },
     },
   },
 });

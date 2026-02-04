@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Box, Container, Typography, Button } from '@mui/material';
+import { Box, Container, Typography, Button, Skeleton } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { SectionNav } from './components/SectionNav';
 import { StepperSection } from './components/StepperSection';
@@ -7,8 +7,9 @@ import { howItWorksSections } from './data/howItWorksSteps';
 
 const HowItWorksPage = () => {
   const [activeSection, setActiveSection] = useState(howItWorksSections[0]?.id || '');
+  const [heroImageLoaded, setHeroImageLoaded] = useState(false);
 
-  // Update meta tags for SEO and social sharing
+  // Update meta tags for SEO and social sharing, and preload critical image
   useEffect(() => {
     const originalTitle = document.title;
     const hash = window.location.hash.slice(1);
@@ -54,8 +55,19 @@ const HowItWorksPage = () => {
     setMetaTag('twitter:description', description);
     setMetaTag('twitter:image', image);
 
+    // Preload critical hero image for faster LCP
+    const preloadLink = document.createElement('link');
+    preloadLink.rel = 'preload';
+    preloadLink.as = 'image';
+    preloadLink.href = '/images/et-dashboard.png';
+    preloadLink.fetchPriority = 'high';
+    document.head.appendChild(preloadLink);
+
     return () => {
       document.title = originalTitle;
+      if (preloadLink.parentNode) {
+        preloadLink.parentNode.removeChild(preloadLink);
+      }
     };
   }, []);
 
@@ -187,14 +199,32 @@ const HowItWorksPage = () => {
                     position: 'relative',
                   }}
                 >
+                  {/* Loading skeleton */}
+                  {!heroImageLoaded && (
+                    <Skeleton
+                      variant="rectangular"
+                      sx={{
+                        width: '100%',
+                        paddingTop: '200%', // Aspect ratio for phone mockup
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        bgcolor: 'rgba(255, 255, 255, 0.1)',
+                      }}
+                    />
+                  )}
                   {/* Dashboard Screenshot */}
                   <Box
                     component="img"
                     src="/images/et-dashboard.png"
                     alt="ET Dashboard"
+                    fetchPriority="high"
+                    onLoad={() => setHeroImageLoaded(true)}
                     sx={{
                       width: '100%',
                       display: 'block',
+                      opacity: heroImageLoaded ? 1 : 0,
+                      transition: 'opacity 0.3s ease-in-out',
                     }}
                   />
                 </Box>

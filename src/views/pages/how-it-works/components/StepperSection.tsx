@@ -130,6 +130,7 @@ export const StepperSection = ({ section, index }: StepperSectionProps) => {
                     component="img"
                     src={section.image}
                     alt={`${section.title} screenshot`}
+                    loading="lazy"
                     sx={{
                       width: '100%',
                       height: '100%',

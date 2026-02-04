@@ -21,5 +21,4 @@ if (rootElement.hasChildNodes()) {
   createRoot(rootElement).render(app);
 }
 
-// Dispatch event for prerender to know rendering is complete
-document.dispatchEvent(new Event('render-event'));
+// Note: render-event is now dispatched from App.tsx after mounting
