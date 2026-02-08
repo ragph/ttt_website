@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { Box, Typography, Container, Chip, IconButton, Snackbar } from '@mui/material';
+import { Box, Typography, Container, Chip, IconButton, Snackbar, Alert } from '@mui/material';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import ShareIcon from '@mui/icons-material/Share';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { StepCard } from './StepCard';
 import type { Section } from '../data/howItWorksSteps';
 
@@ -283,6 +284,31 @@ export const StepperSection = ({ section, index }: StepperSectionProps) => {
                 />
               ))}
             </Box>
+
+            {/* Note/Info Box */}
+            {section.note && (
+              <Alert
+                severity="info"
+                icon={<InfoOutlinedIcon />}
+                sx={{
+                  mt: 3,
+                  borderRadius: 2,
+                  bgcolor: '#e0f2fe',
+                  border: '1px solid #0284c7',
+                  '& .MuiAlert-icon': {
+                    color: '#0369a1',
+                  },
+                  '& .MuiAlert-message': {
+                    fontSize: { xs: '0.875rem', md: '0.9rem' },
+                    lineHeight: 1.6,
+                    whiteSpace: 'pre-line',
+                    color: '#0c4a6e',
+                  },
+                }}
+              >
+                {section.note}
+              </Alert>
+            )}
           </Box>
         </Box>
       </Container>

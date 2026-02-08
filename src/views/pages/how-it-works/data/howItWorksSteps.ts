@@ -10,6 +10,7 @@ export interface Section {
   subtitle: string;
   description: string;
   image: string;
+  note?: string;
   steps: Step[];
 }
 
@@ -54,6 +55,7 @@ export const howItWorksSections: Section[] = [
     subtitle: 'Payout your credits',
     description:
       'Receive your earnings and rewards directly to your bank account or local e-wallet. Fast, secure, and hassle-free payouts.',
+    note: 'Important: This payout is processed via Wise. In some cases, Wise requires recipients to manually accept incoming funds.\n\nIf the amount does not reflect immediately, please log in to your Wise account or check your email for an acceptance request.',
     image: '/images/et-payout.png',
     steps: [
       {
