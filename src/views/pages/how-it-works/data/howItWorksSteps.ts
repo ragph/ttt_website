@@ -55,7 +55,7 @@ export const howItWorksSections: Section[] = [
     subtitle: 'Payout your credits',
     description:
       'Receive your earnings and rewards directly to your bank account or local e-wallet. Fast, secure, and hassle-free payouts.',
-    note: 'Important: This payout is processed via Wise. In some cases, Wise requires recipients to manually accept incoming funds.\n\nIf the amount does not reflect immediately, please log in to your Wise account or check your email for an acceptance request.',
+    // note: 'Important: This payout is processed via Wise. In some cases, Wise requires recipients to manually accept incoming funds.\n\nIf the amount does not reflect immediately, please log in to your Wise account or check your email for an acceptance request.',
     image: '/images/et-payout.png',
     steps: [
       {
@@ -68,7 +68,7 @@ export const howItWorksSections: Section[] = [
         id: 'payout-step-2',
         title: 'Select Destination',
         description:
-          'Choose where you want to receive your credits: bank account, e-wallet, or other supported methods.',
+          'Choose where you want to receive your credits: bank account, e-wallet, or other supported methods.\nFor WISE transfers, it requires recipients to manually accept incoming funds. If the amount does not reflect immediately, please log in to your Wise account or check your email for an acceptance request',
       },
       {
         id: 'payout-step-3',

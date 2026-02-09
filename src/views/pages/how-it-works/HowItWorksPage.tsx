@@ -154,7 +154,7 @@ const HowItWorksPage = () => {
               fontSize: { xs: '2rem', md: '3rem' },
             }}
           >
-            How It Works
+            How To Manage Your In-app Credits
           </Typography>
           <Typography
             variant="h6"

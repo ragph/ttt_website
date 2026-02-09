@@ -85,6 +85,7 @@ export const StepCard = ({
             color: 'text.secondary',
             lineHeight: 1.6,
             fontSize: { xs: '0.85rem', sm: '0.9rem' },
+            whiteSpace: 'pre-line',
           }}
         >
           {description}
