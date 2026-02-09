@@ -31,6 +31,8 @@ const Announcements = lazy(() => import('../views/pages/announcements/Announceme
 const AnnouncementDetails = lazy(() => import('../views/pages/announcements/AnnouncementDetails'));
 const Subscriptions = lazy(() => import('../views/pages/membership/Membership'));
 const HowItWorksPage = lazy(() => import('../views/pages/how-it-works/HowItWorksPage'));
+const UpgradeSubscription = lazy(() => import('../views/pages/upgrade-subscription/UpgradeSubscription'));
+const VoteMissWorldTourism = lazy(() => import('../views/pages/vote-miss-world-tourism/VoteMissWorldTourism'));
 
 // Loading component
 const Loader = () => (
@@ -199,6 +201,22 @@ export const routes: RouteObject[] = [
         element: (
           <SuspenseWrapper>
             <HowItWorksPage />
+          </SuspenseWrapper>
+        ),
+      },
+      {
+        path: '/upgrade-subscription',
+        element: (
+          <SuspenseWrapper>
+            <UpgradeSubscription />
+          </SuspenseWrapper>
+        ),
+      },
+      {
+        path: '/vote-miss-world-tourism-2027',
+        element: (
+          <SuspenseWrapper>
+            <VoteMissWorldTourism />
           </SuspenseWrapper>
         ),
       },
