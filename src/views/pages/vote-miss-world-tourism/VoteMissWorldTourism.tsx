@@ -164,57 +164,6 @@ const VoteMissWorldTourism = () => {
           >
             Cast your vote online to support your favorite contestant. Every vote counts in crowning the next Miss World Tourism!
           </Typography>
-
-          {/* Dashboard Preview Phone Mockup */}
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-            }}
-          >
-            <Box
-              sx={{
-                position: 'relative',
-                width: { xs: 280, sm: 320, md: 360 },
-              }}
-            >
-              {/* Phone Frame */}
-              <Box
-                sx={{
-                  p: '10px',
-                  position: 'relative',
-                  zIndex: 2,
-                }}
-              >
-                {/* Screen */}
-                <Box
-                  sx={{
-                    width: '100%',
-                    overflow: 'hidden',
-                    position: 'relative',
-                  }}
-                >
-                  {/* Dashboard Screenshot */}
-                  <Box
-                    component="img"
-                    src="/images/et-vote.png"
-                    alt="Vote Miss World Tourism Preview"
-                    fetchPriority="high"
-                    onLoad={() => setHeroImageLoaded(true)}
-                    onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
-                      e.currentTarget.style.display = 'none';
-                    }}
-                    sx={{
-                      width: '100%',
-                      display: 'block',
-                      opacity: heroImageLoaded ? 1 : 0,
-                      transition: 'opacity 0.3s ease-in-out',
-                    }}
-                  />
-                </Box>
-              </Box>
-            </Box>
-          </Box>
         </Container>
       </Box>
 
@@ -271,7 +220,7 @@ const VoteMissWorldTourism = () => {
                     {/* Screenshot Image */}
                     <Box
                       component="img"
-                      src="/images/et-placeholder.png"
+                      src="/images/et-vote.png"
                       alt="Vote Miss World Tourism screenshot"
                       loading="lazy"
                       onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
@@ -538,7 +487,7 @@ const VoteMissWorldTourism = () => {
           <Button
             variant="contained"
             size="large"
-            href="/announcements"
+            href="/surveys/miss-world-tourism-festival-2027"
             sx={{
               px: 5,
               py: 1.5,

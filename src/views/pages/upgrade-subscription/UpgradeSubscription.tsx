@@ -1,10 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Box, Container, Typography, Button, Chip, IconButton, Snackbar } from '@mui/material';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ShareIcon from '@mui/icons-material/Share';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { useNavigate } from 'react-router-dom';
 
 interface Step {
   id: string;
@@ -15,23 +12,27 @@ interface Step {
 const steps: Step[] = [
   {
     id: 'upgrade-step-1',
-    title: 'Go to Subscriptions',
-    description: 'Navigate to the Subscriptions section from your account settings or dashboard menu. You can also access it directly from the main navigation menu.',
+    title: 'Open Your ET App',
+    description: 'Log in to your ET App account and navigate to your Dashboard or Account Settings.',
   },
   {
     id: 'upgrade-step-2',
-    title: 'Choose Your Plan',
-    description: 'Browse available subscription tiers and select the plan that best fits your needs. Compare features and benefits across different plans. Each tier offers unique advantages including higher earning potential, exclusive features, and premium support.',
+    title: 'Go to Subscription',
+    description: 'Tap on "Subscription" from the menu. You\'ll see your current subscription level (Traveller, Affiliate, or Victors) and available upgrade options.',
   },
   {
     id: 'upgrade-step-3',
-    title: 'Complete Payment',
-    description: 'Review the subscription details, enter your payment information, and confirm your upgrade. Your new benefits activate immediately upon successful payment. You can use various payment methods including credit cards, debit cards, and e-wallets.',
+    title: 'Choose Your New Plan',
+    description: 'Select the subscription level you want to upgrade to:\n• Traveller → Affiliate (FREE) - Get referral links and markup selling\n• Traveller/Affiliate → Victors (₱99/year) - Unlock premium features and higher rewards',
+  },
+  {
+    id: 'upgrade-step-4',
+    title: 'Complete Upgrade',
+    description: 'For Affiliate upgrade, simply confirm. For Victors upgrade, complete payment using your prepaid credits or other payment methods. Your new benefits activate immediately!',
   },
 ];
 
 const UpgradeSubscription = () => {
-  const navigate = useNavigate();
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [heroImageLoaded, setHeroImageLoaded] = useState(false);
 
@@ -40,7 +41,7 @@ const UpgradeSubscription = () => {
   // Update meta tags for SEO
   useEffect(() => {
     const originalTitle = document.title;
-    document.title = 'How to Upgrade Subscription | Trip Travel & Tours';
+    document.title = 'How to Upgrade Your ET Subscription | Trip Travel & Tours';
 
     const setMetaTag = (name: string, content: string, property?: boolean) => {
       const attr = property ? 'property' : 'name';
@@ -53,9 +54,9 @@ const UpgradeSubscription = () => {
       meta.setAttribute('content', content);
     };
 
-    setMetaTag('description', 'Learn how to upgrade your subscription level to access exclusive features, higher earning potential, and premium benefits.');
-    setMetaTag('og:title', 'How to Upgrade Subscription | Trip Travel & Tours', true);
-    setMetaTag('og:description', 'Step-by-step guide to upgrade your subscription level.', true);
+    setMetaTag('description', 'Learn how to upgrade your ET subscription. Move from Traveller to Affiliate (FREE) or upgrade to Victors (₱99/year) for premium benefits.');
+    setMetaTag('og:title', 'How to Upgrade Your ET Subscription | Trip Travel & Tours', true);
+    setMetaTag('og:description', 'Step-by-step guide to upgrade your ET subscription level and unlock more benefits.', true);
 
     return () => {
       document.title = originalTitle;
@@ -150,7 +151,7 @@ const UpgradeSubscription = () => {
               fontSize: { xs: '2rem', md: '3rem' },
             }}
           >
-            How to Upgrade Your Subscription
+            How to Upgrade Your ET Subscription
           </Typography>
           <Typography
             variant="h6"
@@ -162,59 +163,8 @@ const UpgradeSubscription = () => {
               fontSize: { xs: '1rem', md: '1.25rem' },
             }}
           >
-            Unlock premium features, higher earning potential, and exclusive benefits by upgrading your subscription level.
+            Upgrade from Traveller to Affiliate for free, or unlock premium benefits with Victors for just ₱99/year.
           </Typography>
-
-          {/* Dashboard Preview Phone Mockup */}
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-            }}
-          >
-            <Box
-              sx={{
-                position: 'relative',
-                width: { xs: 280, sm: 320, md: 360 },
-              }}
-            >
-              {/* Phone Frame */}
-              <Box
-                sx={{
-                  p: '10px',
-                  position: 'relative',
-                  zIndex: 2,
-                }}
-              >
-                {/* Screen */}
-                <Box
-                  sx={{
-                    width: '100%',
-                    overflow: 'hidden',
-                    position: 'relative',
-                  }}
-                >
-                  {/* Dashboard Screenshot */}
-                  <Box
-                    component="img"
-                    src="/images/et-upgrade.png"
-                    alt="Upgrade Subscription Preview"
-                    fetchPriority="high"
-                    onLoad={() => setHeroImageLoaded(true)}
-                    onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
-                      e.currentTarget.style.display = 'none';
-                    }}
-                    sx={{
-                      width: '100%',
-                      display: 'block',
-                      opacity: heroImageLoaded ? 1 : 0,
-                      transition: 'opacity 0.3s ease-in-out',
-                    }}
-                  />
-                </Box>
-              </Box>
-            </Box>
-          </Box>
         </Container>
       </Box>
 
@@ -271,7 +221,7 @@ const UpgradeSubscription = () => {
                     {/* Screenshot Image */}
                     <Box
                       component="img"
-                      src="/images/et-placeholder.png"
+                      src="/images/et-subscription.png"
                       alt="Upgrade subscription screenshot"
                       loading="lazy"
                       onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
@@ -353,7 +303,7 @@ const UpgradeSubscription = () => {
                     <WorkspacePremiumIcon sx={{ fontSize: 28, color: 'white' }} />
                   </Box>
                   <Chip
-                    label="3 Easy Steps"
+                    label="4 Easy Steps"
                     size="small"
                     sx={{
                       bgcolor: `${accentColor}15`,
@@ -411,7 +361,7 @@ const UpgradeSubscription = () => {
                     mx: { xs: 'auto', lg: 0 },
                   }}
                 >
-                  Upgrade your subscription level to access exclusive features, higher earning potential, and premium benefits.
+                  Choose the subscription level that fits your needs. Upgrade to Affiliate for referral links and markup selling, or go Victors for higher rewards, exclusive events, and premium services.
                 </Typography>
               </Box>
 
@@ -533,7 +483,7 @@ const UpgradeSubscription = () => {
               fontSize: { xs: '1rem', md: '1.1rem' },
             }}
           >
-            Start enjoying premium benefits today.
+            Compare subscription levels and choose the plan that fits your travel style.
           </Typography>
           <Button
             variant="contained"
@@ -553,7 +503,7 @@ const UpgradeSubscription = () => {
               },
             }}
           >
-            View Subscription Plans
+            View ET Subscription Levels
           </Button>
         </Container>
       </Box>

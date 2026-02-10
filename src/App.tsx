@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { useRoutes } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
+import { useRoutes, useLocation } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
 import { ThemeConfig } from './theme';
@@ -8,32 +8,41 @@ import { useStoreHydration } from './hooks/useStoreHydration';
 
 function AppContent() {
   const routing = useRoutes(routes);
+  const location = useLocation();
+  const loaderHidden = useRef(false);
 
   // Hydrate store from localStorage after initial render
   useStoreHydration();
 
-  // Dispatch render-event after app is fully mounted and styled
+  // Hide loader once - after first route renders
   useEffect(() => {
-    // Wait for next frame to ensure styles are injected
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        // Hide the loading screen
-        const loader = document.getElementById('app-loader');
-        const root = document.getElementById('root');
+    if (loaderHidden.current) return;
 
-        if (loader) loader.classList.add('loaded');
-        if (root) root.classList.add('ready');
+    const hideLoader = () => {
+      const loader = document.getElementById('app-loader');
+      const root = document.getElementById('root');
 
-        // Dispatch event for prerenderer
-        document.dispatchEvent(new Event('render-event'));
+      if (loader) loader.classList.add('loaded');
+      if (root) root.classList.add('ready');
 
-        // Remove loader after transition
-        setTimeout(() => {
-          if (loader) loader.remove();
-        }, 300);
-      });
-    });
-  }, []);
+      // Dispatch event for prerenderer
+      document.dispatchEvent(new Event('render-event'));
+
+      // Remove loader after transition
+      setTimeout(() => {
+        if (loader) loader.remove();
+      }, 300);
+
+      loaderHidden.current = true;
+    };
+
+    // Use requestIdleCallback for better timing, or fallback to setTimeout
+    if ('requestIdleCallback' in window) {
+      (window as Window).requestIdleCallback(hideLoader, { timeout: 500 });
+    } else {
+      setTimeout(hideLoader, 50);
+    }
+  }, [location.pathname]);
 
   return <ThemeConfig>{routing}</ThemeConfig>;
 }

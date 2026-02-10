@@ -172,62 +172,6 @@ const HowItWorksPage = () => {
 
           {/* Tabs */}
 
-          {/* Quick Action Buttons */}
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: { xs: 'column', sm: 'row' },
-              gap: 2,
-              justifyContent: 'center',
-              mb: 4,
-            }}
-          >
-            <Button
-              variant="contained"
-              size="large"
-              href="/upgrade-subscription"
-              sx={{
-                px: 4,
-                py: 1.5,
-                borderRadius: 3,
-                bgcolor: 'white',
-                color: '#000000',
-                fontWeight: 600,
-                fontSize: '1rem',
-                textTransform: 'none',
-                '&:hover': {
-                  bgcolor: 'rgba(255,255,255,0.95)',
-                  transform: 'translateY(-2px)',
-                },
-                transition: 'all 0.3s ease',
-              }}
-            >
-              How to Upgrade Subscription
-            </Button>
-            <Button
-              variant="contained"
-              size="large"
-              href="/vote-miss-world-tourism-2027"
-              sx={{
-                px: 4,
-                py: 1.5,
-                borderRadius: 3,
-                bgcolor: 'white',
-                color: '#000000',
-                fontWeight: 600,
-                fontSize: '1rem',
-                textTransform: 'none',
-                '&:hover': {
-                  bgcolor: 'rgba(255,255,255,0.95)',
-                  transform: 'translateY(-2px)',
-                },
-                transition: 'all 0.3s ease',
-              }}
-            >
-              How to Vote in Miss World Tourism 2027
-            </Button>
-          </Box>
-
           {/* Dashboard Preview Phone Mockup */}
           <Box
             sx={{

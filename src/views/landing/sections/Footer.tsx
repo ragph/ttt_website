@@ -42,11 +42,13 @@ const footerLinks = {
   ],
   support: [
     { label: "FAQs", href: "/faqs" },
-    { label: "How It Works", href: "/how-it-works" },
     { label: "Contact Us", href: "/#contact" },
     { label: "Refund Policy", href: "/refund-policy" },
     { label: "Terms of Service", href: "/terms-of-service" },
     { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Manage In-app Credits", href: "/how-it-works" },
+    { label: "Upgrade Subscription", href: "/upgrade-subscription" },
+    { label: "Vote for Miss World Tourism 2027", href: "/vote-miss-world-tourism-2027" },
   ],
 };
 
