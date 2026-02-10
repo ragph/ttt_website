@@ -9,7 +9,7 @@ const HowItWorksPage = () => {
   const [activeSection, setActiveSection] = useState(howItWorksSections[0]?.id || '');
   const [heroImageLoaded, setHeroImageLoaded] = useState(false);
 
-  // Update meta tags for SEO and social sharing, and preload critical image
+  // Update document title and preload critical image
   useEffect(() => {
     const originalTitle = document.title;
     const hash = window.location.hash.slice(1);
@@ -18,56 +18,11 @@ const HowItWorksPage = () => {
     const title = section
       ? `${section.title} | How It Works | Trip Travel & Tours`
       : 'How It Works | Trip Travel & Tours';
-    const description = section
-      ? section.description
-      : 'Master your credits in minutes. Learn how to top up, payout funds, and convert currencies with our easy-to-follow guides.';
-    const currentUrl = window.location.href;
-    const image = 'https://triptravelandtours.com/og-how-it-works.jpg';
 
-    // Update document title
     document.title = title;
-
-    // Helper to set or create meta tag
-    const setMetaTag = (name: string, content: string, property?: boolean) => {
-      const attr = property ? 'property' : 'name';
-      let meta = document.querySelector(`meta[${attr}="${name}"]`) as HTMLMetaElement;
-      if (!meta) {
-        meta = document.createElement('meta');
-        meta.setAttribute(attr, name);
-        document.head.appendChild(meta);
-      }
-      meta.setAttribute('content', content);
-    };
-
-    // Basic meta tags
-    setMetaTag('description', description);
-
-    // Open Graph meta tags
-    setMetaTag('og:title', title, true);
-    setMetaTag('og:description', description, true);
-    setMetaTag('og:image', image, true);
-    setMetaTag('og:url', currentUrl, true);
-    setMetaTag('og:type', 'website', true);
-
-    // Twitter Card meta tags
-    setMetaTag('twitter:card', 'summary_large_image');
-    setMetaTag('twitter:title', title);
-    setMetaTag('twitter:description', description);
-    setMetaTag('twitter:image', image);
-
-    // Preload critical hero image for faster LCP
-    const preloadLink = document.createElement('link');
-    preloadLink.rel = 'preload';
-    preloadLink.as = 'image';
-    preloadLink.href = '/images/et-dashboard.png';
-    preloadLink.fetchPriority = 'high';
-    document.head.appendChild(preloadLink);
 
     return () => {
       document.title = originalTitle;
-      if (preloadLink.parentNode) {
-        preloadLink.parentNode.removeChild(preloadLink);
-      }
     };
   }, []);
 
@@ -201,20 +156,6 @@ const HowItWorksPage = () => {
                     position: 'relative',
                   }}
                 >
-                  {/* Loading skeleton */}
-                  {!heroImageLoaded && (
-                    <Skeleton
-                      variant="rectangular"
-                      sx={{
-                        width: '100%',
-                        paddingTop: '200%', // Aspect ratio for phone mockup
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        bgcolor: 'rgba(255, 255, 255, 0.1)',
-                      }}
-                    />
-                  )}
                   {/* Dashboard Screenshot */}
                   <Box
                     component="img"
@@ -229,6 +170,20 @@ const HowItWorksPage = () => {
                       transition: 'opacity 0.3s ease-in-out',
                     }}
                   />
+                  {/* Loading skeleton - positioned over the image */}
+                  {!heroImageLoaded && (
+                    <Skeleton
+                      variant="rectangular"
+                      sx={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        bgcolor: 'rgba(255, 255, 255, 0.1)',
+                      }}
+                    />
+                  )}
                 </Box>
               </Box>
 
