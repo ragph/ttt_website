@@ -48,7 +48,7 @@ const footerLinks = {
     { label: "Privacy Policy", href: "/privacy-policy" },
     { label: "Manage In-app Credits", href: "/how-it-works" },
     { label: "Upgrade Subscription", href: "/upgrade-subscription" },
-    { label: "Vote for Miss World Tourism 2027", href: "/vote-miss-world-tourism-2027" },
+    { label: "Vote for Miss World Tourism Festival PH 2027", href: "/vote-miss-world-tourism-2027" },
   ],
 };
 

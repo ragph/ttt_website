@@ -106,6 +106,7 @@ const HowItWorksPage = () => {
               fontWeight: 700,
               mb: 3,
               fontSize: { xs: '2rem', md: '3rem' },
+              lineHeight: 1.2,
             }}
           >
             How To Manage Your In-app Credits

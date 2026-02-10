@@ -148,9 +148,10 @@ const VoteMissWorldTourism = () => {
               fontWeight: 700,
               mb: 3,
               fontSize: { xs: '2rem', md: '3rem' },
+              lineHeight: 1.2,
             }}
           >
-            How to Vote in Miss World Tourism 2027
+            How to Vote in Miss World Tourism Festival Philippines 2027
           </Typography>
           <Typography
             variant="h6"

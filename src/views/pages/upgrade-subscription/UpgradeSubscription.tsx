@@ -149,6 +149,7 @@ const UpgradeSubscription = () => {
               fontWeight: 700,
               mb: 3,
               fontSize: { xs: '2rem', md: '3rem' },
+              lineHeight: 1.2,
             }}
           >
             How to Upgrade Your ET Subscription
