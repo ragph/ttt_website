@@ -221,7 +221,7 @@ const VoteMissWorldTourism = () => {
                     {/* Screenshot Image */}
                     <Box
                       component="img"
-                      src="/images/et-vote.png"
+                      src="/images/et-vote.png?r=01"
                       alt="Vote Miss World Tourism screenshot"
                       loading="lazy"
                       onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
