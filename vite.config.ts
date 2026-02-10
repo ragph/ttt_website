@@ -17,7 +17,7 @@ export default defineConfig({
         '/privacy-policy',
         '/refund-policy',
         '/surveys',
-        // '/how-it-works', // Temporarily disabled - causes styling issues with pre-render
+        // '/manage-in-app-credits', // Temporarily disabled - causes styling issues with pre-render
       ],
       renderer: new PuppeteerRenderer({
         renderAfterDocumentEvent: 'render-event',

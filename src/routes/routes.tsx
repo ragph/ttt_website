@@ -185,7 +185,7 @@ export const routes: RouteObject[] = [
         ),
       },
       {
-        path: '/how-it-works',
+        path: '/manage-in-app-credits',
         element: (
           <SuspenseWrapper>
             <HowItWorksPage />

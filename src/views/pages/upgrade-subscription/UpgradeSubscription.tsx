@@ -132,7 +132,7 @@ const UpgradeSubscription = () => {
         <Container maxWidth="lg">
           {/* <Button
             startIcon={<ArrowBackIcon />}
-            onClick={() => navigate('/how-it-works')}
+            onClick={() => navigate('/manage-in-app-credits')}
             sx={{
               color: 'white',
               mb: 3,
@@ -141,7 +141,7 @@ const UpgradeSubscription = () => {
               },
             }}
           >
-            Back to How It Works
+            Back to Manage In-app Credits
           </Button> */}
           <Typography
             variant="h2"

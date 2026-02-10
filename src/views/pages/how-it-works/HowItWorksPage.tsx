@@ -15,8 +15,8 @@ const HowItWorksPage = () => {
     const section = howItWorksSections.find(s => s.id === hash);
 
     const title = section
-      ? `${section.title} | How It Works | Trip Travel & Tours`
-      : 'How It Works | Trip Travel & Tours';
+      ? `${section.title} | Manage In-app Credits | Trip Travel & Tours`
+      : 'Manage In-app Credits | Trip Travel & Tours';
 
     document.title = title;
 

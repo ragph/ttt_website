@@ -131,7 +131,7 @@ const VoteMissWorldTourism = () => {
         <Container maxWidth="lg">
           {/* <Button
             startIcon={<ArrowBackIcon />}
-            onClick={() => navigate('/how-it-works')}
+            onClick={() => navigate('/manage-in-app-credits')}
             sx={{
               color: 'white',
               mb: 3,
@@ -140,7 +140,7 @@ const VoteMissWorldTourism = () => {
               },
             }}
           >
-            Back to How It Works
+            Back to Manage In-app Credits
           </Button> */}
           <Typography
             variant="h2"
@@ -333,7 +333,7 @@ const VoteMissWorldTourism = () => {
                       lineHeight: 1.2,
                     }}
                   >
-                    Vote for Miss World Tourism 2027
+                    Miss World Tourism Festival Philippines 2027
                   </Typography>
                   <IconButton
                     onClick={handleShare}
@@ -361,7 +361,7 @@ const VoteMissWorldTourism = () => {
                     mx: { xs: 'auto', lg: 0 },
                   }}
                 >
-                  Cast your vote online to support your favorite contestant in Miss World Tourism 2027. Every vote counts!
+                  Cast your vote online to support your favorite contestant in Miss World Tourism Festival Philippines 2027. Every vote counts!
                 </Typography>
               </Box>
 
