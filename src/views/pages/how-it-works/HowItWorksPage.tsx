@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Box, Container, Typography, Button, Skeleton } from '@mui/material';
+import { Box, Container, Typography, Button } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { SectionNav } from './components/SectionNav';
 import { StepperSection } from './components/StepperSection';
@@ -7,7 +7,6 @@ import { howItWorksSections } from './data/howItWorksSteps';
 
 const HowItWorksPage = () => {
   const [activeSection, setActiveSection] = useState(howItWorksSections[0]?.id || '');
-  const [heroImageLoaded, setHeroImageLoaded] = useState(false);
 
   // Update document title and preload critical image
   useEffect(() => {
@@ -153,7 +152,6 @@ const HowItWorksPage = () => {
                   sx={{
                     width: '100%',
                     overflow: 'hidden',
-                    position: 'relative',
                   }}
                 >
                   {/* Dashboard Screenshot */}
@@ -161,29 +159,11 @@ const HowItWorksPage = () => {
                     component="img"
                     src="/images/et-dashboard.png"
                     alt="ET Dashboard"
-                    fetchPriority="high"
-                    onLoad={() => setHeroImageLoaded(true)}
                     sx={{
                       width: '100%',
                       display: 'block',
-                      opacity: heroImageLoaded ? 1 : 0,
-                      transition: 'opacity 0.3s ease-in-out',
                     }}
                   />
-                  {/* Loading skeleton - positioned over the image */}
-                  {!heroImageLoaded && (
-                    <Skeleton
-                      variant="rectangular"
-                      sx={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        bgcolor: 'rgba(255, 255, 255, 0.1)',
-                      }}
-                    />
-                  )}
                 </Box>
               </Box>
 
