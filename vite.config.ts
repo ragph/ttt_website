@@ -18,6 +18,7 @@ export default defineConfig({
         '/refund-policy',
         '/surveys',
         '/how-it-works',
+        '/upgrade-subscription',
       ],
       renderer: new PuppeteerRenderer({
         renderAfterDocumentEvent: 'render-event',

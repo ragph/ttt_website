@@ -24,8 +24,12 @@ function AppContent() {
         if (loader) loader.classList.add('loaded');
         if (root) root.classList.add('ready');
 
-        // Dispatch event for prerenderer
-        document.dispatchEvent(new Event('render-event'));
+        // Wait for meta tags to be set by page components (useEffect)
+        // This ensures pre-rendering captures dynamic meta tags
+        setTimeout(() => {
+          // Dispatch event for prerenderer
+          document.dispatchEvent(new Event('render-event'));
+        }, 100);
 
         // Remove loader after transition
         setTimeout(() => {
