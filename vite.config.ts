@@ -10,15 +10,15 @@ export default defineConfig({
     react(),
     prerender({
       routes: [
-        '/',
-        '/map',
-        '/faqs',
-        '/terms-of-service',
-        '/privacy-policy',
-        '/refund-policy',
-        '/surveys',
-        '/how-it-works',
-        '/upgrade-subscription',
+        // '/',
+        // '/map',
+        // '/faqs',
+        // '/terms-of-service',
+        // '/privacy-policy',
+        // '/refund-policy',
+        // '/surveys',
+        // '/how-it-works',
+        // '/upgrade-subscription',
         // '/manage-in-app-credits', // Temporarily disabled - causes styling issues with pre-render
       ],
       renderer: new PuppeteerRenderer({
