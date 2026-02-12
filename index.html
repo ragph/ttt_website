@@ -33,19 +33,6 @@
     <meta property="twitter:title" content="Trip Travel & Tours Agency" />
     <meta property="twitter:description" content="Discover amazing travel destinations, earn rewards while traveling, and explore the world with Trip Travel & Tours. Your journey to extraordinary adventures starts here." />
     <meta property="twitter:image" content="https://triptravelandtours.com/og-image.jpg" />
-    <script>
-      // CRITICAL: Run this BEFORE any rendering to prevent FOUC
-      // This must be inline and blocking to execute immediately
-      (function() {
-        // Hide root element immediately
-        document.addEventListener('DOMContentLoaded', function() {
-          var root = document.getElementById('root');
-          if (root && !root.classList.contains('ready')) {
-            root.style.cssText = 'visibility: hidden !important; opacity: 0 !important;';
-          }
-        });
-      })();
-    </script>
     <style>
       /* Aggressive FOUC prevention - hide everything until React hydrates */
       body {
@@ -105,19 +92,6 @@
       <div class="loader-spinner"></div>
     </div>
     <div id="root"></div>
-    <script>
-      // CRITICAL: Force hide root immediately after it's created
-      // This runs synchronously BEFORE React hydration
-      (function() {
-        var root = document.getElementById('root');
-        if (root) {
-          root.style.visibility = 'hidden';
-          root.style.opacity = '0';
-          root.style.setProperty('visibility', 'hidden', 'important');
-          root.style.setProperty('opacity', '0', 'important');
-        }
-      })();
-    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
