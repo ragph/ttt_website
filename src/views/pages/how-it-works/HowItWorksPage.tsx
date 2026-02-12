@@ -23,7 +23,7 @@ const HowItWorksPage = () => {
     const currentUrl = typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1'
       ? window.location.href
       : `${productionUrl}/manage-in-app-credits`;
-    const imageUrl = `${productionUrl}/og-manage.jpg`;
+    const imageUrl = `${productionUrl}/og-manage-credit.jpg`;
 
     // Update document title
     document.title = pageTitle;
