@@ -30,7 +30,7 @@ function AppContent() {
       setTimeout(() => {
         // Dispatch event for prerenderer
         document.dispatchEvent(new Event('render-event'));
-      }, 100);
+      }, 500);
 
       // Remove loader after transition
       setTimeout(() => {

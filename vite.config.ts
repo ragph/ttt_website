@@ -18,7 +18,7 @@ export default defineConfig({
         // '/refund-policy',
         // '/surveys',
         // '/how-it-works',
-        // '/upgrade-subscription',
+        '/upgrade-subscription',
         // '/manage-in-app-credits', // Temporarily disabled - causes styling issues with pre-render
       ],
       renderer: new PuppeteerRenderer({
