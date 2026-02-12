@@ -22,21 +22,27 @@ function AppContent() {
       const loader = document.getElementById('app-loader');
       const root = document.getElementById('root');
 
-      if (loader) loader.classList.add('loaded');
-      if (root) root.classList.add('ready');
-      document.body.classList.add('hydrated');
-
       // Wait for meta tags to be set by page components (useEffect)
       // This ensures pre-rendering captures dynamic meta tags
       setTimeout(() => {
-        // Dispatch event for prerenderer
+        // Dispatch event for prerenderer FIRST (before showing content)
         document.dispatchEvent(new Event('render-event'));
-      }, 500);
 
-      // Remove loader after transition
-      setTimeout(() => {
-        if (loader) loader.remove();
-      }, 300);
+        // Then show the content (this won't be captured by prerenderer)
+        if (loader) loader.classList.add('loaded');
+        if (root) {
+          root.classList.add('ready');
+          root.style.setProperty('visibility', 'visible', 'important');
+          root.style.setProperty('opacity', '1', 'important');
+        }
+        document.body.classList.add('hydrated');
+        document.body.style.overflow = 'auto';
+
+        // Remove loader after transition
+        setTimeout(() => {
+          if (loader) loader.remove();
+        }, 300);
+      }, 500);
 
       loaderHidden.current = true;
     };
