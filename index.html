@@ -34,17 +34,27 @@
     <meta property="twitter:description" content="Discover amazing travel destinations, earn rewards while traveling, and explore the world with Trip Travel & Tours. Your journey to extraordinary adventures starts here." />
     <meta property="twitter:image" content="https://triptravelandtours.com/og-image.jpg" />
     <style>
-      /* Prevent FOUC - hide root until React hydrates */
-      #root {
-        visibility: hidden;
+      /* Aggressive FOUC prevention - hide everything until React hydrates */
+      body {
+        overflow: hidden !important;
       }
-      #root.ready {
-        visibility: visible;
+      body.hydrated {
+        overflow: auto !important;
       }
 
-      /* Loading screen overlay */
+      #root {
+        visibility: hidden !important;
+        opacity: 0 !important;
+      }
+      #root.ready {
+        visibility: visible !important;
+        opacity: 1 !important;
+        transition: opacity 0.2s ease-in;
+      }
+
+      /* Full-screen loading overlay - highest z-index */
       #app-loader {
-        position: fixed;
+        position: fixed !important;
         top: 0;
         left: 0;
         width: 100%;
@@ -53,7 +63,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        z-index: 99999;
+        z-index: 999999 !important;
         opacity: 1;
         transition: opacity 0.3s ease-out;
       }

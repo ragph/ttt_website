@@ -24,6 +24,7 @@ function AppContent() {
 
       if (loader) loader.classList.add('loaded');
       if (root) root.classList.add('ready');
+      document.body.classList.add('hydrated');
 
       // Wait for meta tags to be set by page components (useEffect)
       // This ensures pre-rendering captures dynamic meta tags
