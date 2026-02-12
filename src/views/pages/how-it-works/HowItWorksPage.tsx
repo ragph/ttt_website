@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Box, Container, Typography, Button, Skeleton } from '@mui/material';
+import { Box, Container, Typography, Button } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { SectionNav } from './components/SectionNav';
 import { StepperSection } from './components/StepperSection';
@@ -7,67 +7,21 @@ import { howItWorksSections } from './data/howItWorksSteps';
 
 const HowItWorksPage = () => {
   const [activeSection, setActiveSection] = useState(howItWorksSections[0]?.id || '');
-  const [heroImageLoaded, setHeroImageLoaded] = useState(false);
 
-  // Update meta tags for SEO and social sharing, and preload critical image
+  // Update document title and preload critical image
   useEffect(() => {
     const originalTitle = document.title;
     const hash = window.location.hash.slice(1);
     const section = howItWorksSections.find(s => s.id === hash);
 
     const title = section
-      ? `${section.title} | How It Works | Trip Travel & Tours`
-      : 'How It Works | Trip Travel & Tours';
-    const description = section
-      ? section.description
-      : 'Master your credits in minutes. Learn how to top up, payout funds, and convert currencies with our easy-to-follow guides.';
-    const currentUrl = window.location.href;
-    const image = 'https://triptravelandtours.com/og-how-it-works.jpg';
+      ? `${section.title} | Manage In-app Credits | Trip Travel & Tours`
+      : 'Manage In-app Credits | Trip Travel & Tours';
 
-    // Update document title
     document.title = title;
-
-    // Helper to set or create meta tag
-    const setMetaTag = (name: string, content: string, property?: boolean) => {
-      const attr = property ? 'property' : 'name';
-      let meta = document.querySelector(`meta[${attr}="${name}"]`) as HTMLMetaElement;
-      if (!meta) {
-        meta = document.createElement('meta');
-        meta.setAttribute(attr, name);
-        document.head.appendChild(meta);
-      }
-      meta.setAttribute('content', content);
-    };
-
-    // Basic meta tags
-    setMetaTag('description', description);
-
-    // Open Graph meta tags
-    setMetaTag('og:title', title, true);
-    setMetaTag('og:description', description, true);
-    setMetaTag('og:image', image, true);
-    setMetaTag('og:url', currentUrl, true);
-    setMetaTag('og:type', 'website', true);
-
-    // Twitter Card meta tags
-    setMetaTag('twitter:card', 'summary_large_image');
-    setMetaTag('twitter:title', title);
-    setMetaTag('twitter:description', description);
-    setMetaTag('twitter:image', image);
-
-    // Preload critical hero image for faster LCP
-    const preloadLink = document.createElement('link');
-    preloadLink.rel = 'preload';
-    preloadLink.as = 'image';
-    preloadLink.href = '/images/et-dashboard.png';
-    preloadLink.fetchPriority = 'high';
-    document.head.appendChild(preloadLink);
 
     return () => {
       document.title = originalTitle;
-      if (preloadLink.parentNode) {
-        preloadLink.parentNode.removeChild(preloadLink);
-      }
     };
   }, []);
 
@@ -152,6 +106,7 @@ const HowItWorksPage = () => {
               fontWeight: 700,
               mb: 3,
               fontSize: { xs: '2rem', md: '3rem' },
+              lineHeight: 1.2,
             }}
           >
             How To Manage Your In-app Credits
@@ -171,62 +126,6 @@ const HowItWorksPage = () => {
           </Typography>
 
           {/* Tabs */}
-
-          {/* Quick Action Buttons */}
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: { xs: 'column', sm: 'row' },
-              gap: 2,
-              justifyContent: 'center',
-              mb: 4,
-            }}
-          >
-            <Button
-              variant="contained"
-              size="large"
-              href="/upgrade-subscription"
-              sx={{
-                px: 4,
-                py: 1.5,
-                borderRadius: 3,
-                bgcolor: 'white',
-                color: '#000000',
-                fontWeight: 600,
-                fontSize: '1rem',
-                textTransform: 'none',
-                '&:hover': {
-                  bgcolor: 'rgba(255,255,255,0.95)',
-                  transform: 'translateY(-2px)',
-                },
-                transition: 'all 0.3s ease',
-              }}
-            >
-              How to Upgrade Subscription
-            </Button>
-            <Button
-              variant="contained"
-              size="large"
-              href="/vote-miss-world-tourism-2027"
-              sx={{
-                px: 4,
-                py: 1.5,
-                borderRadius: 3,
-                bgcolor: 'white',
-                color: '#000000',
-                fontWeight: 600,
-                fontSize: '1rem',
-                textTransform: 'none',
-                '&:hover': {
-                  bgcolor: 'rgba(255,255,255,0.95)',
-                  transform: 'translateY(-2px)',
-                },
-                transition: 'all 0.3s ease',
-              }}
-            >
-              How to Vote in Miss World Tourism 2027
-            </Button>
-          </Box>
 
           {/* Dashboard Preview Phone Mockup */}
           <Box
@@ -254,35 +153,16 @@ const HowItWorksPage = () => {
                   sx={{
                     width: '100%',
                     overflow: 'hidden',
-                    position: 'relative',
                   }}
                 >
-                  {/* Loading skeleton */}
-                  {!heroImageLoaded && (
-                    <Skeleton
-                      variant="rectangular"
-                      sx={{
-                        width: '100%',
-                        paddingTop: '200%', // Aspect ratio for phone mockup
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        bgcolor: 'rgba(255, 255, 255, 0.1)',
-                      }}
-                    />
-                  )}
                   {/* Dashboard Screenshot */}
                   <Box
                     component="img"
                     src="/images/et-dashboard.png"
                     alt="ET Dashboard"
-                    fetchPriority="high"
-                    onLoad={() => setHeroImageLoaded(true)}
                     sx={{
                       width: '100%',
                       display: 'block',
-                      opacity: heroImageLoaded ? 1 : 0,
-                      transition: 'opacity 0.3s ease-in-out',
                     }}
                   />
                 </Box>

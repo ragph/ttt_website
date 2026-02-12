@@ -32,7 +32,7 @@ export const StepperSection = ({ section, index }: StepperSectionProps) => {
   const isEven = index % 2 === 0;
 
   const handleShare = async () => {
-    const url = `${window.location.origin}/how-it-works#${section.id}`;
+    const url = `${window.location.origin}/manage-in-app-credits#${section.id}`;
 
     if (navigator.share) {
       try {
