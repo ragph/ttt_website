@@ -22,20 +22,15 @@ function AppContent() {
       const loader = document.getElementById('app-loader');
       const root = document.getElementById('root');
 
-<<<<<<< HEAD
-        // Wait for meta tags to be set by page components (useEffect)
-        // This ensures pre-rendering captures dynamic meta tags
-        setTimeout(() => {
-          // Dispatch event for prerenderer
-          document.dispatchEvent(new Event('render-event'));
-        }, 100);
-=======
       if (loader) loader.classList.add('loaded');
       if (root) root.classList.add('ready');
->>>>>>> 8a0f57ce96642286362ea088b7469675e7e716be
 
-      // Dispatch event for prerenderer
-      document.dispatchEvent(new Event('render-event'));
+      // Wait for meta tags to be set by page components (useEffect)
+      // This ensures pre-rendering captures dynamic meta tags
+      setTimeout(() => {
+        // Dispatch event for prerenderer
+        document.dispatchEvent(new Event('render-event'));
+      }, 100);
 
       // Remove loader after transition
       setTimeout(() => {

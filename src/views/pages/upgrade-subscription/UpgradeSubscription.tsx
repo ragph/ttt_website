@@ -41,7 +41,6 @@ const UpgradeSubscription = () => {
   // Update meta tags for SEO
   useEffect(() => {
     const originalTitle = document.title;
-<<<<<<< HEAD
     const pageTitle = 'How to Upgrade Subscription | Trip Travel & Tours';
     const description = 'Learn how to upgrade your subscription level to access exclusive features, higher earning potential, and premium benefits. Step-by-step guide to unlock premium features.';
     const productionUrl = 'https://triptravelandtours.com';
@@ -49,9 +48,6 @@ const UpgradeSubscription = () => {
       ? window.location.href
       : `${productionUrl}/upgrade-subscription`;
     const imageUrl = `${productionUrl}/images/et-upgrade.png`;
-=======
-    document.title = 'How to Upgrade Your ET Subscription | Trip Travel & Tours';
->>>>>>> 8a0f57ce96642286362ea088b7469675e7e716be
 
     // Update document title
     document.title = pageTitle;
@@ -68,15 +64,9 @@ const UpgradeSubscription = () => {
       meta.setAttribute('content', content);
     };
 
-<<<<<<< HEAD
     // Basic meta tags
     setMetaTag('description', description);
     setMetaTag('author', 'Trip Travel & Tours');
-=======
-    setMetaTag('description', 'Learn how to upgrade your ET subscription. Move from Traveller to Affiliate (FREE) or upgrade to Victors (₱99/year) for premium benefits.');
-    setMetaTag('og:title', 'How to Upgrade Your ET Subscription | Trip Travel & Tours', true);
-    setMetaTag('og:description', 'Step-by-step guide to upgrade your ET subscription level and unlock more benefits.', true);
->>>>>>> 8a0f57ce96642286362ea088b7469675e7e716be
 
     // Open Graph meta tags (for Facebook, LinkedIn, etc.)
     setMetaTag('og:title', pageTitle, true);
