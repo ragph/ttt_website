@@ -15,6 +15,7 @@ function fixPrerenderFOUC(): Plugin {
       const htmlFiles = [
         'dist/upgrade-subscription/index.html',
         'dist/vote-miss-world-tourism-2027/index.html',
+        'dist/manage-in-app-credits/index.html',
       ];
 
       htmlFiles.forEach(file => {
@@ -52,10 +53,9 @@ export default defineConfig({
         // '/privacy-policy',
         // '/refund-policy',
         // '/surveys',
-        // '/how-it-works',
+        '/manage-in-app-credits',
         '/upgrade-subscription',
         '/vote-miss-world-tourism-2027',
-        // '/manage-in-app-credits', // Temporarily disabled - causes styling issues with pre-render
       ],
       renderer: new PuppeteerRenderer({
         renderAfterDocumentEvent: 'render-event',

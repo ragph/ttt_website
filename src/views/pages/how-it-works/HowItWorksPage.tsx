@@ -8,18 +8,57 @@ import { howItWorksSections } from './data/howItWorksSteps';
 const HowItWorksPage = () => {
   const [activeSection, setActiveSection] = useState(howItWorksSections[0]?.id || '');
 
-  // Update document title and preload critical image
+  // Update document title and meta tags for SEO
   useEffect(() => {
     const originalTitle = document.title;
     const hash = window.location.hash.slice(1);
     const section = howItWorksSections.find(s => s.id === hash);
 
-    const title = section
+    const pageTitle = section
       ? `${section.title} | Manage In-app Credits | Trip Travel & Tours`
-      : 'Manage In-app Credits | Trip Travel & Tours';
+      : 'How to Manage In-app Credits | Trip Travel & Tours';
 
-    document.title = title;
+    const description = 'Learn how to manage and use your prepaid credits to use in-app services, payout your rewards, convert credits, and top up with our easy-to-follow guides.';
+    const productionUrl = 'https://triptravelandtours.com';
+    const currentUrl = typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1'
+      ? window.location.href
+      : `${productionUrl}/manage-in-app-credits`;
+    const imageUrl = `${productionUrl}/images/et-dashboard.png`;
 
+    // Update document title
+    document.title = pageTitle;
+
+    // Helper to set or create meta tag
+    const setMetaTag = (name: string, content: string, property?: boolean) => {
+      const attr = property ? 'property' : 'name';
+      let meta = document.querySelector(`meta[${attr}="${name}"]`) as HTMLMetaElement;
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute(attr, name);
+        document.head.appendChild(meta);
+      }
+      meta.setAttribute('content', content);
+    };
+
+    // Basic meta tags
+    setMetaTag('description', description);
+    setMetaTag('author', 'Trip Travel & Tours');
+
+    // Open Graph meta tags (for Facebook, LinkedIn, etc.)
+    setMetaTag('og:title', pageTitle, true);
+    setMetaTag('og:description', description, true);
+    setMetaTag('og:image', imageUrl, true);
+    setMetaTag('og:url', currentUrl, true);
+    setMetaTag('og:type', 'website', true);
+    setMetaTag('og:site_name', 'Trip Travel & Tours', true);
+
+    // Twitter Card meta tags
+    setMetaTag('twitter:card', 'summary_large_image');
+    setMetaTag('twitter:title', pageTitle);
+    setMetaTag('twitter:description', description);
+    setMetaTag('twitter:image', imageUrl);
+
+    // Cleanup: restore original title when component unmounts
     return () => {
       document.title = originalTitle;
     };

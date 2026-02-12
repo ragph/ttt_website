@@ -46,7 +46,7 @@ const VoteMissWorldTourism = () => {
     const currentUrl = typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1'
       ? window.location.href
       : `${productionUrl}/vote-miss-world-tourism-2027`;
-    const imageUrl = `${productionUrl}/images/et-vote.png`;
+    const imageUrl = `${productionUrl}/og-vote.jpg`;
 
     // Update document title
     document.title = pageTitle;
