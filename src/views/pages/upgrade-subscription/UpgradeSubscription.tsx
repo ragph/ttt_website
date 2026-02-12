@@ -34,7 +34,6 @@ const steps: Step[] = [
 
 const UpgradeSubscription = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [heroImageLoaded, setHeroImageLoaded] = useState(false);
 
   const accentColor = '#1e40af';
 
@@ -47,7 +46,7 @@ const UpgradeSubscription = () => {
     const currentUrl = typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1'
       ? window.location.href
       : `${productionUrl}/upgrade-subscription`;
-    const imageUrl = `${productionUrl}/images/et-subscription.png`;
+    const imageUrl = `${productionUrl}/og-upgrade.jpg`;
 
     // Update document title
     document.title = pageTitle;

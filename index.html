@@ -34,27 +34,9 @@
     <meta property="twitter:description" content="Discover amazing travel destinations, earn rewards while traveling, and explore the world with Trip Travel & Tours. Your journey to extraordinary adventures starts here." />
     <meta property="twitter:image" content="https://triptravelandtours.com/og-image.jpg" />
     <style>
-      /* Aggressive FOUC prevention - hide everything until React hydrates */
-      body {
-        overflow: hidden !important;
-      }
-      body.hydrated {
-        overflow: auto !important;
-      }
-
-      #root {
-        visibility: hidden !important;
-        opacity: 0 !important;
-      }
-      #root.ready {
-        visibility: visible !important;
-        opacity: 1 !important;
-        transition: opacity 0.2s ease-in;
-      }
-
-      /* Full-screen loading overlay - highest z-index */
+      /* Loading screen overlay - covers content during hydration */
       #app-loader {
-        position: fixed !important;
+        position: fixed;
         top: 0;
         left: 0;
         width: 100%;
@@ -63,13 +45,28 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        z-index: 999999 !important;
+        z-index: 999999;
         opacity: 1;
         transition: opacity 0.3s ease-out;
+        pointer-events: all;
       }
       #app-loader.loaded {
         opacity: 0;
         pointer-events: none;
+      }
+
+      /* Prevent scrolling during load */
+      body:not(.hydrated) {
+        overflow: hidden;
+      }
+
+      /* Smooth fade-in for content */
+      #root {
+        opacity: 0;
+        transition: opacity 0.3s ease-in;
+      }
+      #root.ready {
+        opacity: 1;
       }
 
       .loader-spinner {
@@ -86,7 +83,7 @@
       }
     </style>
   </head>
-  <body style="overflow: hidden;">
+  <body>
     <!-- Loading screen -->
     <div id="app-loader">
       <div class="loader-spinner"></div>
