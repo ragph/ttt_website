@@ -40,8 +40,18 @@ const VoteMissWorldTourism = () => {
   // Update meta tags for SEO
   useEffect(() => {
     const originalTitle = document.title;
-    document.title = 'How to Vote in Miss World Tourism 2027 | Trip Travel & Tours';
+    const pageTitle = 'How to Vote in Miss World Tourism 2027 | Trip Travel & Tours';
+    const description = 'Learn how to cast your vote online to support your favorite contestant in Miss World Tourism Festival Philippines 2027. Step-by-step guide to voting. Every vote counts!';
+    const productionUrl = 'https://triptravelandtours.com';
+    const currentUrl = typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1'
+      ? window.location.href
+      : `${productionUrl}/vote-miss-world-tourism-2027`;
+    const imageUrl = `${productionUrl}/images/et-vote.png`;
 
+    // Update document title
+    document.title = pageTitle;
+
+    // Helper to set or create meta tag
     const setMetaTag = (name: string, content: string, property?: boolean) => {
       const attr = property ? 'property' : 'name';
       let meta = document.querySelector(`meta[${attr}="${name}"]`) as HTMLMetaElement;
@@ -53,10 +63,25 @@ const VoteMissWorldTourism = () => {
       meta.setAttribute('content', content);
     };
 
-    setMetaTag('description', 'Learn how to cast your vote online to support your favorite contestant in Miss World Tourism 2027. Every vote counts!');
-    setMetaTag('og:title', 'How to Vote in Miss World Tourism 2027 | Trip Travel & Tours', true);
-    setMetaTag('og:description', 'Step-by-step guide to vote for Miss World Tourism 2027 contestants.', true);
+    // Basic meta tags
+    setMetaTag('description', description);
+    setMetaTag('author', 'Trip Travel & Tours');
 
+    // Open Graph meta tags (for Facebook, LinkedIn, etc.)
+    setMetaTag('og:title', pageTitle, true);
+    setMetaTag('og:description', description, true);
+    setMetaTag('og:image', imageUrl, true);
+    setMetaTag('og:url', currentUrl, true);
+    setMetaTag('og:type', 'website', true);
+    setMetaTag('og:site_name', 'Trip Travel & Tours', true);
+
+    // Twitter Card meta tags
+    setMetaTag('twitter:card', 'summary_large_image');
+    setMetaTag('twitter:title', pageTitle);
+    setMetaTag('twitter:description', description);
+    setMetaTag('twitter:image', imageUrl);
+
+    // Cleanup: restore original title when component unmounts
     return () => {
       document.title = originalTitle;
     };
