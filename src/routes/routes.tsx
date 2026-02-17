@@ -2,7 +2,6 @@ import { lazy, Suspense } from 'react';
 import { RouteObject, Navigate } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import { FullLayout, BlankLayout } from '../layouts';
-import { Box, CircularProgress } from '@mui/material';
 import { ROUTES } from '../utils/constants';
 
 // Lazy load components
@@ -29,20 +28,13 @@ const SurveyResults = lazy(() => import('../views/pages/surveys/SurveyResults'))
 const BlogDetails = lazy(() => import('../views/pages/blog/BlogDetails'));
 const Announcements = lazy(() => import('../views/pages/announcements/Announcements'));
 const AnnouncementDetails = lazy(() => import('../views/pages/announcements/AnnouncementDetails'));
+const Subscriptions = lazy(() => import('../views/pages/membership/Membership'));
+const HowItWorksPage = lazy(() => import('../views/pages/how-it-works/HowItWorksPage'));
+const UpgradeSubscription = lazy(() => import('../views/pages/upgrade-subscription/UpgradeSubscription'));
+const VoteMissWorldTourism = lazy(() => import('../views/pages/vote-miss-world-tourism/VoteMissWorldTourism'));
 
-// Loading component
-const Loader = () => (
-  <Box
-    sx={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      minHeight: '100vh',
-    }}
-  >
-    <CircularProgress />
-  </Box>
-);
+// Loading component - returns null to let the initial HTML loader handle it
+const Loader = () => null;
 
 // Wrap lazy components with Suspense
 const SuspenseWrapper = ({ children }: { children: React.ReactElement }) => (
@@ -181,6 +173,38 @@ export const routes: RouteObject[] = [
         element: (
           <SuspenseWrapper>
             <AnnouncementDetails />
+          </SuspenseWrapper>
+        ),
+      },
+      {
+        path: '/subscriptions',
+        element: (
+          <SuspenseWrapper>
+            <Subscriptions />
+          </SuspenseWrapper>
+        ),
+      },
+      {
+        path: '/manage-in-app-credits',
+        element: (
+          <SuspenseWrapper>
+            <HowItWorksPage />
+          </SuspenseWrapper>
+        ),
+      },
+      {
+        path: '/upgrade-subscription',
+        element: (
+          <SuspenseWrapper>
+            <UpgradeSubscription />
+          </SuspenseWrapper>
+        ),
+      },
+      {
+        path: '/vote-miss-world-tourism-2027',
+        element: (
+          <SuspenseWrapper>
+            <VoteMissWorldTourism />
           </SuspenseWrapper>
         ),
       },

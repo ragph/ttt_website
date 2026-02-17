@@ -21,6 +21,10 @@ export const Categories = () => {
       title: "Sports Tourism",
       description: "Watching or participating in sports events.",
     },
+    {
+      title: "Cultural Tourism",
+      description: "Exploring heritage sites, museums, and cultural experiences.",
+    },
   ];
 
   const destinations = [

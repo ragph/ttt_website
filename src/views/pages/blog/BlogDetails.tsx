@@ -4,7 +4,6 @@ import {
   Box,
   Container,
   Typography,
-  Avatar,
   Chip,
   Button,
   Paper,
@@ -14,7 +13,6 @@ import {
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import PersonIcon from "@mui/icons-material/Person";
 import ShareIcon from "@mui/icons-material/Share";
 import { blogApi } from "@/api/blogApi";
 import type { Blog } from "@/api/types/blog.types";

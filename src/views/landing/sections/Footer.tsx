@@ -32,10 +32,13 @@ const footerLinks = {
     { label: "Blog", href: "#blog" },
   ],
   quickLinks: [
-    { label: "What We Offer", href: "#what-we-offer" },
-    { label: "How It Works", href: "#how-it-works" },
+    { label: "Home", href: "#hero" },
     { label: "Explore", href: "/map" },
-    { label: "Partnerships", href: "#partners" },
+    { label: "Blog", href: "#blog" },
+    { label: "Surveys", href: "/surveys" },
+    { label: "Announcements", href: "/announcements" },
+    { label: "Subscriptions", href: "/subscriptions" },
+    { label: "Contact", href: "#contact" },
   ],
   support: [
     { label: "FAQs", href: "/faqs" },
@@ -43,6 +46,9 @@ const footerLinks = {
     { label: "Refund Policy", href: "/refund-policy" },
     { label: "Terms of Service", href: "/terms-of-service" },
     { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Manage In-app Credits", href: "/manage-in-app-credits" },
+    { label: "Upgrade Subscription", href: "/upgrade-subscription" },
+    { label: "Vote for Miss World Tourism Festival PH 2027", href: "/vote-miss-world-tourism-2027" },
   ],
 };
 

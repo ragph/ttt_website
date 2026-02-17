@@ -62,11 +62,11 @@ const Header = ({ toggleMobileSidebar }: HeaderProps) => {
   const navLinks: NavLink[] = useMemo(
     () => [
       { label: "Home", href: "#hero" },
-      { label: "About", href: "#about" },
       { label: "Explore", href: "/map" },
       { label: "Blog", href: "#blog" },
       { label: "Surveys", href: "/surveys" },
       { label: "Announcements", href: "/announcements" },
+      { label: "Subscriptions", href: "/subscriptions" },
       { label: "Contact", href: "#contact" },
     ],
     []

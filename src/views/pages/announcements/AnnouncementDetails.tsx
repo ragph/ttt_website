@@ -18,7 +18,7 @@ import { announcementsApi, Announcement } from '../../../api/announcementsApi';
 import Loader from '../../../components/shared/Loader';
 
 // Placeholder image for announcements
-const PLACEHOLDER_IMAGE = 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&h=600&fit=crop';
+const PLACEHOLDER_IMAGE = '/images/placeholder.jpg';
 
 // Type labels for chips
 const typeLabels: Record<string, string> = {
