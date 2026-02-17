@@ -297,7 +297,7 @@ const Header = ({ toggleMobileSidebar }: HeaderProps) => {
                   },
                 }}
               >
-                Login to App
+                Book Now
               </Button>
               <Divider
                 orientation="vertical"

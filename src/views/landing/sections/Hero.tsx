@@ -110,7 +110,7 @@ export const Hero = () => {
                     transition: "all 0.3s ease",
                   }}
                 >
-                  Login to App
+                  Book Now
                 </Button>
               </Box>
             </AnimatedSection>
