@@ -7,6 +7,7 @@ import { HowItWorks } from "./sections/HowItWorks";
 import { Categories } from "./sections/Categories";
 import { TrendingDestinations } from "./sections/TrendingDestinations";
 import { Features } from "./sections/Features";
+import { WhyChooseUs } from "./sections/WhyChooseUs";
 import { Explore } from "./sections/Explore";
 import { Promo } from "./sections/Promo";
 import { Partners } from "./sections/Partners";
@@ -56,6 +57,8 @@ const LandingPage = () => {
 
           {/* Animated Sections */}
           <About />
+
+          <WhyChooseUs />
 
           {/* <WhatWeOffer /> */}
 
