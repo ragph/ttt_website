@@ -16,9 +16,9 @@ const reasons = [
   },
   {
     icon: HotelIcon,
-    stat: '50,000+',
+    stat: '800,000+ and 50,000+',
     title: 'Discounted Hotels',
-    description: 'Over 50,000 hotels with discounted package rates so you can enjoy premium stays at unbeatable prices.',
+    description: 'Over 800,000+ hotels and 50,000+ hotels with discounted package rates so you can enjoy premium stays at unbeatable prices.',
     accent: '#f59e0b',
   },
   {
@@ -89,11 +89,11 @@ export const WhyChooseUs = () => {
         </AnimatedSection>
 
         {/* Cards Grid */}
-        <Grid container spacing={3}>
+        <Grid container spacing={3} sx={{ alignItems: 'stretch' }}>
           {reasons.map((reason, index) => {
             const Icon = reason.icon;
             return (
-              <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
+              <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index} sx={{ display: 'flex', flexDirection: 'column' }}>
                 <AnimatedSection
                   animation="fadeUp"
                   duration={0.6}
@@ -101,65 +101,82 @@ export const WhyChooseUs = () => {
                 >
                   <Card
                     sx={{
-                      height: '100%',
-                      minHeight: 340,
+                      height: { xs: '100%', md: 520 },
+                      display: 'flex',
+                      flexDirection: 'column',
                       borderRadius: 4,
                       background: 'rgba(255,255,255,0.05)',
                       backdropFilter: 'blur(10px)',
                       border: '1px solid rgba(255,255,255,0.1)',
-                      overflow: 'visible',
+                      overflow: 'hidden',
                       boxShadow: 'none',
+                      transition: 'all 0.3s ease',
+                      '&:hover': {
+                        background: 'rgba(255,255,255,0.08)',
+                      },
                     }}
                   >
                     <CardContent
                       sx={{
-                        p: 4,
-                        textAlign: 'center',
+                        p: { xs: 3, md: 4 },
+                        flex: 1,
                         display: 'flex',
                         flexDirection: 'column',
-                        alignItems: 'center',
-                        height: '100%',
+                        textAlign: 'center',
                       }}
                     >
                       {/* Icon */}
                       <Box
                         sx={{
-                          width: 80,
-                          height: 80,
-                          borderRadius: '50%',
-                          // background: `linear-gradient(135deg, ${reason.accent}30, ${reason.accent}10)`,
-                          // border: `2px solid ${reason.accent}40`,
+                          width: 64,
+                          height: 64,
+                          borderRadius: 3,
+                          background: `linear-gradient(135deg, ${reason.accent}20, ${reason.accent}10)`,
+                          border: `1px solid ${reason.accent}40`,
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
+                          mx: 'auto',
                           mb: 3,
                           transition: 'all 0.3s ease',
+                          flexShrink: 0,
                         }}
                       >
-                        <Icon sx={{ fontSize: 36, color: reason.accent }} />
+                        <Icon sx={{ fontSize: 32, color: reason.accent }} />
                       </Box>
 
                       {/* Stat Number */}
-                      <Typography
-                        variant="h3"
+                      <Box
                         sx={{
-                          fontWeight: 800,
-                          color: '#FFD23F',
-                          fontSize: { xs: '2rem', md: '2.5rem' },
-                          lineHeight: 1,
-                          mb: 1,
+                          minHeight: { xs: 40, md: 48 },
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          mb: 1.5,
                         }}
                       >
-                        {reason.stat}
-                      </Typography>
+                        <Typography
+                          variant="h2"
+                          sx={{
+                            fontWeight: 900,
+                            color: '#FFD23F',
+                            fontSize: { xs: '1.5rem', md: '2.2rem' },
+                            lineHeight: 1.1,
+                            letterSpacing: '-0.02em',
+                          }}
+                        >
+                          {reason.stat}
+                        </Typography>
+                      </Box>
 
                       {/* Title */}
                       <Typography
-                        variant="h6"
+                        variant="h5"
                         sx={{
-                          fontWeight: 600,
+                          fontWeight: 700,
                           color: '#ffffff',
                           mb: 2,
+                          fontSize: { xs: '1.25rem', md: '1.5rem' },
                         }}
                       >
                         {reason.title}
@@ -169,8 +186,9 @@ export const WhyChooseUs = () => {
                       <Typography
                         variant="body2"
                         sx={{
-                          color: 'rgba(255,255,255,0.6)',
-                          lineHeight: 1.7,
+                          color: 'rgba(255,255,255,0.7)',
+                          lineHeight: 1.8,
+                          fontSize: '0.95rem',
                         }}
                       >
                         {reason.description}
