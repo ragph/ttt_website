@@ -316,9 +316,8 @@ const AnnouncementDetails = () => {
               color: 'text.secondary',
               whiteSpace: 'pre-wrap',
             }}
-          >
-            {announcement.message}
-          </Typography>
+            dangerouslySetInnerHTML={{ __html: announcement.message }}
+          />
         </Paper>
 
         {/* Back Button */}

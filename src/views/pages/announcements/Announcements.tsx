@@ -274,9 +274,8 @@ const Announcements = () => {
                             WebkitBoxOrient: 'vertical',
                             overflow: 'hidden',
                           }}
-                        >
-                          {announcement.message}
-                        </Typography>
+                          dangerouslySetInnerHTML={{ __html: announcement.message }}
+                        />
 
                         {/* Read More Button */}
                         <Button
