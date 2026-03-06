@@ -16,7 +16,7 @@ const steps: Step[] = [
   {
     id: 'vote-step-1',
     title: 'Access Voting Portal',
-    description: 'Navigate to the Miss World Tourism 2027 voting section from the main menu or events page. You can find the voting portal in the announcements section or through direct links shared on our social media channels.',
+    description: 'Navigate to the ET World Tourism 2027 voting section from the main menu or events page. You can find the voting portal in the announcements section or through direct links shared on our social media channels.',
   },
   {
     id: 'vote-step-2',
@@ -40,8 +40,8 @@ const VoteMissWorldTourism = () => {
   // Update meta tags for SEO
   useEffect(() => {
     const originalTitle = document.title;
-    const pageTitle = 'How to Vote in Miss World Tourism 2027 | Trip Travel & Tours';
-    const description = 'Learn how to cast your vote online to support your favorite contestant in Miss World Tourism Festival Philippines 2027. Step-by-step guide to voting. Every vote counts!';
+    const pageTitle = 'How to Vote in ET World Tourism 2027 | Trip Travel & Tours';
+    const description = 'Learn how to cast your vote online to support your favorite contestant in ET World Tourism Festival Philippines 2027. Step-by-step guide to voting. Every vote counts!';
     const productionUrl = 'https://triptravelandtours.com';
     const currentUrl = typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1'
       ? window.location.href
@@ -93,8 +93,8 @@ const VoteMissWorldTourism = () => {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: 'How to Vote in Miss World Tourism 2027',
-          text: 'Learn how to cast your vote online for Miss World Tourism 2027.',
+          title: 'How to Vote in ET World Tourism 2027',
+          text: 'Learn how to cast your vote online for ET World Tourism 2027.',
           url: url,
         });
       } catch (err) {
@@ -176,7 +176,7 @@ const VoteMissWorldTourism = () => {
               lineHeight: 1.2,
             }}
           >
-            How to Vote in Miss World Tourism Festival Philippines 2027
+            How to Vote in ET World Tourism Festival Philippines 2027
           </Typography>
           <Typography
             variant="h6"
@@ -188,7 +188,7 @@ const VoteMissWorldTourism = () => {
               fontSize: { xs: '1rem', md: '1.25rem' }
             }}
           >
-            Cast your vote online to support your favorite contestant. Every vote counts in crowning the next Miss World Tourism!
+            Cast your vote online to support your favorite contestant. Every vote counts in crowning the next ET World Tourism winner!
           </Typography>
         </Container>
       </Box>
@@ -247,7 +247,7 @@ const VoteMissWorldTourism = () => {
                     <Box
                       component="img"
                       src="/images/et-vote.png?r=01"
-                      alt="Vote Miss World Tourism screenshot"
+                      alt="Vote ET World Tourism screenshot"
                       loading="lazy"
                       onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
                         e.currentTarget.style.display = 'none';
@@ -358,7 +358,7 @@ const VoteMissWorldTourism = () => {
                       lineHeight: 1.2,
                     }}
                   >
-                    Miss World Tourism Festival Philippines 2027
+                    ET World Tourism Festival Philippines 2027
                   </Typography>
                   <IconButton
                     onClick={handleShare}
@@ -386,7 +386,7 @@ const VoteMissWorldTourism = () => {
                     mx: { xs: 'auto', lg: 0 },
                   }}
                 >
-                  Cast your vote online to support your favorite contestant in Miss World Tourism Festival Philippines 2027. Every vote counts!
+                  Cast your vote online to support your favorite contestant in ET World Tourism Festival Philippines 2027. Every vote counts!
                 </Typography>
               </Box>
 

@@ -25,11 +25,11 @@ export const surveyCategories = [
 export const surveyData: Survey[] = [
   {
     id: '1',
-    title: 'Miss World Tourism Festival Philippines 2027',
-    subtitle: 'Vote for the next Miss World Tourism Festival Philippines 2027! Choose your favorite contestant and help us crown the next ambassador of tourism.',
+    title: 'ET World Tourism Festival Philippines 2027',
+    subtitle: 'Vote for the next ET World Tourism Festival Philippines 2027! Choose your favorite contestant and help us crown the next ambassador of tourism.',
     image: '/images/mwt.jpg',
     category: 'Pageant',
-    description: 'Who is your choice for Miss World Tourism Festival Philippines 2027?',
+    description: 'Who is your choice for ET World Tourism Festival Philippines 2027?',
     questions: 15,
     participants: 234,
     status: 'active',
