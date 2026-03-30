@@ -38,9 +38,9 @@ axiosClient.interceptors.response.use(
       // Handle specific error codes
       switch (error.response.status) {
         case 401:
-          // Unauthorized - clear auth and redirect to login
+          // Unauthorized - clear auth and redirect to home
           localStorage.removeItem(AUTH_STORAGE_KEY);
-          window.location.href = '/login';
+          window.location.href = '/';
           break;
         case 403:
           console.error('Forbidden: You do not have permission to access this resource');

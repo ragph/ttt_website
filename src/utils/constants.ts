@@ -26,9 +26,6 @@ export const APP_VERSION = '1.0.0';
 export const ROUTES = {
   HOME: '/home',
   DASHBOARD: '/dashboard',
-  LOGIN: '/login',
-  REGISTER: '/register',
-  FORGOT_PASSWORD: '/forgot-password',
   PROFILE: '/profile',
   SETTINGS: '/settings',
   USERS_TABLE: '/tables/users',

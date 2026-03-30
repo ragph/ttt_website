@@ -8,9 +8,6 @@ import { ROUTES } from '../utils/constants';
 const LandingPage = lazy(() => import('../views/landing/LandingPage'));
 const Home = lazy(() => import('../views/pages/home/Home'));
 const Dashboard = lazy(() => import('../views/dashboards/DefaultDashboard'));
-const Login = lazy(() => import('../views/authentication/Login'));
-const Register = lazy(() => import('../views/authentication/Register'));
-const ForgotPassword = lazy(() => import('../views/authentication/ForgotPassword'));
 const Profile = lazy(() => import('../views/pages/profile/Profile'));
 const Settings = lazy(() => import('../views/pages/settings/Settings'));
 const UsersTable = lazy(() => import('../views/tables/UsersTable'));
@@ -56,30 +53,6 @@ export const routes: RouteObject[] = [
     path: '/',
     element: <BlankLayout />,
     children: [
-      {
-        path: ROUTES.LOGIN,
-        element: (
-          <SuspenseWrapper>
-            <Login />
-          </SuspenseWrapper>
-        ),
-      },
-      {
-        path: ROUTES.REGISTER,
-        element: (
-          <SuspenseWrapper>
-            <Register />
-          </SuspenseWrapper>
-        ),
-      },
-      {
-        path: ROUTES.FORGOT_PASSWORD,
-        element: (
-          <SuspenseWrapper>
-            <ForgotPassword />
-          </SuspenseWrapper>
-        ),
-      },
       {
         path: ROUTES.MAP,
         element: (

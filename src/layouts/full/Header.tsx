@@ -33,9 +33,7 @@ const TikTokIcon = (props: React.ComponentProps<typeof SvgIcon>) => (
   </SvgIcon>
 );
 import { toggleTheme } from "../../features/theme/themeSlice";
-import { logout } from "../../features/auth/authSlice";
 import { useNavigate, useLocation } from "react-router-dom";
-import { getInitials } from "../../utils/helpers";
 
 interface HeaderProps {
   toggleMobileSidebar: () => void;
@@ -51,9 +49,7 @@ const Header = ({ toggleMobileSidebar }: HeaderProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const themeMode = useAppSelector((state) => state.theme.mode);
-  const user = useAppSelector((state) => state.auth.user);
 
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [activeSection, setActiveSection] = useState<string>("#hero");
 
   const isLandingPage = location.pathname === "/";
@@ -72,32 +68,8 @@ const Header = ({ toggleMobileSidebar }: HeaderProps) => {
     []
   );
 
-  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
-
   const handleThemeToggle = () => {
     dispatch(toggleTheme());
-  };
-
-  const handleLogout = () => {
-    dispatch(logout());
-    handleMenuClose();
-    navigate("/login");
-  };
-
-  const handleProfile = () => {
-    navigate("/profile");
-    handleMenuClose();
-  };
-
-  const handleSettings = () => {
-    navigate("/settings");
-    handleMenuClose();
   };
 
   const handleNavClick = (href: string) => {
