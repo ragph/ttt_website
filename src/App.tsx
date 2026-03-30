@@ -5,6 +5,7 @@ import { store } from './app/store';
 import { ThemeConfig } from './theme';
 import { routes } from './routes';
 import { useStoreHydration } from './hooks/useStoreHydration';
+import Lenis from 'lenis';
 
 function AppContent() {
   const routing = useRoutes(routes);
@@ -13,6 +14,26 @@ function AppContent() {
 
   // Hydrate store from localStorage after initial render
   useStoreHydration();
+
+  // Initialize Lenis smooth scrolling
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
 
   // Hide loader once - after first route renders
   useEffect(() => {
