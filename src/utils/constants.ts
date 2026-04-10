@@ -8,12 +8,6 @@ export const API_IMAGE_BASE_URL = baseUrl.replace(/\/api$/, '');
 
 export const API_TIMEOUT = 30000;
 
-// Debug logging (remove after verification)
-console.log('🔧 Environment Variables:');
-console.log('VITE_API_BASE_URL:', import.meta.env.VITE_API_BASE_URL);
-console.log('API_BASE_URL:', API_BASE_URL);
-console.log('API_IMAGE_BASE_URL:', API_IMAGE_BASE_URL);
-
 // LocalStorage Keys
 export const AUTH_STORAGE_KEY = 'auth';
 export const THEME_STORAGE_KEY = 'theme';
