@@ -134,6 +134,41 @@ export const Footer = () => {
             >
               Your trusted platform for booking flights, hotels, and travel services. Explore destinations worldwide with a seamless and secure travel experience.
             </Typography>
+
+            {/* Certifications */}
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: 1.5,
+                mb: 3,
+              }}
+            >
+              <Box
+                component="img"
+                src="/images/halal-logo.png"
+                alt="Maslaha Halal Certification Board Inc. - Philippines"
+                title="Halal Certified"
+                sx={{
+                  height: 72,
+                  width: "auto",
+                }}
+                onError={(e: any) => {
+                  e.target.style.display = "none";
+                }}
+              />
+              <Typography
+                variant="caption"
+                sx={{
+                  color: "rgba(255,255,255,0.7)",
+                  lineHeight: 1.4,
+                  maxWidth: 160,
+                }}
+              >
+                Halal Certified by Maslaha Halal Certification Board Inc.
+              </Typography>
+            </Box>
+
             <Box sx={{ display: "flex", gap: 1 }}>
               {socialLinks.map((social) => {
                 const Icon = social.icon;
