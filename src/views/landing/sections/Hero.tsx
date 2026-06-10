@@ -175,6 +175,41 @@ export const Hero = () => {
                     </Typography>
                   </Box>
                 </Box>
+
+                {/* Halal Certification Badge */}
+                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                  <Box
+                    component="img"
+                    src="/images/halal-logo.png"
+                    alt="Maslaha Halal Certification Board Inc. - Philippines"
+                    title="Halal Certified"
+                    sx={{
+                      height: 56,
+                      width: "auto",
+                    }}
+                    onError={(e: any) => {
+                      e.target.style.display = "none";
+                    }}
+                  />
+                  <Box>
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: "primary.main",
+                        fontWeight: 600,
+                        fontSize: "0.875rem",
+                      }}
+                    >
+                      Halal Certified
+                    </Typography>
+                    <Typography
+                      variant="caption"
+                      sx={{ color: "#616161", fontSize: "0.75rem" }}
+                    >
+                      Maslaha Halal Board
+                    </Typography>
+                  </Box>
+                </Box>
               </Box>
             </AnimatedSection>
           </Grid>
