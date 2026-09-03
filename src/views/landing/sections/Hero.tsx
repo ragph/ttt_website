@@ -60,12 +60,12 @@ export const Hero = () => {
                   <Box
                     component="sup"
                     sx={{
-                      fontSize: "0.4em",
+                      fontSize: "0.5em",
                       color: "primary.main",
                       fontWeight: 400,
                     }}
                   >
-                    TM
+                    ®
                   </Box>
                 </Box>
               </Typography>
