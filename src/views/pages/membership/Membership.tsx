@@ -54,7 +54,7 @@ const membershipTiers: MembershipTier[] = [
     tagline: "Turn bookings into income.",
     description:
       "Built for creators, promoters, and anyone who wants to earn by sharing travel deals.",
-    price: "FREE",
+    price: "₱999/Year",
     priceLabel: "Subscription",
     features: [
       "Everything in Traveller, plus:",
@@ -72,7 +72,7 @@ const membershipTiers: MembershipTier[] = [
     tagline: "Maximize earnings. Lead with advantage.",
     description:
       "Built for high-performing users who want priority access, higher profit potential, and premium treatment.",
-    price: "₱99/Year",
+    price: "₱4,999/Year",
     priceLabel: "Subscription",
     features: [
       "Higher reward rates from all travel booking activities",

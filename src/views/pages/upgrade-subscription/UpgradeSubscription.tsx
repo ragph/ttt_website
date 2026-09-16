@@ -23,12 +23,12 @@ const steps: Step[] = [
   {
     id: 'upgrade-step-3',
     title: 'Choose Your New Plan',
-    description: 'Select the subscription level you want to upgrade to:\n• Traveller → Affiliate (FREE) - Get referral links and markup selling\n• Traveller/Affiliate → Victors (₱99/year) - Unlock premium features and higher rewards',
+    description: 'Select the subscription level you want to upgrade to:\n• Traveller → Affiliate (₱999/year) - Get referral links and markup selling\n• Traveller/Affiliate → Victors (₱4,999/year) - Unlock premium features and higher rewards',
   },
   {
     id: 'upgrade-step-4',
     title: 'Complete Upgrade',
-    description: 'For Affiliate upgrade, simply confirm. For Victors upgrade, complete payment using your prepaid credits or other payment methods. Your new benefits activate immediately!',
+    description: 'Complete payment for your chosen tier using your prepaid credits or other payment methods. Your new benefits activate immediately!',
   },
 ];
 
@@ -188,7 +188,7 @@ const UpgradeSubscription = () => {
               fontSize: { xs: '1rem', md: '1.25rem' },
             }}
           >
-            Upgrade from Traveller to Affiliate for free, or unlock premium benefits with Victors for just ₱99/year.
+            Upgrade from Traveller to Affiliate for ₱999/year, or unlock premium benefits with Victors for ₱4,999/year.
           </Typography>
         </Container>
       </Box>

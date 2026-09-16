@@ -26,7 +26,7 @@ export const Promo = () => {
         "Invite others to discover the platform and unlock additional features as your network grows. Ideal for users who enjoy sharing travel opportunities with friends and family.",
       color: "#FF9800",
       image: "/images/affiliate.png",
-      price: "FREE",
+      price: "₱999/Year",
       priceDetail: 'Subscription',
     },
     {
@@ -37,7 +37,7 @@ export const Promo = () => {
         "Our highest tier, designed for engaged users who want enhanced features, priority access, and exclusive platform privileges.",
       color: "#2196F3",
       image: "/images/victors.png",
-      price: "₱99/Year",
+      price: "₱4,999/Year",
       priceDetail: "Subscription",
     },
   ];
