@@ -142,7 +142,7 @@ const rewardsData: TierRewards[] = [
     subtitle: "Highest rewards and earning potential across all actions.",
     color: "#2196F3",
     rewards: [
-      { activity: "Shared platform annual victors subscription", points: "10 pts" },
+      { activity: "Shared platform annual victors subscription", points: "999 pts" },
       { activity: "International flight booking cashback", points: "50 pts" },
       { activity: "Domestic flight booking cashback", points: "25 pts" },
       {
