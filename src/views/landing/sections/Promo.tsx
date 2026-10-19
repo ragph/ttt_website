@@ -26,7 +26,7 @@ export const Promo = () => {
         "Invite others to discover the platform and unlock additional features as your network grows. Ideal for users who enjoy sharing travel opportunities with friends and family.",
       color: "#FF9800",
       image: "/images/affiliate.png",
-      price: "₱999/Year",
+      price: "₱499/Year",
       priceDetail: 'Subscription',
     },
     {
